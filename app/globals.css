@@ -30,9 +30,10 @@
 @layer components {
   /* The Ultimate Glassmorphic Structural Shell
     Used universally across all cards and modals to ensure 100% uniformity.
+    Vercel Fix: Using native bg-white/5 to prevent @apply parser crashes.
   */
   .glass-card {
-    @apply bg-white/[0.02] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
   }
 
   /* Cinematic Text Gradients
