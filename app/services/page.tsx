@@ -1,335 +1,172 @@
 "use client";
-import Link from "next/link";
-import { Wrench, Wifi, Globe, ArrowRight, CheckCircle2, Activity, FileText, Settings, ShieldCheck, Check, Camera } from "lucide-react";
+import { Suspense } from "react";
+import { useRouter } from "next/navigation";
+import { Server, ShieldAlert, Cpu, Network, Lock, Wrench, ArrowRight, CheckCircle2, Loader2, Activity } from "lucide-react";
 import DecodeText from "../components/DecodeText";
-import MagneticWrapper from "../components/MagneticWrapper";
 import RevealWrapper from "../components/RevealWrapper";
-import BeforeAfterSlider from "../components/BeforeAfterSlider";
+import MagneticWrapper from "../components/MagneticWrapper";
 
-export default function ServicesPage() {
+const SERVICE_MODULES = [
+  {
+    id: "network",
+    title: "Network Architecture",
+    description: "Enterprise-grade infrastructure design. From high-throughput fiber routing to intelligent VLAN segmentation and SD-WAN deployment.",
+    icon: <Network className="w-8 h-8 text-blue-400" />,
+    color: "blue",
+    features: ["VLAN Segmentation & Security", "High-Density Wi-Fi Deployment", "SD-WAN & Multi-Site Routing", "Layer 3 Switch Configuration"],
+  },
+  {
+    id: "security",
+    title: "Zero-Trust Security",
+    description: "Military-grade endpoint protection and perimeter defense. Securing your data against active intrusions and lateral network movement.",
+    icon: <Lock className="w-8 h-8 text-emerald-400" />,
+    color: "emerald",
+    features: ["Next-Gen Firewall Deployment", "Intrusion Detection Systems (IDS)", "Endpoint Detection & Response", "Encrypted VPN Tunnels"],
+  },
+  {
+    id: "hardware",
+    title: "Hardware Deployment",
+    description: "Custom workstation fabrication and server rack installation. Engineered for absolute maximum computational efficiency.",
+    icon: <Server className="w-8 h-8 text-cyan-400" />,
+    color: "cyan",
+    features: ["Server Rack Integration", "Custom Workstation Builds", "RAID Storage Arrays", "Thermal & Power Optimization"],
+  },
+  {
+    id: "diagnostics",
+    title: "Advanced Diagnostics",
+    description: "Deep-level system troubleshooting. We isolate hardware failures and software anomalies before they cause critical downtime.",
+    icon: <Activity className="w-8 h-8 text-purple-400" />,
+    color: "purple",
+    features: ["Kernel-Level Debugging", "Hardware Failure Isolation", "Network Bottleneck Analysis", "Data Recovery Protocols"],
+  },
+];
+
+function ServicesLogic() {
+  const router = useRouter();
+
   return (
-    <main className="min-h-screen pt-32 pb-20 px-6 flex flex-col items-center overflow-hidden">
+    <div className="w-full flex flex-col items-center relative z-10 px-4 md:px-6">
       
-      {/* Header */}
-      <header className="w-full max-w-5xl mb-16 text-center">
-        <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-4">
-          <DecodeText text="Service" /> <br className="md:hidden" />
-          <span className="text-gradient drop-shadow-[0_0_30px_rgba(0,163,255,0.2)]">
+      {/* --------------------------------------------------------- */}
+      {/* HEADER */}
+      {/* --------------------------------------------------------- */}
+      <header className="w-full max-w-5xl mb-24 text-center mt-10">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-6 backdrop-blur-md">
+          <Server className="w-4 h-4 text-cyan-400" />
+          <span className="text-xs font-mono text-cyan-300 uppercase tracking-widest">Infrastructure Protocols</span>
+        </div>
+        <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6 leading-none">
+          <DecodeText text="System" /> <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 drop-shadow-[0_0_30px_rgba(34,211,238,0.3)]">
             <DecodeText text="Architecture" delay={600} />
           </span>
         </h1>
-        <RevealWrapper delay={1200} direction="up">
-          <p className="text-gray-300 font-mono text-sm uppercase tracking-widest flex items-center justify-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-blue-500" aria-hidden="true" />
-            Transparent Pricing & Capabilities
+        <RevealWrapper delay={1000} direction="up">
+          <p className="text-gray-400 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed">
+            We engineer, deploy, and maintain high-performance IT ecosystems. From physical server installations to encrypted network routing, our solutions scale with your operational demands.
           </p>
         </RevealWrapper>
       </header>
 
-      {/* --- SECTION 1: THE REPAIR METHODOLOGY --- */}
-      <section aria-labelledby="repair-heading" className="w-full max-w-5xl mb-24">
-        <RevealWrapper delay={100}>
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0 border border-blue-500/20 shadow-[0_0_20px_rgba(37,99,235,0.1)]">
-              <Wrench className="w-6 h-6 text-blue-400" aria-hidden="true" />
-            </div>
-            <h2 id="repair-heading" className="text-2xl md:text-3xl font-black text-white uppercase tracking-wider">Hardware Repair</h2>
-            <div className="h-px bg-white/10 flex-grow" aria-hidden="true" />
-          </div>
-        </RevealWrapper>
-
-        <RevealWrapper delay={250}>
-          <div className="glass-card rounded-[2rem] p-8 md:p-12 relative overflow-hidden border-blue-500/20 shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
-            <div className="scanline opacity-10 absolute inset-0 pointer-events-none" aria-hidden="true" />
-            
-            {/* Baseline Pricing Box */}
-            <div className="flex flex-col md:flex-row gap-6 mb-16 relative z-10">
-              <article className="flex-1 bg-black/60 border border-white/10 rounded-2xl p-6 flex items-center justify-between group hover:border-blue-500/50 hover:bg-blue-900/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(0,163,255,0.1)]">
-                <div>
-                  <h3 className="text-white font-bold uppercase tracking-wider mb-1">Diagnostic Triage</h3>
-                  <p className="text-sm text-gray-400">Fault isolation & system testing.</p>
-                </div>
-                <span className="text-3xl font-black text-blue-400 group-hover:text-white transition-colors duration-500 drop-shadow-[0_0_15px_rgba(0,163,255,0.3)]">R350</span>
-              </article>
-              <article className="flex-1 bg-black/60 border border-white/10 rounded-2xl p-6 flex items-center justify-between group hover:border-blue-500/50 hover:bg-blue-900/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(0,163,255,0.1)]">
-                <div>
-                  <h3 className="text-white font-bold uppercase tracking-wider mb-1">OS Reinstallation</h3>
-                  <p className="text-sm text-gray-400">Clean Windows/macOS install + Drivers.</p>
-                </div>
-                <span className="text-3xl font-black text-blue-400 group-hover:text-white transition-colors duration-500 drop-shadow-[0_0_15px_rgba(0,163,255,0.3)]">R450</span>
-              </article>
-            </div>
-
-            {/* The Methodology Timeline */}
-            <h3 className="font-mono text-sm text-blue-400 uppercase tracking-widest mb-10 text-center relative z-10 flex items-center justify-center gap-2">
-              Standard Operating Procedure
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
-              <div className="hidden md:block absolute top-[32px] left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-blue-500/0 via-blue-500/50 to-blue-500/0 z-0" aria-hidden="true" />
+      {/* --------------------------------------------------------- */}
+      {/* SERVICE GRID */}
+      {/* --------------------------------------------------------- */}
+      <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
+        {SERVICE_MODULES.map((service, index) => (
+          <RevealWrapper key={service.id} delay={index * 200} direction="up" className="h-full">
+            <div className={`glass-card h-full rounded-[2.5rem] p-8 md:p-12 border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent hover:bg-${service.color}-900/10 hover:border-${service.color}-500/30 transition-all duration-700 ease-out group flex flex-col relative overflow-hidden`}>
               
-              <div className="relative z-10 flex flex-col items-center text-center group">
-                <div className="w-16 h-16 rounded-2xl bg-blue-900/50 border border-blue-400 flex items-center justify-center mb-5 shadow-[0_0_30px_rgba(0,163,255,0.2)] group-hover:scale-110 group-hover:bg-blue-600 transition-all duration-500">
-                  <Activity className="w-6 h-6 text-white" aria-hidden="true" />
+              {/* Dynamic Glow */}
+              <div className={`absolute -top-32 -right-32 w-64 h-64 bg-${service.color}-500/10 rounded-full blur-[80px] group-hover:bg-${service.color}-500/20 group-hover:scale-150 transition-all duration-700 pointer-events-none`} />
+              
+              <div className="flex items-center gap-6 mb-8 relative z-10">
+                <div className={`w-16 h-16 rounded-2xl bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/10 group-hover:border-${service.color}-500/50 group-hover:shadow-[0_0_30px_rgba(var(--${service.color}-rgb),0.3)] transition-all duration-500 shrink-0`}>
+                  {service.icon}
                 </div>
-                <h4 className="text-white font-bold uppercase mb-2 tracking-wide">1. Diagnostic</h4>
-                <p className="text-xs text-gray-400 px-2 leading-relaxed">System isolation and fault identification.</p>
+                <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight uppercase">
+                  {service.title}
+                </h2>
               </div>
 
-              <div className="relative z-10 flex flex-col items-center text-center group mt-6 md:mt-0">
-                <div className="w-16 h-16 rounded-2xl bg-black border border-white/20 flex items-center justify-center mb-5 group-hover:border-blue-400 group-hover:shadow-[0_0_30px_rgba(0,163,255,0.2)] group-hover:scale-110 transition-all duration-500">
-                  <FileText className="w-6 h-6 text-gray-400 group-hover:text-blue-400 transition-colors" aria-hidden="true" />
-                </div>
-                <h4 className="text-white font-bold uppercase mb-2 tracking-wide">2. Quote</h4>
-                <p className="text-xs text-gray-400 px-2 leading-relaxed">Cost breakdown of parts and labor.</p>
+              <p className="text-gray-400 text-base font-medium leading-relaxed mb-10 relative z-10">
+                {service.description}
+              </p>
+
+              <div className="mt-auto relative z-10">
+                <div className="h-px w-full bg-gradient-to-r from-white/10 to-transparent mb-6" />
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {service.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <CheckCircle2 className={`w-4 h-4 mt-0.5 shrink-0 text-${service.color}-400/70 group-hover:text-${service.color}-400 transition-colors`} />
+                      <span className="text-xs font-mono text-gray-400 uppercase tracking-wide leading-relaxed">
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <div className="relative z-10 flex flex-col items-center text-center group mt-6 md:mt-0">
-                <div className="w-16 h-16 rounded-2xl bg-black border border-white/20 flex items-center justify-center mb-5 group-hover:border-blue-400 group-hover:shadow-[0_0_30px_rgba(0,163,255,0.2)] group-hover:scale-110 transition-all duration-500">
-                  <Settings className="w-6 h-6 text-gray-400 group-hover:text-blue-400 transition-colors" aria-hidden="true" />
-                </div>
-                <h4 className="text-white font-bold uppercase mb-2 tracking-wide">3. Execution</h4>
-                <p className="text-xs text-gray-400 px-2 leading-relaxed">Precision repair and component sourcing.</p>
-              </div>
-
-              <div className="relative z-10 flex flex-col items-center text-center group mt-6 md:mt-0">
-                <div className="w-16 h-16 rounded-2xl bg-black border border-white/20 flex items-center justify-center mb-5 group-hover:border-emerald-400 group-hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] group-hover:scale-110 transition-all duration-500">
-                  <CheckCircle2 className="w-6 h-6 text-gray-400 group-hover:text-emerald-400 transition-colors" aria-hidden="true" />
-                </div>
-                <h4 className="text-white font-bold uppercase mb-2 tracking-wide">4. Bench Test</h4>
-                <p className="text-xs text-gray-400 px-2 leading-relaxed">Stress testing prior to client handoff.</p>
-              </div>
             </div>
+          </RevealWrapper>
+        ))}
+      </div>
+
+      {/* --------------------------------------------------------- */}
+      {/* ESCALATION CTA */}
+      {/* --------------------------------------------------------- */}
+      <RevealWrapper delay={400} direction="up" className="w-full max-w-5xl mb-10">
+        <div className="glass-card rounded-[2.5rem] p-10 md:p-16 border border-cyan-500/20 bg-gradient-to-br from-cyan-900/10 to-black/60 shadow-[0_0_80px_rgba(34,211,238,0.05)] text-center relative overflow-hidden flex flex-col items-center">
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 mix-blend-overlay pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
+          
+          <div className="w-20 h-20 rounded-3xl bg-black/60 backdrop-blur-xl flex items-center justify-center mb-8 border border-cyan-500/30 shadow-[0_0_40px_rgba(34,211,238,0.2)] relative z-10">
+            <ShieldAlert className="w-10 h-10 text-cyan-400" />
+          </div>
+          
+          <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter mb-6 relative z-10">
+            Require Advanced <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">Integration?</span>
+          </h2>
+          <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-10 font-medium relative z-10">
+            Bypass standard diagnostic ticketing and schedule a direct consultation with Lead Engineer Rudi Mouton to discuss enterprise-level architecture.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 relative z-10 w-full sm:w-auto">
+            <MagneticWrapper pullStrength={0.15} className="w-full sm:w-auto">
+              <button 
+                onClick={() => router.push("/schedule")}
+                className="w-full sm:w-auto px-10 py-5 bg-cyan-600 hover:bg-cyan-500 rounded-2xl font-black text-xs md:text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all shadow-[0_10px_30px_rgba(34,211,238,0.2)] hover:shadow-[0_15px_40px_rgba(34,211,238,0.4)] ring-1 ring-cyan-400/50"
+              >
+                Schedule Consultation <ArrowRight className="w-4 h-4" />
+              </button>
+            </MagneticWrapper>
             
-            <div className="mt-14 flex justify-center relative z-10">
-              <MagneticWrapper pullStrength={0.15}>
-                <Link href="/schedule" className="px-8 py-4 bg-white/5 hover:bg-blue-600 border border-white/10 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl font-black text-xs uppercase tracking-widest transition-all min-h-[56px] flex items-center justify-center backdrop-blur-md">
-                    Book a Drop-off Slot
-                </Link>
-              </MagneticWrapper>
-            </div>
-          </div>
-        </RevealWrapper>
-      </section>
-
-      {/* --- SECTION 2: NETWORKING ARCHITECTURE --- */}
-      <section aria-labelledby="network-heading" className="w-full max-w-5xl mb-24">
-        <RevealWrapper delay={100}>
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0 border border-blue-500/20 shadow-[0_0_20px_rgba(37,99,235,0.1)]">
-              <Wifi className="w-6 h-6 text-blue-400" aria-hidden="true" />
-            </div>
-            <h2 id="network-heading" className="text-2xl md:text-3xl font-black text-white uppercase tracking-wider">Network Systems</h2>
-            <div className="h-px bg-white/10 flex-grow" aria-hidden="true" />
-          </div>
-        </RevealWrapper>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <RevealWrapper delay={200}>
-            <article className="glass-card rounded-[2rem] p-8 border border-white/5 hover:border-blue-500/50 hover:bg-blue-900/5 transition-all duration-500 h-full hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,163,255,0.1)] flex flex-col">
-              <h3 className="text-xl font-bold text-white uppercase mb-4 tracking-wide">Dead-Zone Elimination</h3>
-              <p className="text-sm text-gray-400 mb-8 leading-relaxed flex-grow">Strategic placement and configuration of high-power access points to ensure wall-to-wall coverage in your home or office.</p>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3 text-sm text-gray-300"><Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" aria-hidden="true" /> Signal mapping</li>
-                <li className="flex items-start gap-3 text-sm text-gray-300"><Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" aria-hidden="true" /> Channel optimization</li>
-              </ul>
-            </article>
-          </RevealWrapper>
-
-          <RevealWrapper delay={350}>
-            <article className="glass-card rounded-[2rem] p-8 border border-blue-500/30 shadow-[0_0_30px_rgba(0,163,255,0.1)] relative overflow-hidden h-full hover:-translate-y-2 transition-transform duration-500 flex flex-col">
-              <div className="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-bl-xl z-10 shadow-lg shadow-blue-500/20">Popular</div>
-              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-bl-full blur-3xl pointer-events-none" aria-hidden="true" />
-              <h3 className="text-xl font-bold text-white uppercase mb-4 tracking-wide relative z-10">Mesh Router Setup</h3>
-              <p className="text-sm text-gray-400 mb-8 leading-relaxed flex-grow relative z-10">Seamless roaming architecture. Walk through your entire property without ever disconnecting or switching networks.</p>
-              <ul className="space-y-3 relative z-10">
-                <li className="flex items-start gap-3 text-sm text-gray-300"><Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" aria-hidden="true" /> Multi-node configuration</li>
-                <li className="flex items-start gap-3 text-sm text-gray-300"><Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" aria-hidden="true" /> Band steering setup</li>
-              </ul>
-            </article>
-          </RevealWrapper>
-
-          <RevealWrapper delay={500}>
-            <article className="glass-card rounded-[2rem] p-8 border border-white/5 hover:border-blue-500/50 hover:bg-blue-900/5 transition-all duration-500 h-full hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,163,255,0.1)] flex flex-col">
-              <h3 className="text-xl font-bold text-white uppercase mb-4 tracking-wide">Wired Infrastructure</h3>
-              <p className="text-sm text-gray-400 mb-8 leading-relaxed flex-grow">Physical cabling for pure speed and zero latency. Ideal for gaming rigs, home servers, and smart TVs.</p>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3 text-sm text-gray-300"><Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" aria-hidden="true" /> Basic Ethernet runs</li>
-                <li className="flex items-start gap-3 text-sm text-gray-300"><Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" aria-hidden="true" /> Switch installation</li>
-              </ul>
-            </article>
-          </RevealWrapper>
-        </div>
-        
-        <RevealWrapper delay={650} direction="up">
-          <div className="mt-10 flex justify-end">
-            <MagneticWrapper pullStrength={0.2}>
-              <Link href="/schedule" className="px-8 py-4 bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-[0_10px_30px_rgba(37,99,235,0.2)] hover:shadow-[0_15px_40px_rgba(37,99,235,0.4)] flex items-center justify-center gap-2 min-h-[56px] ring-1 ring-blue-400/50">
-                Request Network Dispatch <ArrowRight className="w-4 h-4" aria-hidden="true" />
-              </Link>
+            <MagneticWrapper pullStrength={0.1} className="w-full sm:w-auto">
+              <button 
+                onClick={() => router.push("/contact")}
+                className="w-full sm:w-auto px-10 py-5 bg-[#111] hover:bg-[#1a1a1a] border border-white/10 hover:border-white/20 rounded-2xl font-black text-xs md:text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all text-white"
+              >
+                Log Ticket <Wrench className="w-4 h-4" />
+              </button>
             </MagneticWrapper>
           </div>
-        </RevealWrapper>
-      </section>
-
-      {/* --- SECTION 3: THE ENGINEERING PORTFOLIO (VISUAL PROOF) --- */}
-      <section aria-labelledby="portfolio-heading" className="w-full max-w-5xl mb-24">
-        <RevealWrapper delay={100}>
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0 border border-blue-500/20 shadow-[0_0_20px_rgba(37,99,235,0.1)]">
-              <Camera className="w-6 h-6 text-blue-400" aria-hidden="true" />
-            </div>
-            <h2 id="portfolio-heading" className="text-2xl md:text-3xl font-black text-white uppercase tracking-wider">Visual Proof</h2>
-            <div className="h-px bg-white/10 flex-grow" aria-hidden="true" />
-          </div>
-          <p className="text-sm text-gray-400 mb-12 max-w-2xl leading-relaxed">
-            Standard technicians treat the symptoms. Engineers rebuild the system. Drag the sliders to compare the difference between typical IT negligence and The Mouton Hub's precision standards.
-          </p>
-        </RevealWrapper>
-
-        <div className="space-y-16">
-          
-          {/* Portfolio Item 1: Cable Management */}
-          <RevealWrapper delay={200}>
-            <div className="flex flex-col gap-5">
-              <div>
-                <h3 className="text-xl font-bold text-white uppercase tracking-wider flex items-center gap-3 mb-2">
-                  <span className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_10px_#3b82f6]"></span> 01. Infrastructure Routing
-                </h3>
-                <p className="text-sm text-gray-400 max-w-3xl leading-relaxed">Eliminating signal interference and heat-traps through meticulous cable management. A tangled home network is rebuilt into a perfectly zip-tied, wall-mounted command center.</p>
-              </div>
-              <BeforeAfterSlider 
-                beforeImage="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop" 
-                afterImage="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop" 
-                beforeLabel="Tangled & Exposed"
-                afterLabel="Precision Wall-Mounted"
-              />
-            </div>
-          </RevealWrapper>
-
-          {/* Portfolio Item 2: Hardware Restoration */}
-          <RevealWrapper delay={300}>
-            <div className="flex flex-col gap-5">
-              <div>
-                <h3 className="text-xl font-bold text-white uppercase tracking-wider flex items-center gap-3 mb-2">
-                  <span className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_10px_#3b82f6]"></span> 02. Component Restoration
-                </h3>
-                <p className="text-sm text-gray-400 max-w-3xl leading-relaxed">Dust and degraded thermal paste cause catastrophic thermal throttling. Systems are stripped down, subjected to deep-level cleaning, and repasted with high-grade thermal compounds.</p>
-              </div>
-              <BeforeAfterSlider 
-                beforeImage="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?q=80&w=1200&auto=format&fit=crop" 
-                afterImage="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" 
-                beforeLabel="Dust-Choked & Overheating"
-                afterLabel="Ultrasonically Cleaned"
-              />
-            </div>
-          </RevealWrapper>
-
-          {/* Portfolio Item 3: Screen Repair */}
-          <RevealWrapper delay={400}>
-            <div className="flex flex-col gap-5">
-              <div>
-                <h3 className="text-xl font-bold text-white uppercase tracking-wider flex items-center gap-3 mb-2">
-                  <span className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_10px_#3b82f6]"></span> 03. Panel Replacement
-                </h3>
-                <p className="text-sm text-gray-400 max-w-3xl leading-relaxed">Shattered displays are surgically removed. We source OEM-grade replacement panels globally and execute flawless installations, returning the device to factory-new condition.</p>
-              </div>
-              <BeforeAfterSlider 
-                beforeImage="https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?q=80&w=1200&auto=format&fit=crop" 
-                afterImage="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1200&auto=format&fit=crop" 
-                beforeLabel="Shattered & Unusable"
-                afterLabel="OEM Panel Restored"
-              />
-            </div>
-          </RevealWrapper>
 
         </div>
-      </section>
+      </RevealWrapper>
 
-      {/* --- SECTION 4: WEB CREATION --- */}
-      <section aria-labelledby="web-heading" className="w-full max-w-5xl">
-        <RevealWrapper delay={100}>
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0 border border-blue-500/20 shadow-[0_0_20px_rgba(37,99,235,0.1)]">
-              <Globe className="w-6 h-6 text-blue-400" aria-hidden="true" />
-            </div>
-            <h2 id="web-heading" className="text-2xl md:text-3xl font-black text-white uppercase tracking-wider">Web Development</h2>
-            <div className="h-px bg-white/10 flex-grow" aria-hidden="true" />
-          </div>
-        </RevealWrapper>
+    </div>
+  );
+}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
-          
-          <RevealWrapper delay={200}>
-            <article className="glass-card rounded-[2rem] p-8 border border-white/5 hover:border-blue-500/50 hover:bg-blue-900/5 transition-all duration-500 h-[90%] flex flex-col hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,163,255,0.1)]">
-              <h3 className="text-xl font-bold text-white uppercase mb-2 tracking-wide">Starter Hub</h3>
-              <p className="text-sm text-gray-400 mb-6 leading-relaxed">A high-impact landing page to establish your digital presence.</p>
-              <div className="mb-8">
-                <span className="text-3xl font-black text-white">R1,850</span>
-                <span className="text-xs text-gray-500 ml-2 uppercase font-mono tracking-widest">Base</span>
-              </div>
-              <ul className="space-y-3 mb-10 flex-grow">
-                <li className="flex items-start gap-3 text-sm text-gray-300"><Check className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" aria-hidden="true" /> Single Landing Page</li>
-                <li className="flex items-start gap-3 text-sm text-gray-300"><Check className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" aria-hidden="true" /> Mobile Responsive</li>
-                <li className="flex items-start gap-3 text-sm text-gray-300"><Check className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" aria-hidden="true" /> Basic Contact Form</li>
-              </ul>
-              <MagneticWrapper pullStrength={0.1} className="w-full mt-auto">
-                <Link href="/contact" className="w-full py-4 bg-white/5 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-white/10 hover:border-blue-500 rounded-xl font-black text-xs text-center uppercase tracking-widest transition-all min-h-[56px] flex items-center justify-center backdrop-blur-sm">
-                  Initialize Project
-                </Link>
-              </MagneticWrapper>
-            </article>
-          </RevealWrapper>
-
-          <RevealWrapper delay={350}>
-            <article className="glass-card rounded-[2rem] p-8 border-2 border-blue-500 shadow-[0_0_40px_rgba(0,163,255,0.15)] relative h-full flex flex-col hover:-translate-y-2 transition-transform duration-500 overflow-hidden">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest px-6 py-1.5 rounded-b-xl z-10 shadow-lg shadow-blue-500/20">
-                Recommended
-              </div>
-              <div className="absolute top-0 right-0 w-40 h-40 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
-              <h3 className="text-xl font-bold text-white uppercase mt-6 mb-2 tracking-wide relative z-10">Business Scale</h3>
-              <p className="text-sm text-gray-400 mb-6 leading-relaxed relative z-10">A complete multi-page architecture designed to convert leads.</p>
-              <div className="mb-8 relative z-10">
-                <span className="text-4xl font-black text-blue-400 drop-shadow-[0_0_15px_rgba(0,163,255,0.3)]">R4,500</span>
-                <span className="text-xs text-gray-500 ml-2 uppercase font-mono tracking-widest">Base</span>
-              </div>
-              <ul className="space-y-3 mb-10 flex-grow relative z-10">
-                <li className="flex items-start gap-3 text-sm text-white"><Check className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" aria-hidden="true" /> Up to 5 Pages</li>
-                <li className="flex items-start gap-3 text-sm text-white"><Check className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" aria-hidden="true" /> SEO Optimization</li>
-                <li className="flex items-start gap-3 text-sm text-white"><Check className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" aria-hidden="true" /> Custom Analytics Setup</li>
-                <li className="flex items-start gap-3 text-sm text-white"><Check className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" aria-hidden="true" /> Domain Integration</li>
-              </ul>
-              <MagneticWrapper pullStrength={0.1} className="w-full mt-auto relative z-10">
-                <Link href="/contact" className="w-full py-4 bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black rounded-xl font-black text-xs text-center uppercase tracking-widest transition-all shadow-[0_10px_30px_rgba(37,99,235,0.2)] hover:shadow-[0_15px_40px_rgba(37,99,235,0.4)] ring-1 ring-blue-400/50 min-h-[56px] flex items-center justify-center">
-                  Deploy Business Build
-                </Link>
-              </MagneticWrapper>
-            </article>
-          </RevealWrapper>
-
-          <RevealWrapper delay={500}>
-            <article className="glass-card rounded-[2rem] p-8 border border-white/5 hover:border-blue-500/50 hover:bg-blue-900/5 transition-all duration-500 h-[90%] flex flex-col hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,163,255,0.1)]">
-              <h3 className="text-xl font-bold text-white uppercase mb-2 tracking-wide">Custom System</h3>
-              <p className="text-sm text-gray-400 mb-6 leading-relaxed">Full-stack web applications and bespoke software solutions.</p>
-              <div className="mb-8">
-                <span className="text-3xl font-black text-white">Custom</span>
-                <span className="text-xs text-gray-500 ml-2 uppercase font-mono tracking-widest">Quote</span>
-              </div>
-              <ul className="space-y-3 mb-10 flex-grow">
-                <li className="flex items-start gap-3 text-sm text-gray-400"><Check className="w-4 h-4 text-gray-600 flex-shrink-0 mt-0.5" aria-hidden="true" /> E-Commerce Engines</li>
-                <li className="flex items-start gap-3 text-sm text-gray-400"><Check className="w-4 h-4 text-gray-600 flex-shrink-0 mt-0.5" aria-hidden="true" /> Database Architecture</li>
-                <li className="flex items-start gap-3 text-sm text-gray-400"><Check className="w-4 h-4 text-gray-600 flex-shrink-0 mt-0.5" aria-hidden="true" /> Third-Party API Wiring</li>
-              </ul>
-              <MagneticWrapper pullStrength={0.1} className="w-full mt-auto">
-                <Link href="/contact" className="w-full py-4 bg-white/5 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-white/10 hover:border-blue-500 rounded-xl font-black text-xs text-center uppercase tracking-widest transition-all min-h-[56px] flex items-center justify-center backdrop-blur-sm">
-                  Request Assessment
-                </Link>
-              </MagneticWrapper>
-            </article>
-          </RevealWrapper>
-
-        </div>
-      </section>
-
+export default function ServicesPage() {
+  return (
+    <main className="min-h-screen pt-24 pb-20 flex flex-col items-center overflow-hidden relative w-full">
+      {/* Global Background Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[600px] bg-cyan-600/5 rounded-[100%] blur-[150px] pointer-events-none z-0" aria-hidden="true" />
+      <div className="scanline opacity-10 pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
+      
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center w-full"><Loader2 className="w-10 h-10 text-cyan-500 animate-spin" /></div>}>
+        <ServicesLogic />
+      </Suspense>
     </main>
   );
 }

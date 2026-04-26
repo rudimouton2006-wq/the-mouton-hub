@@ -1,29 +1,38 @@
 "use client";
-import { useRef, useState, ReactNode, MouseEvent } from "react";
+import { useRef, useState, MouseEvent } from "react";
 
 interface MagneticWrapperProps {
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
-  pullStrength?: number; // Controls how intensely the button pulls toward the cursor
+  pullStrength?: number;
 }
 
-export default function MagneticWrapper({ children, className = "", pullStrength = 0.15 }: MagneticWrapperProps) {
-  const ref = useRef<HTMLDivElement>(null);
+export default function MagneticWrapper({ 
+  children, 
+  className = "", 
+  pullStrength = 0.15 
+}: MagneticWrapperProps) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
+    if (!wrapperRef.current) return;
     
-    // Calculate the exact center of the button
-    const { height, width, left, top } = ref.current.getBoundingClientRect();
+    // Extract exact mouse coordinates relative to the viewport
+    const { clientX, clientY } = e;
+    
+    // Extract exact dimensions and position of the wrapped element
+    const { width, height, left, top } = wrapperRef.current.getBoundingClientRect();
+    
+    // Calculate the mathematical center of the element
     const centerX = left + width / 2;
     const centerY = top + height / 2;
     
-    // Calculate distance between mouse and button center
-    const distanceX = e.clientX - centerX;
-    const distanceY = e.clientY - centerY;
-
-    // Apply the magnetic pull
+    // Calculate how far the mouse is from the center
+    const distanceX = clientX - centerX;
+    const distanceY = clientY - centerY;
+    
+    // Apply the magnetic pull fraction
     setPosition({ 
       x: distanceX * pullStrength, 
       y: distanceY * pullStrength 
@@ -31,22 +40,24 @@ export default function MagneticWrapper({ children, className = "", pullStrength
   };
 
   const handleMouseLeave = () => {
-    // Snap back to zero coordinates when the mouse leaves
+    // Release the magnetic lock and snap back to origin
     setPosition({ x: 0, y: 0 });
   };
 
-  const { x, y } = position;
-  
   return (
     <div
-      ref={ref}
+      ref={wrapperRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`relative inline-flex ${className}`}
+      className={`relative inline-block ${className}`}
       style={{
-        transform: `translate3d(${x}px, ${y}px, 0)`,
-        // Fast transition when tracking the mouse, smooth springy transition when snapping back
-        transition: x === 0 && y === 0 ? "transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)" : "transform 0.1s ease-out",
+        transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
+        // If x and y are 0 (mouse left), use a smooth elastic spring-back effect.
+        // Otherwise, use a rapid, snappy follow effect.
+        transition: position.x === 0 && position.y === 0 
+          ? "transform 0.6s cubic-bezier(0.25, 1, 0.2, 1)" 
+          : "transform 0.1s ease-out",
+        willChange: "transform" // Hardware acceleration hint
       }}
     >
       {children}

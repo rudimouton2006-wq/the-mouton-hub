@@ -2,131 +2,151 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Terminal, Menu, X, ChevronRight, Wrench } from "lucide-react";
+import { Menu, X, ChevronRight, Terminal, Wrench } from "lucide-react";
+
+const NAV_LINKS = [
+  { name: "Dashboard", href: "/" },
+  { name: "Services", href: "/services" },
+  { name: "Hardware", href: "/shop" },
+  { name: "Schedule", href: "/schedule" },
+  { name: "Engineer", href: "/engineer" },
+];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Dynamic scroll listener for premium glass effect
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    if (isOpen) {
+    if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
     }
     return () => { document.body.style.overflow = "unset"; };
-  }, [isOpen]);
-
-  const navLinks = [
-    { name: "Dashboard", href: "/" },
-    { name: "Services", href: "/services" },
-    { name: "Hardware", href: "/shop" },
-    { name: "Schedule", href: "/schedule" },
-    { name: "Engineer", href: "/engineer" },
-  ];
+  }, [isMobileMenuOpen]);
 
   return (
     <>
-      {/* Desktop & Top Bar Nav */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? "bg-black/80 backdrop-blur-2xl border-b border-white/10 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)]" : "bg-gradient-to-b from-black/80 to-transparent py-6"}`}>
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      {/* --------------------------------------------------------- */}
+      {/* DESKTOP & GLOBAL HEADER */}
+      {/* --------------------------------------------------------- */}
+      <header 
+        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 border-b ${
+          isScrolled 
+            ? "bg-[#050505]/80 backdrop-blur-xl border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)] py-4" 
+            : "bg-transparent border-transparent py-6"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between">
           
-          {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-3 group focus:outline-none z-50 relative" onClick={() => setIsOpen(false)}>
-            <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center group-hover:bg-blue-500 transition-colors shadow-[0_0_20px_rgba(37,99,235,0.4)] border border-blue-400/50">
-              <Terminal className="w-5 h-5 text-white" aria-hidden="true" />
+          {/* Logo / Brand */}
+          <Link href="/" className="flex items-center gap-3 group relative z-[101]">
+            <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center border border-blue-400/30 shadow-[0_0_20px_rgba(37,99,235,0.4)] group-hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] transition-all duration-500">
+              <Terminal className="w-5 h-5 text-white" />
             </div>
-            <span className="font-black text-white tracking-tighter uppercase text-xl group-hover:text-blue-400 transition-colors hidden sm:block">
+            <span className="text-xl font-black tracking-tighter uppercase text-white group-hover:text-blue-400 transition-colors">
               The Mouton Hub
             </span>
           </Link>
 
-          {/* Desktop Nav Routing & CTA */}
-          <div className="hidden md:flex items-center gap-4">
-            {/* The Glass Link Container */}
-            <div className="flex items-center gap-1 bg-white/5 border border-white/10 p-1.5 rounded-2xl backdrop-blur-md">
-              {navLinks.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Link 
-                    key={link.name} 
-                    href={link.href}
-                    className={`px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest transition-all duration-300 ${isActive ? "bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.5)] border border-blue-400/50" : "text-gray-400 hover:text-white hover:bg-white/10"}`}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              })}
-            </div>
-            
-            {/* The Restored Support Portal CTA */}
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-2 bg-[#111]/80 backdrop-blur-md border border-white/10 rounded-full p-1.5 shadow-inner">
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 ${
+                    isActive
+                      ? "bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.3)]"
+                      : "text-gray-400 hover:text-white hover:bg-white/5"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* Desktop Support CTA */}
+          <div className="hidden lg:block">
             <Link 
-              href="/contact" 
-              className="hidden lg:flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] border border-blue-400/50 hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]"
+              href="/contact"
+              className="px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-blue-500/50 rounded-xl font-black text-xs uppercase tracking-widest flex items-center gap-2 transition-all text-blue-400 hover:text-white hover:shadow-[0_0_20px_rgba(0,163,255,0.2)]"
             >
-              Support Portal <Wrench className="w-4 h-4" aria-hidden="true" />
+              Support Portal <Wrench className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile Menu Toggle */}
           <button 
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden w-12 h-12 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 text-white z-50 relative focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all hover:bg-white/10 backdrop-blur-md"
-            aria-label="Toggle Menu"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden relative z-[101] w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-colors focus:outline-none"
+            aria-label="Toggle Mobile Menu"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
 
         </div>
-      </nav>
+      </header>
 
-      {/* Mobile Full-Screen Overlay Menu */}
+      {/* --------------------------------------------------------- */}
+      {/* MOBILE NAVIGATION OVERLAY */}
+      {/* --------------------------------------------------------- */}
       <div 
-        className={`fixed inset-0 z-40 bg-black/95 backdrop-blur-3xl transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] md:hidden flex flex-col justify-center px-8 ${isOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full pointer-events-none"}`}
-        aria-hidden={!isOpen}
+        className={`fixed inset-0 z-[99] bg-[#050505]/95 backdrop-blur-2xl transition-all duration-500 lg:hidden flex flex-col pt-32 px-6 pb-10 ${
+          isMobileMenuOpen 
+            ? "opacity-100 pointer-events-auto translate-y-0" 
+            : "opacity-0 pointer-events-none -translate-y-10"
+        }`}
       >
-        <div className="flex flex-col space-y-6 max-w-sm mx-auto w-full relative z-50">
-          {navLinks.map((link, i) => {
+        <div className="flex-grow flex flex-col gap-4">
+          {NAV_LINKS.map((link, index) => {
             const isActive = pathname === link.href;
             return (
-              <Link 
-                key={link.name} 
+              <Link
+                key={link.name}
                 href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`flex items-center justify-between py-4 border-b border-white/10 transition-all duration-500 ${isOpen ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"}`}
-                style={{ transitionDelay: `${isOpen ? i * 100 : 0}ms` }}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`p-6 rounded-2xl border flex items-center justify-between transition-all duration-500 delay-[${index * 50}ms] ${
+                  isMobileMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+                } ${
+                  isActive 
+                    ? "bg-blue-600/10 border-blue-500/50 shadow-[0_0_30px_rgba(37,99,235,0.15)]" 
+                    : "bg-[#111] border-white/5 hover:border-white/20"
+                }`}
               >
-                <span className={`text-2xl font-black uppercase tracking-wider ${isActive ? "text-blue-400 drop-shadow-[0_0_15px_rgba(0,163,255,0.4)]" : "text-gray-300 hover:text-white"}`}>
+                <span className={`text-xl font-black uppercase tracking-wider ${isActive ? "text-blue-400" : "text-white"}`}>
                   {link.name}
                 </span>
                 <ChevronRight className={`w-6 h-6 ${isActive ? "text-blue-400" : "text-gray-600"}`} />
               </Link>
             );
           })}
-
-          <div 
-            className={`mt-8 transition-all duration-500 ${isOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
-            style={{ transitionDelay: `${isOpen ? navLinks.length * 100 : 0}ms` }}
-          >
-            <Link 
-              href="/contact"
-              onClick={() => setIsOpen(false)}
-              className="w-full py-5 bg-blue-600 rounded-xl text-center font-black text-sm text-white uppercase tracking-widest shadow-[0_10px_30px_rgba(37,99,235,0.3)] block border border-blue-400/50 hover:bg-blue-500 transition-colors flex items-center justify-center gap-2"
-            >
-              Support Portal <Wrench className="w-5 h-5" aria-hidden="true" />
-            </Link>
-          </div>
         </div>
 
-        {/* Ambient background glow for mobile menu */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none z-0" />
+        {/* Mobile Support CTA at bottom */}
+        <div className={`mt-auto transition-all duration-500 delay-300 ${isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+          <Link 
+            href="/contact"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="w-full py-6 bg-blue-600 hover:bg-blue-500 rounded-2xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all shadow-[0_10px_30px_rgba(37,99,235,0.3)] text-white"
+          >
+            Access Support Portal <Wrench className="w-5 h-5" />
+          </Link>
+        </div>
       </div>
     </>
   );

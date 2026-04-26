@@ -1,90 +1,87 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
-interface TypewriterProps {
+interface DecodeTextProps {
   text: string;
-  className?: string;
   delay?: number;
+  className?: string;
 }
 
-export default function DecodeText({ text, className = "", delay = 0 }: TypewriterProps) {
-  const [displayText, setDisplayText] = useState("");
-  const [isComplete, setIsComplete] = useState(false);
-  const [hasRun, setHasRun] = useState(false);
-  const elementRef = useRef<HTMLSpanElement>(null);
+// The character pool used for the cryptographic scrambling effect
+const GLITCH_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+<>_";
+
+export default function DecodeText({ text, delay = 0, className = "" }: DecodeTextProps) {
+  // Initialize with blank or heavily obfuscated text based on actual length
+  const [displayText, setDisplayText] = useState(() => 
+    text.split("").map(char => char === " " ? " " : "_").join("")
+  );
+  
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const containerRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    // Observer triggers the typing only when the user scrolls to the text
+    // Hardware-accelerated intersection observer to trigger on scroll
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && !hasRun) {
-          setHasRun(true);
-          setTimeout(() => {
-            typeText();
+        if (entries[0].isIntersecting && !hasAnimated) {
+          // Wait for any staggered delays, then execute
+          const timeoutId = setTimeout(() => {
+            executeDecodeSequence();
+            setHasAnimated(true);
           }, delay);
+          
+          return () => clearTimeout(timeoutId);
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.1 } // Triggers when 10% of the element is visible
     );
 
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
+    const currentRef = containerRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
-    return () => observer.disconnect();
-  }, [hasRun, delay, text]);
-
-  const typeText = () => {
-    let currentIndex = 0;
-    
-    // Fast, mechanical typing speed
-    const typeNextChar = () => {
-      if (currentIndex <= text.length) {
-        setDisplayText(text.substring(0, currentIndex));
-        currentIndex++;
-        
-        // Randomize speed slightly between 30ms and 60ms for a natural, organic feel
-        const nextDelay = Math.random() * 30 + 30; 
-        setTimeout(typeNextChar, nextDelay);
-      } else {
-        setIsComplete(true);
-      }
+    return () => {
+      if (currentRef) observer.unobserve(currentRef);
     };
+  }, [hasAnimated, delay, text]);
+
+  const executeDecodeSequence = () => {
+    let iteration = 0;
+    const maxIterations = text.length * 3; // Controls the total duration of the sweep
     
-    typeNextChar();
+    const intervalId = setInterval(() => {
+      setDisplayText((currentText) => 
+        text.split("").map((actualLetter, index) => {
+          // Preserve spaces
+          if (actualLetter === " ") return " ";
+          
+          // Once the sweep passes this letter's index, lock in the real letter
+          if (index < Math.floor(iteration / 3)) {
+            return text[index];
+          }
+          
+          // Otherwise, continue scrambling with random cryptographic characters
+          return GLITCH_CHARACTERS[Math.floor(Math.random() * GLITCH_CHARACTERS.length)];
+        }).join("")
+      );
+
+      if (iteration >= maxIterations) {
+        clearInterval(intervalId);
+        // Safety lock: ensure final text perfectly matches the input prop
+        setDisplayText(text); 
+      }
+      
+      iteration += 1;
+    }, 30); // 30ms creates a fluid, 60fps-style rapid scramble
   };
 
   return (
-    // We use inline-grid to place the invisible placeholder and the typing text on top of each other
-    // without using absolute positioning. This fixes the gradient clipping bug.
-    <span ref={elementRef} className={`inline-grid ${className}`}>
-      
-      {/* 1. Invisible placeholder: Sets the exact final width + space for our custom cursor, 
-          so the layout never jumps or shifts.
-      */}
-      <span className="col-start-1 row-start-1 opacity-0 pointer-events-none pr-[10px]" aria-hidden="true">
-        {text}
-      </span>
-      
-      {/* 2. Visible typing layer: Types left-to-right inside the reserved grid space */}
-      <span className="col-start-1 row-start-1 justify-self-start text-left whitespace-nowrap">
-        {displayText}
-        
-        {/* REFINED CODER CURSOR WITH FADE:
-            When typing is done, it waits 300ms, then fades out smoothly over 1000ms. 
-        */}
-        <span
-          className={`inline-block w-[6px] h-[0.8em] bg-blue-500 rounded-sm ml-1 translate-y-[2px] ${
-            isComplete 
-              ? "opacity-0 transition-opacity duration-1000 delay-300 ease-out" 
-              : "opacity-100 animate-[pulse_1s_step-end_infinite]"
-          }`}
-          // Anti-Gradient Bug Fix: This explicit rule ensures the cursor stays solid blue
-          // even when placed behind the gradient text.
-          style={{ WebkitTextFillColor: "initial", WebkitBackgroundClip: "initial" }} 
-        />
-      </span>
-      
+    <span 
+      ref={containerRef} 
+      className={`inline-block font-black tracking-tighter ${className}`}
+    >
+      {displayText}
     </span>
   );
 }
