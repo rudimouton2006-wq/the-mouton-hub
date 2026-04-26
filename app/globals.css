@@ -29,25 +29,29 @@
 
 @layer components {
   /* The Ultimate Glassmorphic Structural Shell
-    Used universally across all cards and modals to ensure 100% uniformity.
-    Vercel Fix: Using native bg-white/5 to prevent @apply parser crashes.
+    Turbopack Fix: Replaced @apply with native CSS to bypass the opacity parsing anomaly.
   */
   .glass-card {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   }
 
   /* Cinematic Text Gradients
-    Standardized gradient text clipping for headers.
+    Turbopack Fix: Native CSS implementation for unbreakable builds.
   */
   .text-gradient {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400;
+    background-image: linear-gradient(to right, #60a5fa, #34d399);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 }
 
 @layer utilities {
-  /* CRT-style scanline overlay for the military/command-center aesthetic.
-    Uses linear gradients instead of images to save network payload.
-  */
+  /* CRT-style scanline overlay for the military/command-center aesthetic. */
   .scanline {
     background: linear-gradient(
       to bottom,
@@ -58,12 +62,10 @@
     );
     background-size: 100% 4px;
     animation: scanline 15s linear infinite;
-    pointer-events: none; /* Ensures clicks pass through the scanline */
+    pointer-events: none;
   }
 
-  /* Premium Scrollbar for internal modals and textareas.
-    Overrides ugly default browser scrollbars with a sleek, dark aesthetic.
-  */
+  /* Premium Scrollbar for internal modals and textareas. */
   .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
     height: 6px;

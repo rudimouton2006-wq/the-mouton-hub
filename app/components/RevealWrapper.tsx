@@ -3,71 +3,77 @@ import { useEffect, useRef, useState } from "react";
 
 interface RevealWrapperProps {
   children: React.ReactNode;
-  className?: string;
-  delay?: number; // Delay in milliseconds
   direction?: "up" | "down" | "left" | "right" | "none";
+  delay?: number;
+  className?: string;
 }
 
-export default function RevealWrapper({ 
-  children, 
-  className = "", 
-  delay = 0, 
-  direction = "up" 
+export default function RevealWrapper({
+  children,
+  direction = "up",
+  delay = 0,
+  className = "",
 }: RevealWrapperProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const domRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Hardware-accelerated observer to watch for viewport entry
+    // Initialize the Intersection Observer for scroll-triggered rendering
     const observer = new IntersectionObserver(
-      (entries) => {
-        // Once the element enters the viewport, trigger the state change
-        if (entries[0].isIntersecting) {
+      ([entry]) => {
+        if (entry.isIntersecting) {
           setIsVisible(true);
-          // Unobserve immediately after triggering so the animation only runs once per load
-          if (domRef.current) observer.unobserve(domRef.current);
+          // Instantly unobserve to prevent memory leaks and CPU drain
+          if (ref.current) {
+            observer.unobserve(ref.current);
+          }
         }
       },
-      { 
-        threshold: 0.1, // Trigger when 10% of the element is visible
-        rootMargin: "50px" // Start loading slightly before it hits the actual screen edge
+      {
+        root: null,
+        // Triggers exactly when the element is 10% visible from the bottom
+        rootMargin: "0px 0px -10% 0px", 
+        threshold: 0.1,
       }
     );
 
-    const currentRef = domRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
+    if (ref.current) {
+      observer.observe(ref.current);
     }
 
+    // Cleanup protocol on component unmount
     return () => {
-      if (currentRef) observer.unobserve(currentRef);
+      if (ref.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        observer.unobserve(ref.current); 
+      }
     };
   }, []);
 
-  // Calculate the starting position matrix based on the requested direction
-  const getTransformDirection = () => {
+  const getDirectionClasses = () => {
     switch (direction) {
-      case "up": return "translateY(40px)";
-      case "down": return "translateY(-40px)";
-      case "left": return "translateX(40px)";
-      case "right": return "translateX(-40px)";
-      case "none": return "translate(0,0)";
-      default: return "translateY(40px)";
+      case "up":
+        return "translate-y-12";
+      case "down":
+        return "-translate-y-12";
+      case "left":
+        return "translate-x-12";
+      case "right":
+        return "-translate-x-12";
+      case "none":
+        return "";
+      default:
+        return "translate-y-12";
     }
   };
 
   return (
     <div
-      ref={domRef}
-      className={className}
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translate(0,0)" : getTransformDirection(),
-        // Transition heavily utilizes cubic-bezier curves for a natural, "premium" snap
-        transition: `opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)`,
-        transitionDelay: `${delay}ms`,
-        willChange: "opacity, transform" // GPU acceleration hint
-      }}
+      ref={ref}
+      className={`transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] will-change-[opacity,transform] ${
+        isVisible ? "opacity-100 translate-x-0 translate-y-0" : `opacity-0 ${getDirectionClasses()}`
+      } ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
     </div>

@@ -1,44 +1,44 @@
 "use client";
 import { Suspense } from "react";
 import { useRouter } from "next/navigation";
-import { Server, ShieldAlert, Cpu, Network, Lock, Wrench, ArrowRight, CheckCircle2, Loader2, Activity } from "lucide-react";
+import { Server, ShieldCheck, Network, Cpu, ArrowRight, Loader2, Zap, Layers } from "lucide-react";
 import DecodeText from "../components/DecodeText";
 import RevealWrapper from "../components/RevealWrapper";
 import MagneticWrapper from "../components/MagneticWrapper";
 
-const SERVICE_MODULES = [
+const ARCHITECTURE_MODULES = [
   {
-    id: "network",
-    title: "Network Architecture",
-    description: "Enterprise-grade infrastructure design. From high-throughput fiber routing to intelligent VLAN segmentation and SD-WAN deployment.",
+    id: "01",
+    title: "Network Architecture & Routing",
     icon: <Network className="w-8 h-8 text-blue-400" />,
     color: "blue",
-    features: ["VLAN Segmentation & Security", "High-Density Wi-Fi Deployment", "SD-WAN & Multi-Site Routing", "Layer 3 Switch Configuration"],
+    description: "Design and deployment of high-availability network infrastructures. Specializing in enterprise-grade VLAN segmentation, latency reduction, and seamless inter-node communication.",
+    tags: ["VLAN Segmentation", "Packet Prioritization", "Failover Systems"]
   },
   {
-    id: "security",
-    title: "Zero-Trust Security",
-    description: "Military-grade endpoint protection and perimeter defense. Securing your data against active intrusions and lateral network movement.",
-    icon: <Lock className="w-8 h-8 text-emerald-400" />,
-    color: "emerald",
-    features: ["Next-Gen Firewall Deployment", "Intrusion Detection Systems (IDS)", "Endpoint Detection & Response", "Encrypted VPN Tunnels"],
+    id: "02",
+    title: "Enterprise IT Infrastructure",
+    icon: <Server className="w-8 h-8 text-indigo-400" />,
+    color: "indigo",
+    description: "End-to-end fabrication of physical and digital IT environments. From server rack installations to professional workstation deployments operating on the Takumi standard of precision.",
+    tags: ["Server Deployment", "Hardware Integration", "System Diagnostics"]
   },
   {
-    id: "hardware",
-    title: "Hardware Deployment",
-    description: "Custom workstation fabrication and server rack installation. Engineered for absolute maximum computational efficiency.",
-    icon: <Server className="w-8 h-8 text-cyan-400" />,
+    id: "03",
+    title: "Zero-Trust Security Protocols",
+    icon: <ShieldCheck className="w-8 h-8 text-cyan-400" />,
     color: "cyan",
-    features: ["Server Rack Integration", "Custom Workstation Builds", "RAID Storage Arrays", "Thermal & Power Optimization"],
+    description: "Implementation of advanced, defense-in-depth security parameters. We lock down network perimeters, establish secure API routing, and prevent unauthorized telemetry leaks.",
+    tags: ["Endpoint Security", "Traffic Encryption", "Access Control"]
   },
   {
-    id: "diagnostics",
-    title: "Advanced Diagnostics",
-    description: "Deep-level system troubleshooting. We isolate hardware failures and software anomalies before they cause critical downtime.",
-    icon: <Activity className="w-8 h-8 text-purple-400" />,
-    color: "purple",
-    features: ["Kernel-Level Debugging", "Hardware Failure Isolation", "Network Bottleneck Analysis", "Data Recovery Protocols"],
-  },
+    id: "04",
+    title: "Low-Level System Optimization",
+    icon: <Cpu className="w-8 h-8 text-emerald-400" />,
+    color: "emerald",
+    description: "Deep kernel-level tuning for maximum computational efficiency. Utilizing custom OS configurations (such as AtlasOS) to strip bloatware and maximize hardware resource allocation.",
+    tags: ["OS Stripping", "Resource Allocation", "Thermal Profiling"]
+  }
 ];
 
 function ServicesLogic() {
@@ -48,108 +48,94 @@ function ServicesLogic() {
     <div className="w-full flex flex-col items-center relative z-10 px-4 md:px-6">
       
       {/* --------------------------------------------------------- */}
-      {/* HEADER */}
+      {/* HEADER SECTION */}
       {/* --------------------------------------------------------- */}
       <header className="w-full max-w-5xl mb-24 text-center mt-10">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-6 backdrop-blur-md">
-          <Server className="w-4 h-4 text-cyan-400" />
-          <span className="text-xs font-mono text-cyan-300 uppercase tracking-widest">Infrastructure Protocols</span>
+          <Layers className="w-4 h-4 text-cyan-400" />
+          <span className="text-xs font-mono text-cyan-300 uppercase tracking-widest">System Capabilities</span>
         </div>
         <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6 leading-none">
-          <DecodeText text="System" /> <br />
+          <DecodeText text="Infrastructure" /> <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 drop-shadow-[0_0_30px_rgba(34,211,238,0.3)]">
             <DecodeText text="Architecture" delay={600} />
           </span>
         </h1>
         <RevealWrapper delay={1000} direction="up">
-          <p className="text-gray-400 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed">
-            We engineer, deploy, and maintain high-performance IT ecosystems. From physical server installations to encrypted network routing, our solutions scale with your operational demands.
+          <p className="text-gray-400 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed mb-8">
+            Takumi Tech engineers elite digital ecosystems. We do not offer pre-packaged solutions; every network, server, and system is meticulously custom-designed to match your exact operational requirements.
           </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-xs font-mono text-blue-400 uppercase tracking-widest bg-blue-500/5 p-4 rounded-xl border border-blue-500/20 max-w-3xl mx-auto">
+            <Zap className="w-4 h-4 shrink-0" />
+            <span className="text-center sm:text-left leading-relaxed">
+              <strong>Dynamic Assessment:</strong> All infrastructure projects require a preliminary diagnostic. Costs scale dynamically based on the hardware scope and architectural complexity.
+            </span>
+          </div>
         </RevealWrapper>
       </header>
 
       {/* --------------------------------------------------------- */}
-      {/* SERVICE GRID */}
+      {/* CAPABILITIES GRID */}
       {/* --------------------------------------------------------- */}
-      <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
-        {SERVICE_MODULES.map((service, index) => (
-          <RevealWrapper key={service.id} delay={index * 200} direction="up" className="h-full">
-            <div className={`glass-card h-full rounded-[2.5rem] p-8 md:p-12 border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent hover:bg-${service.color}-900/10 hover:border-${service.color}-500/30 transition-all duration-700 ease-out group flex flex-col relative overflow-hidden`}>
+      <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-24">
+        {ARCHITECTURE_MODULES.map((module, idx) => (
+          <RevealWrapper key={module.id} delay={200 + (idx * 200)} direction="up" className="h-full">
+            <div className={`glass-card rounded-[2rem] p-8 md:p-10 border border-white/5 bg-[#080808] relative overflow-hidden h-full group hover:border-${module.color}-500/30 transition-colors duration-700 flex flex-col`}>
+              <div className={`absolute top-0 right-0 w-64 h-64 bg-${module.color}-600/5 rounded-full blur-[80px] pointer-events-none group-hover:bg-${module.color}-600/10 transition-colors duration-700`} />
               
-              {/* Dynamic Glow */}
-              <div className={`absolute -top-32 -right-32 w-64 h-64 bg-${service.color}-500/10 rounded-full blur-[80px] group-hover:bg-${service.color}-500/20 group-hover:scale-150 transition-all duration-700 pointer-events-none`} />
-              
-              <div className="flex items-center gap-6 mb-8 relative z-10">
-                <div className={`w-16 h-16 rounded-2xl bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/10 group-hover:border-${service.color}-500/50 group-hover:shadow-[0_0_30px_rgba(var(--${service.color}-rgb),0.3)] transition-all duration-500 shrink-0`}>
-                  {service.icon}
+              <div className="flex justify-between items-start mb-8 relative z-10">
+                <div className={`w-16 h-16 rounded-2xl bg-${module.color}-500/10 flex items-center justify-center border border-${module.color}-500/20 shadow-[0_0_20px_rgba(0,0,0,0)] group-hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] transition-all`}>
+                  {module.icon}
                 </div>
-                <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight uppercase">
-                  {service.title}
-                </h2>
+                <span className={`text-4xl font-black text-white/5 group-hover:text-${module.color}-500/20 transition-colors select-none`}>
+                  {module.id}
+                </span>
               </div>
 
-              <p className="text-gray-400 text-base font-medium leading-relaxed mb-10 relative z-10">
-                {service.description}
+              <h2 className="text-2xl font-black text-white uppercase tracking-wider mb-4 relative z-10">
+                {module.title}
+              </h2>
+              
+              <p className="text-gray-400 text-sm md:text-base font-medium leading-relaxed mb-8 relative z-10 flex-grow">
+                {module.description}
               </p>
 
-              <div className="mt-auto relative z-10">
-                <div className="h-px w-full bg-gradient-to-r from-white/10 to-transparent mb-6" />
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {service.features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <CheckCircle2 className={`w-4 h-4 mt-0.5 shrink-0 text-${service.color}-400/70 group-hover:text-${service.color}-400 transition-colors`} />
-                      <span className="text-xs font-mono text-gray-400 uppercase tracking-wide leading-relaxed">
-                        {feature}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+              <div className="flex flex-wrap gap-2 relative z-10 mt-auto pt-6 border-t border-white/5">
+                {module.tags.map(tag => (
+                  <span key={tag} className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-gray-400 uppercase tracking-widest">
+                    {tag}
+                  </span>
+                ))}
               </div>
-
             </div>
           </RevealWrapper>
         ))}
       </div>
 
       {/* --------------------------------------------------------- */}
-      {/* ESCALATION CTA */}
+      {/* CALL TO ACTION */}
       {/* --------------------------------------------------------- */}
-      <RevealWrapper delay={400} direction="up" className="w-full max-w-5xl mb-10">
-        <div className="glass-card rounded-[2.5rem] p-10 md:p-16 border border-cyan-500/20 bg-gradient-to-br from-cyan-900/10 to-black/60 shadow-[0_0_80px_rgba(34,211,238,0.05)] text-center relative overflow-hidden flex flex-col items-center">
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 mix-blend-overlay pointer-events-none" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
+      <RevealWrapper delay={400} direction="up" className="w-full max-w-4xl mb-24">
+        <div className="glass-card rounded-[2.5rem] p-10 md:p-14 border border-blue-500/30 bg-gradient-to-br from-blue-900/20 to-[#050505] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 pointer-events-none" />
           
-          <div className="w-20 h-20 rounded-3xl bg-black/60 backdrop-blur-xl flex items-center justify-center mb-8 border border-cyan-500/30 shadow-[0_0_40px_rgba(34,211,238,0.2)] relative z-10">
-            <ShieldAlert className="w-10 h-10 text-cyan-400" />
-          </div>
-          
-          <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter mb-6 relative z-10">
-            Require Advanced <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">Integration?</span>
-          </h2>
-          <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-10 font-medium relative z-10">
-            Bypass standard diagnostic ticketing and schedule a direct consultation with Lead Engineer Rudi Mouton to discuss enterprise-level architecture.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 relative z-10 w-full sm:w-auto">
-            <MagneticWrapper pullStrength={0.15} className="w-full sm:w-auto">
-              <button 
-                onClick={() => router.push("/schedule")}
-                className="w-full sm:w-auto px-10 py-5 bg-cyan-600 hover:bg-cyan-500 rounded-2xl font-black text-xs md:text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all shadow-[0_10px_30px_rgba(34,211,238,0.2)] hover:shadow-[0_15px_40px_rgba(34,211,238,0.4)] ring-1 ring-cyan-400/50"
-              >
-                Schedule Consultation <ArrowRight className="w-4 h-4" />
-              </button>
-            </MagneticWrapper>
-            
-            <MagneticWrapper pullStrength={0.1} className="w-full sm:w-auto">
-              <button 
-                onClick={() => router.push("/contact")}
-                className="w-full sm:w-auto px-10 py-5 bg-[#111] hover:bg-[#1a1a1a] border border-white/10 hover:border-white/20 rounded-2xl font-black text-xs md:text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all text-white"
-              >
-                Log Ticket <Wrench className="w-4 h-4" />
-              </button>
-            </MagneticWrapper>
+          <div className="relative z-10 max-w-xl">
+            <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-4">
+              Require a Custom Deployment?
+            </h2>
+            <p className="text-blue-200 text-sm md:text-base font-medium leading-relaxed">
+              Initialize a diagnostic ticket. Our engineers will review your operational requirements and engineer a Takumi-grade solution.
+            </p>
           </div>
 
+          <MagneticWrapper pullStrength={0.15} className="relative z-10 w-full md:w-auto shrink-0">
+            <button 
+              onClick={() => router.push("/contact")}
+              className="w-full md:w-auto px-10 py-6 bg-blue-600 hover:bg-blue-500 rounded-2xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all shadow-[0_10px_40px_rgba(37,99,235,0.4)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.6)] ring-1 ring-blue-400/50"
+            >
+              Log Diagnostic Ticket <ArrowRight className="w-5 h-5" />
+            </button>
+          </MagneticWrapper>
         </div>
       </RevealWrapper>
 
@@ -159,7 +145,7 @@ function ServicesLogic() {
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen pt-24 pb-20 flex flex-col items-center overflow-hidden relative w-full">
+    <main className="min-h-[100svh] pt-24 flex flex-col items-center overflow-hidden relative w-full">
       {/* Global Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[600px] bg-cyan-600/5 rounded-[100%] blur-[150px] pointer-events-none z-0" aria-hidden="true" />
       <div className="scanline opacity-10 pointer-events-none absolute inset-0 z-0" aria-hidden="true" />

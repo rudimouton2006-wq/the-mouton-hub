@@ -9,8 +9,8 @@ export default function NotFound() {
   const router = useRouter();
 
   return (
-    <main className="min-h-[85vh] pt-24 pb-20 px-4 md:px-6 flex flex-col items-center justify-center overflow-hidden relative w-full">
-      {/* Global Background Glow - Warning Amber/Red */}
+    <main className="min-h-[100svh] pt-24 pb-20 px-4 md:px-6 flex flex-col items-center justify-center overflow-hidden relative w-full">
+      {/* Global Background Glow - Warning Crimson */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[500px] bg-red-600/10 rounded-[100%] blur-[120px] pointer-events-none z-0" aria-hidden="true" />
       <div className="scanline opacity-10 pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
 
@@ -36,10 +36,10 @@ export default function NotFound() {
           {/* Subtext */}
           <div className="space-y-3 mb-12">
             <p className="text-red-400 font-mono text-sm uppercase tracking-widest bg-red-500/10 px-4 py-1.5 rounded-full border border-red-500/20 inline-block">
-              Directory Not Found
+              Routing Protocol Offline
             </p>
             <p className="text-gray-400 font-mono text-xs md:text-sm uppercase tracking-widest leading-relaxed max-w-md mx-auto pt-2">
-              The requested routing protocol has failed. This node does not exist within the current architecture.
+              The requested directory node does not exist within the Takumi Tech infrastructure. Please re-align your navigational vectors.
             </p>
           </div>
 
@@ -52,7 +52,7 @@ export default function NotFound() {
                 onClick={() => router.back()}
                 className="w-full px-6 py-4 bg-[#111] hover:bg-[#1a1a1a] border border-white/10 hover:border-white/20 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all text-gray-300 hover:text-white min-h-[56px] shadow-inner"
               >
-                <ArrowLeft className="w-4 h-4" /> Previous UI
+                <ArrowLeft className="w-4 h-4" /> Previous Node
               </button>
             </MagneticWrapper>
 

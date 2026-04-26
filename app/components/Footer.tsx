@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { Terminal, MapPin, Clock, MessageSquare, ShieldCheck } from "lucide-react";
 
@@ -19,11 +20,11 @@ export default function Footer() {
                 <Terminal className="w-5 h-5 text-blue-400 group-hover:text-white transition-colors" />
               </div>
               <span className="text-xl font-black tracking-tighter uppercase text-white group-hover:text-blue-400 transition-colors">
-                The Mouton Hub
+                Takumi Tech
               </span>
             </Link>
             <p className="text-gray-400 text-sm font-medium leading-relaxed max-w-xs">
-              Enterprise-grade IT infrastructure, advanced network architecture, and elite hardware procurement protocols.
+              Enterprise-grade IT infrastructure, advanced network architecture, and elite global sourcing protocols.
             </p>
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 w-fit">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
@@ -35,20 +36,22 @@ export default function Footer() {
           <div className="flex flex-col gap-6">
             <h3 className="text-sm font-black text-white uppercase tracking-widest">Systems Directory</h3>
             <nav className="flex flex-col gap-4">
-              {["Dashboard", "Services", "Hardware", "Schedule", "Engineer"].map((item) => {
-                // Map the display name to the correct route
-                const href = item === "Dashboard" ? "/" : item === "Hardware" ? "/shop" : `/${item.toLowerCase()}`;
-                return (
-                  <Link 
-                    key={item} 
-                    href={href} 
-                    className="text-sm text-gray-400 hover:text-blue-400 transition-colors font-medium w-fit flex items-center gap-2 group"
-                  >
-                    <span className="w-1 h-1 rounded-full bg-blue-500/50 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    {item}
-                  </Link>
-                );
-              })}
+              {[
+                { name: "Dashboard", route: "/" },
+                { name: "Services", route: "/services" },
+                { name: "Sourcing", route: "/shop" },
+                { name: "Schedule", route: "/schedule" },
+                { name: "Engineer", route: "/engineer" }
+              ].map((item) => (
+                <Link 
+                  key={item.name} 
+                  href={item.route} 
+                  className="text-sm text-gray-400 hover:text-blue-400 transition-colors font-medium w-fit flex items-center gap-2 group"
+                >
+                  <span className="w-1 h-1 rounded-full bg-blue-500/50 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  {item.name}
+                </Link>
+              ))}
             </nav>
           </div>
 
@@ -75,7 +78,7 @@ export default function Footer() {
           <div className="flex flex-col gap-6">
             <h3 className="text-sm font-black text-white uppercase tracking-widest">Escalation</h3>
             <p className="text-gray-400 text-sm font-medium leading-relaxed">
-              For immediate hardware diagnostics or network sourcing requests, initialize a ticket through the secure portal.
+              For immediate system diagnostics or custom hardware sourcing requests, initialize a ticket through the secure portal.
             </p>
             <Link 
               href="/contact" 
@@ -91,7 +94,7 @@ export default function Footer() {
         {/* Deep Copyright & Legal Footer */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[10px] sm:text-xs font-mono text-gray-500 uppercase tracking-widest text-center md:text-left">
-            &copy; {currentYear} The Mouton Hub. All rights reserved.
+            &copy; {currentYear} Takumitech.co.za. All rights reserved.
           </p>
           <div className="flex items-center gap-3">
             <div className="h-px w-8 bg-white/10 hidden md:block" aria-hidden="true" />

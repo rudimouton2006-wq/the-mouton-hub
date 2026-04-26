@@ -1,4 +1,24 @@
-User-agent: *
-Allow: /
+# =========================================
+# TAKUMI TECH | GLOBAL CRAWLER DIRECTIVE
+# =========================================
+# Target Domain: https://takumitech.co.za
 
-Sitemap: https://the-mouton-hub.vercel.app/sitemap.xml
+User-Agent: *
+
+# Public Authorized Nodes
+Allow: /
+Allow: /services
+Allow: /shop
+Allow: /schedule
+Allow: /engineer
+Allow: /contact
+Allow: /terms
+
+# Restricted Architecture / Do Not Index
+Disallow: /api/
+Disallow: /success
+Disallow: /*?* Disallow: /_next/
+Disallow: /_error
+
+# Protocol Mapping
+Sitemap: https://takumitech.co.za/sitemap.xml

@@ -1,5 +1,7 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
+
+const CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+";
 
 interface DecodeTextProps {
   text: string;
@@ -7,81 +9,67 @@ interface DecodeTextProps {
   className?: string;
 }
 
-// The character pool used for the cryptographic scrambling effect
-const GLITCH_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+<>_";
-
 export default function DecodeText({ text, delay = 0, className = "" }: DecodeTextProps) {
-  // Initialize with blank or heavily obfuscated text based on actual length
-  const [displayText, setDisplayText] = useState(() => 
-    text.split("").map(char => char === " " ? " " : "_").join("")
-  );
-  
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const containerRef = useRef<HTMLSpanElement>(null);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isHovering, setIsHovering] = useState(false);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
-    // Hardware-accelerated intersection observer to trigger on scroll
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasAnimated) {
-          // Wait for any staggered delays, then execute
-          const timeoutId = setTimeout(() => {
-            executeDecodeSequence();
-            setHasAnimated(true);
-          }, delay);
-          
-          return () => clearTimeout(timeoutId);
-        }
-      },
-      { threshold: 0.1 } // Triggers when 10% of the element is visible
-    );
+    let timeoutId: NodeJS.Timeout;
+    let intervalId: NodeJS.Timeout;
 
-    const currentRef = containerRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
+    const animate = () => {
+      let iteration = 0;
+      clearInterval(intervalId);
+
+      intervalId = setInterval(() => {
+        setDisplayedText((prev) =>
+          text
+            .split("")
+            .map((char, index) => {
+              if (index < iteration) {
+                return text[index];
+              }
+              if (char === " ") return " ";
+              return CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
+            })
+            .join("")
+        );
+
+        if (iteration >= text.length) {
+          clearInterval(intervalId);
+        }
+
+        // Adjust the division factor to control decode speed (higher = slower)
+        iteration += 1 / 3; 
+      }, 30);
+    };
+
+    if (!hasAnimated.current) {
+      timeoutId = setTimeout(() => {
+        animate();
+        hasAnimated.current = true;
+      }, delay);
+    } else if (isHovering) {
+      animate();
+    } else {
+      setDisplayedText(text);
     }
 
     return () => {
-      if (currentRef) observer.unobserve(currentRef);
+      clearTimeout(timeoutId);
+      clearInterval(intervalId);
     };
-  }, [hasAnimated, delay, text]);
-
-  const executeDecodeSequence = () => {
-    let iteration = 0;
-    const maxIterations = text.length * 3; // Controls the total duration of the sweep
-    
-    const intervalId = setInterval(() => {
-      setDisplayText((currentText) => 
-        text.split("").map((actualLetter, index) => {
-          // Preserve spaces
-          if (actualLetter === " ") return " ";
-          
-          // Once the sweep passes this letter's index, lock in the real letter
-          if (index < Math.floor(iteration / 3)) {
-            return text[index];
-          }
-          
-          // Otherwise, continue scrambling with random cryptographic characters
-          return GLITCH_CHARACTERS[Math.floor(Math.random() * GLITCH_CHARACTERS.length)];
-        }).join("")
-      );
-
-      if (iteration >= maxIterations) {
-        clearInterval(intervalId);
-        // Safety lock: ensure final text perfectly matches the input prop
-        setDisplayText(text); 
-      }
-      
-      iteration += 1;
-    }, 30); // 30ms creates a fluid, 60fps-style rapid scramble
-  };
+  }, [text, delay, isHovering]);
 
   return (
     <span 
-      ref={containerRef} 
-      className={`inline-block font-black tracking-tighter ${className}`}
+      className={`inline-block ${className}`}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
     >
-      {displayText}
+      {/* Fallback to non-breaking spaces of equal length to prevent layout shift before animation starts */}
+      {displayedText || text.replace(/./g, "\u00A0")}
     </span>
   );
 }

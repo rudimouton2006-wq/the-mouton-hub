@@ -1,46 +1,45 @@
 "use client";
-import { useRef, useState, MouseEvent } from "react";
+import { useRef, useState } from "react";
 
 interface MagneticWrapperProps {
   children: React.ReactNode;
-  className?: string;
   pullStrength?: number;
+  className?: string;
 }
 
-export default function MagneticWrapper({ 
-  children, 
-  className = "", 
-  pullStrength = 0.15 
+export default function MagneticWrapper({
+  children,
+  pullStrength = 0.15,
+  className = "",
 }: MagneticWrapperProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
 
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!wrapperRef.current) return;
     
-    // Extract exact mouse coordinates relative to the viewport
     const { clientX, clientY } = e;
-    
-    // Extract exact dimensions and position of the wrapped element
     const { width, height, left, top } = wrapperRef.current.getBoundingClientRect();
     
-    // Calculate the mathematical center of the element
+    // Calculate distance from the exact center of the DOM element
     const centerX = left + width / 2;
     const centerY = top + height / 2;
     
-    // Calculate how far the mouse is from the center
-    const distanceX = clientX - centerX;
-    const distanceY = clientY - centerY;
-    
-    // Apply the magnetic pull fraction
-    setPosition({ 
-      x: distanceX * pullStrength, 
-      y: distanceY * pullStrength 
-    });
+    // Apply the magnetic pull multiplier
+    const deltaX = (clientX - centerX) * pullStrength;
+    const deltaY = (clientY - centerY) * pullStrength;
+
+    setPosition({ x: deltaX, y: deltaY });
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
-    // Release the magnetic lock and snap back to origin
+    setIsHovered(false);
+    // Snap back to origin
     setPosition({ x: 0, y: 0 });
   };
 
@@ -48,16 +47,15 @@ export default function MagneticWrapper({
     <div
       ref={wrapperRef}
       onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative inline-block ${className}`}
+      className={`inline-block relative z-10 will-change-[transform] ${className}`}
       style={{
         transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
-        // If x and y are 0 (mouse left), use a smooth elastic spring-back effect.
-        // Otherwise, use a rapid, snappy follow effect.
-        transition: position.x === 0 && position.y === 0 
-          ? "transform 0.6s cubic-bezier(0.25, 1, 0.2, 1)" 
-          : "transform 0.1s ease-out",
-        willChange: "transform" // Hardware acceleration hint
+        // When hovered, the transform tracks instantly. When un-hovered, it smoothly eases back to zero.
+        transition: isHovered 
+          ? "transform 0.1s linear" 
+          : "transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)",
       }}
     >
       {children}

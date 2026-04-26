@@ -23,7 +23,7 @@ export default function GlobalLoading() {
         {/* Telemetry Output */}
         <div className="flex flex-col items-center gap-3">
           <span className="text-[10px] md:text-xs font-mono text-blue-400 uppercase tracking-[0.3em] animate-pulse">
-            Establishing Secure Connection
+            Connecting to Takumi Tech Node
           </span>
           
           {/* Faux Progress Bar */}
