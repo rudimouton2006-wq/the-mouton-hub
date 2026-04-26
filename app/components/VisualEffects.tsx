@@ -10,7 +10,7 @@ export default function VisualEffects() {
   // This prevents the page from re-rendering 60 times a second and lagging the site.
   const mouse = useRef({ x: 0, y: 0 });
   const trailing = useRef({ x: 0, y: 0 });
-  const requestRef = useRef<number>();
+  const requestRef = useRef<any>(null);
 
   useEffect(() => {
     // Safety Switch: Disable custom cursors on mobile/touch devices
