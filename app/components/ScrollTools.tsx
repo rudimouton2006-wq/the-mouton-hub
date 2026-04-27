@@ -6,7 +6,7 @@ import { ArrowUp } from "lucide-react";
 export default function ScrollTools() {
   const [isVisible, setIsVisible] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const requestRef = useRef<number>();
+  const requestRef = useRef<number>(0);
 
   useEffect(() => {
     let ticking = false;
