@@ -257,7 +257,6 @@ function TicketFormEngine() {
 export const metadata = {
   title: "Log a Ticket | Takumi Tech",
   description: "Initialize a diagnostic ticket. Form adapts based on requested service module.",
-};
 
 export default function TicketPage() {
   return (
