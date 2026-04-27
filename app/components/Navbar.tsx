@@ -52,13 +52,13 @@ export default function Navbar() {
       {/* DESKTOP & HEADER MATRIX */}
       {/* --------------------------------------------------------- */}
       <header
-        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 border-b ${
+        className={`fixed top-0 w-full z-[100] transition-all duration-500 border-b ${
           isScrolled
             ? "bg-[#050505]/80 backdrop-blur-xl border-white/10 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.8)]"
             : "bg-transparent border-transparent py-6"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             
             {/* Elite Brand Node */}
@@ -122,13 +122,13 @@ export default function Navbar() {
       {/* MOBILE OVERLAY MATRIX */}
       {/* --------------------------------------------------------- */}
       <div
-        className={`fixed inset-0 z-[90] bg-[#050505]/95 backdrop-blur-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] md:hidden flex flex-col justify-center px-6 ${
+        className={`fixed inset-0 w-full h-[100dvh] z-[90] bg-[#050505]/95 backdrop-blur-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] md:hidden flex flex-col justify-center px-6 ${
           isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#00E5FF]/10 rounded-full blur-[100px] pointer-events-none" />
 
-        <nav className="flex flex-col gap-8 relative z-10">
+        <nav className="flex flex-col gap-8 relative z-10 w-full">
           {navLinks.map((link, index) => {
             const isActive = pathname === link.path;
             return (
@@ -136,7 +136,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.path}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="group flex items-center gap-4 overflow-hidden"
+                className="group flex items-center gap-4 overflow-hidden w-full"
               >
                 <span className={`text-sm font-mono tracking-widest transition-colors duration-300 ${isActive ? 'text-[#00E5FF]' : 'text-gray-600 group-hover:text-[#00E5FF]'}`}>
                   0{index + 1}
