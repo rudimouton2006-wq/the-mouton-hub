@@ -5,26 +5,30 @@ import Link from "next/link";
 import { ArrowRight, ShieldCheck, Zap, Server } from "lucide-react";
 
 export default function HomePage() {
-  // ---------------------------------------------------------
-  // THE BUFFER/LOAD-IN ANIMATION ENGINE
-  // ---------------------------------------------------------
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
-    },
-  };
+// ---------------------------------------------------------
+// THE BUFFER/LOAD-IN ANIMATION ENGINE
+// ---------------------------------------------------------
+const containerVariants: any = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 }
+  }
+};
 
-  const bufferVariants = {
-    hidden: { opacity: 0, y: 30, filter: "blur(12px)" },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }, // Cinematic deceleration
-    },
-  };
+const bufferVariants: any = {
+  hidden: { 
+    opacity: 0, 
+    y: 20, 
+    filter: "blur(10px)" 
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
+  }
+};
 
   return (
     <div className="w-full flex flex-col items-center justify-start z-10 pb-32">
