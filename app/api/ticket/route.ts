@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-// Initialize the Resend Matrix
+// Initialize the Resend Matrix securely
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
@@ -11,14 +11,12 @@ export async function POST(request: Request) {
 
     // 2. Extract core transmission parameters
     const { 
-      type,             
       designation,      
       returnVector,     
       module,           
       urgency,          
       dynamicData,      
       payload,          
-      targetInbox       
     } = body;
 
     // 3. Strict Validation Matrix
@@ -31,23 +29,30 @@ export async function POST(request: Request) {
 
     // 4. LIVE TRANSMISSION PROTOCOL
     const { data, error } = await resend.emails.send({
-      from: 'Takumi Tech Terminal <onboarding@resend.dev>', // Update to system@takumitech.co.za once domain is verified in Resend
-      to: 'rudi@takumitech.co.za', // Your target inbox
+      // IMPORTANT: Leave this as onboarding@resend.dev until your domain is verified in Phase 2.
+      // Once verified, change this to: 'Takumi Tech System <system@takumitech.co.za>'
+      from: 'Takumi Tech Terminal <onboarding@resend.dev>', 
+      to: 'rudi@takumitech.co.za', 
       subject: `[URGENCY: ${urgency?.toUpperCase() || 'STANDARD'}] New ${module} Ticket from ${designation}`,
       html: `
-        <div style="font-family: monospace; background-color: #050505; color: #00E5FF; padding: 40px; border-radius: 10px;">
-          <h2 style="color: #FFFFFF; text-transform: uppercase; border-bottom: 1px solid #00E5FF; padding-bottom: 10px;">Diagnostic Ticket Logged</h2>
-          <p><strong>Entity:</strong> <span style="color: #FFFFFF;">${designation}</span></p>
-          <p><strong>Return Vector:</strong> <span style="color: #FFFFFF;">${returnVector}</span></p>
-          <p><strong>Service Module:</strong> <span style="color: #FFFFFF;">${module}</span></p>
-          <p><strong>Specific Context (Serial/Domain):</strong> <span style="color: #FFFFFF;">${dynamicData || 'N/A'}</span></p>
-          <br/>
-          <h3 style="color: #FFFFFF; text-transform: uppercase;">Decrypted Payload:</h3>
-          <div style="background-color: #111; padding: 20px; border-left: 3px solid #00E5FF; color: #CCC;">
-            ${payload}
+        <div style="font-family: 'Courier New', monospace; background-color: #050505; color: #00E5FF; padding: 40px; border-radius: 10px; border: 1px solid #111;">
+          <h2 style="color: #FFFFFF; text-transform: uppercase; border-bottom: 1px solid #00E5FF; padding-bottom: 10px; margin-top: 0;">Diagnostic Ticket Logged</h2>
+          
+          <table style="width: 100%; color: #FFFFFF; text-align: left; margin-bottom: 20px;">
+            <tr><td style="padding: 5px 0; color: #888; width: 150px;">Entity:</td><td><strong>${designation}</strong></td></tr>
+            <tr><td style="padding: 5px 0; color: #888;">Return Vector:</td><td><strong>${returnVector}</strong></td></tr>
+            <tr><td style="padding: 5px 0; color: #888;">Service Module:</td><td><strong>${module}</strong></td></tr>
+            <tr><td style="padding: 5px 0; color: #888;">Specific Context:</td><td><strong>${dynamicData || 'N/A'}</strong></td></tr>
+          </table>
+          
+          <h3 style="color: #FFFFFF; text-transform: uppercase; margin-top: 30px;">Decrypted Payload:</h3>
+          <div style="background-color: #111; padding: 20px; border-left: 3px solid #00E5FF; color: #E5E5E5; line-height: 1.6;">
+            ${payload.replace(/\n/g, '<br>')}
           </div>
-          <br/>
-          <p style="font-size: 10px; color: #555;">Transmitted securely via Takumi Tech Edge Network.</p>
+          
+          <p style="font-size: 11px; color: #444; margin-top: 40px; text-transform: uppercase; letter-spacing: 1px;">
+            Transmitted securely via Takumi Tech Edge Network.
+          </p>
         </div>
       `
     });
