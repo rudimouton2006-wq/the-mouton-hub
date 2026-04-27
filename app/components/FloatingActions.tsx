@@ -11,7 +11,7 @@ export default function FloatingActions() {
       {/* NODE 1: WHATSAPP DIRECT COMM LINK */}
       {/* --------------------------------------------------------- */}
       <Link 
-        href="https://wa.me/278182811861"
+        href="https://wa.me/27818281861"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Initialize Secure WhatsApp Comm Link"
