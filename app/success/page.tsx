@@ -1,72 +1,61 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { CheckCircle2, Home, ArrowLeft } from "lucide-react";
-import MagneticWrapper from "../components/MagneticWrapper";
-import RevealWrapper from "../components/RevealWrapper";
+import Link from "next/link";
+import { ShieldCheck, ArrowLeft, Terminal } from "lucide-react";
+
+export const metadata = {
+  title: "Transmission Secured | Takumi Tech",
+  description: "Your secure payload has been successfully transmitted to the Takumi Tech network.",
+};
 
 export default function SuccessPage() {
-  const router = useRouter();
-
   return (
-    <main className="min-h-[100svh] pt-24 pb-20 px-4 md:px-6 flex flex-col items-center justify-center overflow-hidden relative w-full">
-      {/* Global Background Glow - Success Emerald */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[500px] bg-emerald-600/10 rounded-[100%] blur-[120px] pointer-events-none z-0" aria-hidden="true" />
-      <div className="scanline opacity-10 pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
+    <div className="w-full flex flex-col items-center justify-center min-h-[70vh] pt-12 md:pt-20 px-4 relative z-10">
+      
+      {/* Background Ambient Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-900/10 rounded-full blur-[120px] pointer-events-none z-0" />
 
-      <RevealWrapper delay={100} className="w-full max-w-2xl relative z-10">
-        <div className="glass-card rounded-[2.5rem] p-10 md:p-16 border border-emerald-500/20 bg-[#080808]/80 shadow-[0_0_80px_rgba(16,185,129,0.1)] text-center relative overflow-hidden flex flex-col items-center">
-          
-          {/* Subtle top glare */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-emerald-400/50 to-transparent" />
-
-          {/* Pulsing Success Icon */}
-          <div className="w-24 h-24 rounded-full bg-emerald-500/10 border-2 border-emerald-500 shadow-[0_0_40px_rgba(16,185,129,0.4)] flex items-center justify-center mb-8 animate-[pulse_2s_ease-in-out_infinite]">
-            <CheckCircle2 className="w-12 h-12 text-emerald-400" />
-          </div>
-
-          {/* Heading */}
-          <h1 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter mb-4 leading-tight">
-            Transmission <br className="md:hidden" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Secured.</span>
-          </h1>
-
-          {/* Subtext */}
-          <div className="space-y-3 mb-12">
-            <p className="text-emerald-400 font-mono text-sm uppercase tracking-widest bg-emerald-500/10 px-4 py-1.5 rounded-full border border-emerald-500/20 inline-block">
-              Payload Successfully Intercepted
-            </p>
-            <p className="text-gray-400 font-mono text-xs md:text-sm uppercase tracking-widest leading-relaxed max-w-md mx-auto pt-2">
-              Takumi Tech Systems have logged your telemetry. Lead Engineer Rudi Mouton will review the request within standard operational parameters.
-            </p>
-          </div>
-
-          {/* Navigation Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md mx-auto relative z-10">
-            
-            {/* The Dynamic 'Go Back' Button */}
-            <MagneticWrapper pullStrength={0.1} className="w-full sm:w-1/2">
-              <button
-                onClick={() => router.back()}
-                className="w-full px-6 py-4 bg-[#111] hover:bg-[#1a1a1a] border border-white/10 hover:border-white/20 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all text-gray-300 hover:text-white min-h-[56px] shadow-inner"
-              >
-                <ArrowLeft className="w-4 h-4" /> Previous Node
-              </button>
-            </MagneticWrapper>
-
-            {/* The Dashboard Button */}
-            <MagneticWrapper pullStrength={0.15} className="w-full sm:w-1/2">
-              <button
-                onClick={() => router.push("/")}
-                className="w-full px-6 py-4 bg-emerald-600 hover:bg-emerald-500 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-[0_10px_30px_rgba(16,185,129,0.3)] hover:shadow-[0_15px_40px_rgba(16,185,129,0.5)] ring-1 ring-emerald-400/50 text-white min-h-[56px]"
-              >
-                Main Terminal <Home className="w-4 h-4" />
-              </button>
-            </MagneticWrapper>
-
-          </div>
-
+      {/* --------------------------------------------------------- */}
+      {/* SUCCESS TERMINAL */}
+      {/* --------------------------------------------------------- */}
+      <section className="glass-card w-full max-w-2xl mx-auto rounded-[2.5rem] p-10 md:p-16 flex flex-col items-center text-center border-emerald-500/20 relative overflow-hidden">
+        
+        {/* Dynamic Status Indicator */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-10 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="text-[10px] sm:text-xs font-mono text-emerald-300 tracking-[0.2em] uppercase">Status: 200 OK</span>
         </div>
-      </RevealWrapper>
-    </main>
+
+        {/* Core Success Iconography */}
+        <div className="w-24 h-24 bg-emerald-500/10 border border-emerald-500/30 rounded-3xl flex items-center justify-center mb-8 shadow-[inset_0_0_30px_rgba(16,185,129,0.2)]">
+          <ShieldCheck className="w-12 h-12 text-emerald-400 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
+        </div>
+        
+        <h1 className="text-3xl md:text-5xl font-black tracking-tighter uppercase mb-6 text-white">
+          Transmission <span className="text-emerald-400">Secured</span>
+        </h1>
+        
+        <p className="text-gray-400 text-sm md:text-base leading-relaxed font-medium max-w-md mx-auto mb-12">
+          Your encrypted payload has been successfully received by the Takumi Tech central node. A lead engineer will decrypt your requirements and establish comms shortly.
+        </p>
+
+        {/* Action Vectors */}
+        <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
+          <Link 
+            href="/" 
+            className="group flex items-center justify-center gap-3 px-8 py-4 bg-white text-black font-black uppercase tracking-widest text-xs rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:bg-gray-200 transition-all w-full sm:w-auto"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Return to Terminal
+          </Link>
+          
+          <Link 
+            href="/services" 
+            className="group flex items-center justify-center gap-3 px-8 py-4 bg-transparent border border-white/20 text-white font-black uppercase tracking-widest text-xs rounded-xl hover:bg-white/5 transition-all w-full sm:w-auto"
+          >
+            Review Modules <Terminal className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
+          </Link>
+        </div>
+
+      </section>
+
+    </div>
   );
 }

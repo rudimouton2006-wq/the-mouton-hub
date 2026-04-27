@@ -1,106 +1,93 @@
 "use client";
+
 import Link from "next/link";
-import { Terminal, MapPin, Clock, MessageSquare, ShieldCheck } from "lucide-react";
+import { Terminal, Github, Twitter, Linkedin, Mail, ArrowRight } from "lucide-react";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="w-full relative z-[50] bg-[#050505] border-t border-white/5 pt-16 pb-8 overflow-hidden shrink-0">
-      {/* Deep Space Background Glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[300px] bg-blue-600/5 rounded-[100%] blur-[120px] pointer-events-none" aria-hidden="true" />
-      
-      <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+    <footer className="w-full relative z-50 bg-[#050505] border-t border-white/10 pt-16 pb-8 overflow-hidden mt-auto">
+      {/* Subtle bottom-edge ambient glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-blue-900/5 rounded-[100%] blur-[120px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           
-          {/* Column 1: Brand & Status */}
-          <div className="flex flex-col gap-6 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-3 group w-fit">
-              <div className="w-10 h-10 rounded-xl bg-blue-600/20 flex items-center justify-center border border-blue-500/30 group-hover:bg-blue-600 shadow-[0_0_20px_rgba(37,99,235,0.2)] transition-all duration-500">
-                <Terminal className="w-5 h-5 text-blue-400 group-hover:text-white transition-colors" />
+          {/* Brand & Mission Column */}
+          <div className="flex flex-col gap-6">
+            <Link href="/" className="flex items-center gap-3 w-max group">
+              <div className="w-8 h-8 bg-white text-black flex items-center justify-center rounded-sm transition-transform duration-500 group-hover:rotate-90">
+                <Terminal className="w-4 h-4 transition-transform duration-500 group-hover:-rotate-90" />
               </div>
-              <span className="text-xl font-black tracking-tighter uppercase text-white group-hover:text-blue-400 transition-colors">
-                Takumi Tech
-              </span>
+              <div className="flex flex-col">
+                <span className="text-lg font-black tracking-tighter uppercase leading-none text-white">Takumi</span>
+                <span className="text-[9px] font-mono tracking-[0.3em] uppercase text-gray-400 leading-none mt-1">Systems</span>
+              </div>
             </Link>
-            <p className="text-gray-400 text-sm font-medium leading-relaxed max-w-xs">
-              Enterprise-grade IT infrastructure, advanced network architecture, and elite global sourcing protocols.
+            <p className="text-xs text-gray-500 leading-relaxed font-mono uppercase tracking-wider max-w-xs">
+              Enterprise-grade IT infrastructure and zero-trust network architecture deployed with uncompromising precision.
             </p>
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 w-fit">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest">Global Systems Secure</span>
-            </div>
           </div>
 
-          {/* Column 2: Systems Directory */}
-          <div className="flex flex-col gap-6">
-            <h3 className="text-sm font-black text-white uppercase tracking-widest">Systems Directory</h3>
-            <nav className="flex flex-col gap-4">
-              {[
-                { name: "Dashboard", route: "/" },
-                { name: "Services", route: "/services" },
-                { name: "Sourcing", route: "/shop" },
-                { name: "Schedule", route: "/schedule" },
-                { name: "Engineer", route: "/engineer" }
-              ].map((item) => (
-                <Link 
-                  key={item.name} 
-                  href={item.route} 
-                  className="text-sm text-gray-400 hover:text-blue-400 transition-colors font-medium w-fit flex items-center gap-2 group"
-                >
-                  <span className="w-1 h-1 rounded-full bg-blue-500/50 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  {item.name}
-                </Link>
-              ))}
-            </nav>
+          {/* Architecture Links */}
+          <div className="flex flex-col gap-4">
+            <h4 className="text-white font-black tracking-widest uppercase text-xs mb-2">Architecture</h4>
+            <Link href="/services" className="text-gray-400 hover:text-cyan-400 text-sm transition-colors font-medium w-max">Network Defense</Link>
+            <Link href="/services" className="text-gray-400 hover:text-cyan-400 text-sm transition-colors font-medium w-max">Infrastructure Setup</Link>
+            <Link href="/shop" className="text-gray-400 hover:text-cyan-400 text-sm transition-colors font-medium w-max">Hardware Sourcing</Link>
+            <Link href="/engineer" className="text-gray-400 hover:text-cyan-400 text-sm transition-colors font-medium w-max">System Diagnostics</Link>
           </div>
 
-          {/* Column 3: Operational Base */}
-          <div className="flex flex-col gap-6">
-            <h3 className="text-sm font-black text-white uppercase tracking-widest">Operational Base</h3>
-            <div className="flex flex-col gap-5">
-              <div className="flex items-start gap-4 text-sm text-gray-400 font-medium">
-                <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0 mt-1">
-                  <MapPin className="w-4 h-4 text-blue-400" />
-                </div>
-                <span className="leading-relaxed">Oakdale, Bellville<br />Cape Town, ZA</span>
-              </div>
-              <div className="flex items-center gap-4 text-sm text-gray-400 font-medium">
-                <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 shrink-0">
-                  <Clock className="w-4 h-4 text-emerald-400" />
-                </div>
-                <span>08:00 - 18:00 (SAST)</span>
-              </div>
-            </div>
+          {/* Support Node Links */}
+          <div className="flex flex-col gap-4">
+            <h4 className="text-white font-black tracking-widest uppercase text-xs mb-2">Support Nodes</h4>
+            <Link href="/contact" className="text-gray-400 hover:text-emerald-400 text-sm transition-colors font-medium w-max">Establish Comms</Link>
+            <Link href="/schedule" className="text-gray-400 hover:text-emerald-400 text-sm transition-colors font-medium w-max">Schedule Briefing</Link>
+            <Link href="/terms" className="text-gray-400 hover:text-emerald-400 text-sm transition-colors font-medium w-max">Operational Protocols</Link>
+            <Link href="/terms" className="text-gray-400 hover:text-emerald-400 text-sm transition-colors font-medium w-max">Privacy Matrix</Link>
           </div>
 
-          {/* Column 4: Escalation */}
-          <div className="flex flex-col gap-6">
-            <h3 className="text-sm font-black text-white uppercase tracking-widest">Escalation</h3>
-            <p className="text-gray-400 text-sm font-medium leading-relaxed">
-              For immediate system diagnostics or custom hardware sourcing requests, initialize a ticket through the secure portal.
-            </p>
-            <Link 
-              href="/contact" 
-              className="px-6 py-4 bg-[#111] hover:bg-[#1a1a1a] border border-white/10 hover:border-blue-500/50 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 transition-all text-white hover:text-blue-400 group shadow-inner"
-            >
-              <MessageSquare className="w-4 h-4 group-hover:text-blue-400 transition-colors" />
-              Log Support Ticket
-            </Link>
+          {/* System Alerts Input Matrix */}
+          <div className="flex flex-col gap-4">
+            <h4 className="text-white font-black tracking-widest uppercase text-xs mb-2">System Alerts</h4>
+            <p className="text-xs text-gray-500 font-mono tracking-wider mb-2">Subscribe for critical architecture updates and hardware availability.</p>
+            <form className="flex w-full group relative" onSubmit={(e) => e.preventDefault()}>
+              <input 
+                type="email" 
+                placeholder="ENTER COMM LINK..." 
+                className="w-full bg-white/5 border border-white/10 rounded-l-md px-4 py-3 text-xs font-mono text-white placeholder:text-gray-600 focus:outline-none focus:border-cyan-500/50 focus:bg-white/10 transition-all"
+                required
+              />
+              <button 
+                type="submit" 
+                className="bg-white/10 border border-l-0 border-white/10 rounded-r-md px-4 py-3 hover:bg-cyan-500 hover:border-cyan-500 transition-colors flex items-center justify-center group-focus-within:border-cyan-500/50"
+                aria-label="Submit Communication Link"
+              >
+                <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
+              </button>
+            </form>
           </div>
 
         </div>
 
-        {/* Deep Copyright & Legal Footer */}
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[10px] sm:text-xs font-mono text-gray-500 uppercase tracking-widest text-center md:text-left">
-            &copy; {currentYear} Takumitech.co.za. All rights reserved.
+        {/* Global Legal & Social Base Bar */}
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-[10px] text-gray-500 font-mono tracking-widest uppercase text-center md:text-left">
+            &copy; {new Date().getFullYear()} Takumi Tech Systems. All rights secured.
           </p>
+          
           <div className="flex items-center gap-3">
-            <div className="h-px w-8 bg-white/10 hidden md:block" aria-hidden="true" />
-            <p className="text-[10px] sm:text-xs font-mono text-gray-500 uppercase tracking-widest flex items-center gap-2">
-              Lead Engineer: <span className="text-blue-400 font-bold">Rudi Mouton</span>
-            </p>
+            <a href="#" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:border-cyan-400/50 hover:bg-cyan-900/20 transition-all">
+              <Twitter className="w-4 h-4" />
+            </a>
+            <a href="#" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:border-cyan-400/50 hover:bg-cyan-900/20 transition-all">
+              <Github className="w-4 h-4" />
+            </a>
+            <a href="#" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:border-cyan-400/50 hover:bg-cyan-900/20 transition-all">
+              <Linkedin className="w-4 h-4" />
+            </a>
+            <a href="mailto:sysadmin@takumitech.co.za" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:border-cyan-400/50 hover:bg-cyan-900/20 transition-all">
+              <Mail className="w-4 h-4" />
+            </a>
           </div>
         </div>
       </div>

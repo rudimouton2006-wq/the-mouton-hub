@@ -1,225 +1,162 @@
-"use client";
-import { Suspense } from "react";
-import { Terminal, Cpu, ShieldCheck, Briefcase, GraduationCap, Wrench, Code, Activity, Flame } from "lucide-react";
-import DecodeText from "../components/DecodeText";
-import RevealWrapper from "../components/RevealWrapper";
+import Link from "next/link";
+import { ArrowRight, Terminal, Cpu, Fingerprint, ShieldAlert, Zap, Lock } from "lucide-react";
 
-function EngineerLogic() {
-  return (
-    <div className="w-full flex flex-col items-center relative z-10 px-4 md:px-6">
-      
-      {/* --------------------------------------------------------- */}
-      {/* HEADER: THE TAKUMI PHILOSOPHY & DOSSIER */}
-      {/* --------------------------------------------------------- */}
-      <header className="w-full max-w-5xl mb-20 text-center mt-10">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 mb-6 backdrop-blur-md">
-          <Terminal className="w-4 h-4 text-indigo-400" />
-          <span className="text-xs font-mono text-indigo-300 uppercase tracking-widest">Personnel Dossier: Active</span>
-        </div>
-        <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6 leading-none">
-          <DecodeText text="Lead" /> <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-blue-400 drop-shadow-[0_0_30px_rgba(99,102,241,0.3)]">
-            <DecodeText text="Engineer" delay={600} />
-          </span>
-        </h1>
-        <RevealWrapper delay={1000} direction="up">
-          <p className="text-gray-400 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed">
-            Rudi Mouton. Computer Engineering specialist based in Cape Town, ZA. Architecting high-performance digital ecosystems, enterprise hardware solutions, and secure network infrastructure.
-          </p>
-        </RevealWrapper>
-      </header>
+export const metadata = {
+  title: "Engineering Team & Diagnostics | Takumi Tech",
+  description: "Meet the elite system architects, network defense specialists, and infrastructure engineers driving Takumi Tech.",
+};
 
-      {/* --------------------------------------------------------- */}
-      {/* THE MEANING OF TAKUMI */}
-      {/* --------------------------------------------------------- */}
-      <RevealWrapper delay={200} direction="up" className="w-full max-w-6xl mb-12">
-        <section className="glass-card rounded-[2.5rem] p-8 md:p-12 border border-indigo-500/30 bg-gradient-to-br from-indigo-900/20 to-[#050505] relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-600/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-indigo-600/20 transition-colors duration-1000" />
-          
-          <div className="flex flex-col md:flex-row items-center gap-8 relative z-10">
-            <div className="w-24 h-24 rounded-3xl bg-black/60 backdrop-blur-xl flex items-center justify-center border border-indigo-500/40 shadow-[0_0_40px_rgba(99,102,241,0.2)] shrink-0">
-              <span className="text-4xl font-black text-indigo-400">匠</span>
-            </div>
-            
-            <div className="text-center md:text-left">
-              <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-wider mb-3">The Takumi Philosophy</h2>
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed font-medium">
-                In Japanese, <strong className="text-white">Takumi (匠)</strong> translates to &quot;master craftsman&quot;—an artisan who has achieved the absolute pinnacle of skill through relentless dedication, repetition, and precision. At Takumi Tech, this philosophy is the bedrock of our operations. We do not just assemble hardware or route networks; we meticulously engineer digital infrastructure with the exactness of a master craftsman.
-              </p>
-            </div>
-          </div>
-        </section>
-      </RevealWrapper>
-
-      {/* --------------------------------------------------------- */}
-      {/* MAIN GRID: DOSSIER MODULES */}
-      {/* --------------------------------------------------------- */}
-      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-8 mb-24">
-        
-        {/* COLUMN 1: OPERATIONAL EXPERIENCE & EDUCATION */}
-        <div className="lg:col-span-7 flex flex-col gap-8">
-          
-          {/* Experience Module */}
-          <RevealWrapper delay={400} direction="right" className="h-full">
-            <article className="glass-card h-full rounded-[2rem] p-8 md:p-10 border border-white/5 bg-gradient-to-br from-white/[0.03] to-transparent relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/5 rounded-full blur-[80px] pointer-events-none" />
-              
-              <div className="flex items-center gap-4 mb-8 relative z-10">
-                <div className="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center border border-indigo-500/20">
-                  <Briefcase className="w-5 h-5 text-indigo-400" />
-                </div>
-                <h2 className="text-2xl font-black text-white uppercase tracking-wider">Operational Record</h2>
-              </div>
-
-              <div className="space-y-8 relative z-10">
-                {/* Flawless IT */}
-                <div className="flex gap-4 group">
-                  <div className="flex flex-col items-center">
-                    <div className="w-3 h-3 rounded-full bg-indigo-500 ring-4 ring-indigo-500/20 group-hover:ring-indigo-500/40 transition-all" />
-                    <div className="w-px h-full bg-gradient-to-b from-indigo-500/50 to-transparent mt-2" />
-                  </div>
-                  <div className="pb-4">
-                    <h3 className="text-lg font-bold text-white mb-1">IT Professional</h3>
-                    <h4 className="text-sm font-mono text-indigo-400 uppercase tracking-widest mb-3">Flawless IT</h4>
-                    <p className="text-sm text-gray-400 font-medium leading-relaxed">
-                      Deploying and maintaining enterprise IT infrastructure. Providing advanced system diagnostics, network optimization, and secure operational support for corporate clients applying the Takumi standard of precision.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Internship */}
-                <div className="flex gap-4 group">
-                  <div className="flex flex-col items-center">
-                    <div className="w-3 h-3 rounded-full bg-gray-600 group-hover:bg-indigo-400 transition-colors" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-white mb-1">IT Internship</h3>
-                    <h4 className="text-sm font-mono text-gray-400 uppercase tracking-widest mb-3">Optimi College / College SA</h4>
-                    <p className="text-sm text-gray-400 font-medium leading-relaxed">
-                      Executed foundational IT protocols, gaining practical deployment experience in system administration and technical support architectures.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </RevealWrapper>
-        </div>
-
-        {/* COLUMN 2: ACADEMICS & CAPABILITIES */}
-        <div className="lg:col-span-5 flex flex-col gap-8">
-          
-          {/* Academic Foundation Module */}
-          <RevealWrapper delay={600} direction="left">
-            <article className="glass-card rounded-[2rem] p-8 md:p-10 border border-white/5 bg-gradient-to-bl from-white/[0.03] to-transparent relative overflow-hidden">
-              <div className="flex items-center gap-4 mb-8 relative z-10">
-                <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
-                  <GraduationCap className="w-5 h-5 text-blue-400" />
-                </div>
-                <h2 className="text-xl md:text-2xl font-black text-white uppercase tracking-wider">Academic Foundation</h2>
-              </div>
-
-              <div className="flex gap-5 relative z-10">
-                <div className="w-12 h-12 rounded-xl bg-[#111] border border-white/10 flex items-center justify-center shrink-0">
-                  <Cpu className="w-6 h-6 text-gray-400" />
-                </div>
-                <div>
-                  <h3 className="text-base md:text-lg font-bold text-white mb-1">Diploma in Engineering Technology</h3>
-                  <h4 className="text-xs md:text-sm font-mono text-blue-400 uppercase tracking-widest mb-3">Computer Engineering • CPUT</h4>
-                  <p className="text-xs md:text-sm text-gray-400 font-medium leading-relaxed">
-                    Intensive focus on Engineering Mathematics, applied Physics, and core computational architecture. Bridging the gap between physical hardware and low-level software systems.
-                  </p>
-                </div>
-              </div>
-            </article>
-          </RevealWrapper>
-
-          {/* Tech Stack */}
-          <RevealWrapper delay={800} direction="left" className="flex-grow">
-            <article className="glass-card rounded-[2rem] p-8 md:p-10 border border-white/5 bg-[#080808] relative overflow-hidden h-full flex flex-col">
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-600/5 rounded-full blur-[80px] pointer-events-none" />
-              
-              <div className="flex items-center gap-4 mb-8 relative z-10">
-                <div className="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20">
-                  <Code className="w-5 h-5 text-cyan-400" />
-                </div>
-                <h2 className="text-xl md:text-2xl font-black text-white uppercase tracking-wider">Core Capabilities</h2>
-              </div>
-
-              <div className="flex flex-col gap-4 relative z-10 flex-grow">
-                {[
-                  { name: "Full-Stack Architecture", tech: "Next.js, React, Vercel", icon: <Terminal className="w-4 h-4 text-cyan-400" /> },
-                  { name: "Global Sourcing Protocols", tech: "Enterprise Logistics & Procurement", icon: <ShieldCheck className="w-4 h-4 text-cyan-400" /> },
-                  { name: "Network Infrastructure", tech: "Routing & Security Protocols", icon: <Activity className="w-4 h-4 text-cyan-400" /> },
-                  { name: "System Optimization", tech: "AtlasOS, Deep Performance Tuning", icon: <Cpu className="w-4 h-4 text-cyan-400" /> }
-                ].map((skill, idx) => (
-                  <div key={idx} className="p-4 rounded-xl bg-[#111] border border-white/5 flex items-start gap-4 group hover:border-cyan-500/30 transition-colors">
-                    <div className="mt-0.5 shrink-0">{skill.icon}</div>
-                    <div>
-                      <h4 className="text-sm font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors">{skill.name}</h4>
-                      <p className="text-xs font-mono text-gray-500">{skill.tech}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </article>
-          </RevealWrapper>
-        </div>
-      </div>
-
-      {/* --------------------------------------------------------- */}
-      {/* OFF-DUTY PROTOCOLS (FULL WIDTH) */}
-      {/* --------------------------------------------------------- */}
-      <RevealWrapper delay={1000} direction="up" className="w-full max-w-6xl mb-24">
-        <section className="glass-card rounded-[2rem] p-8 md:p-12 border border-white/5 bg-gradient-to-r from-emerald-900/10 to-[#050505] relative overflow-hidden">
-          <div className="absolute top-1/2 -translate-y-1/2 left-0 w-64 h-64 bg-emerald-600/10 rounded-full blur-[80px] pointer-events-none" />
-          
-          <div className="flex items-center gap-4 mb-8 relative z-10">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20">
-              <Wrench className="w-5 h-5 text-emerald-400" />
-            </div>
-            <h2 className="text-2xl font-black text-white uppercase tracking-wider">Off-Duty Protocols</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-            <div className="p-6 rounded-2xl bg-[#111] border border-white/5">
-              <Flame className="w-6 h-6 text-emerald-400 mb-4" />
-              <h4 className="text-white font-bold mb-2">Mechanical Engineering</h4>
-              <p className="text-sm text-gray-400 leading-relaxed">
-                Applying the Takumi philosophy to the physical world: Complete restoration and performance tuning of a classic 1983 Nissan 1400.
-              </p>
-            </div>
-            <div className="p-6 rounded-2xl bg-[#111] border border-white/5">
-              <Activity className="w-6 h-6 text-emerald-400 mb-4" />
-              <h4 className="text-white font-bold mb-2">Elite Athletics</h4>
-              <p className="text-sm text-gray-400 leading-relaxed">
-                Discipline and precision. Achieved a Black Belt in Karate and Western Province Provincial Colors for both Karate and Hockey.
-              </p>
-            </div>
-            <div className="p-6 rounded-2xl bg-[#111] border border-white/5">
-              <Terminal className="w-6 h-6 text-emerald-400 mb-4" />
-              <h4 className="text-white font-bold mb-2">Media Production</h4>
-              <p className="text-sm text-gray-400 leading-relaxed">
-                Active background actor for film and television productions via Colt Talent Agency, engaging in complex set logistics.
-              </p>
-            </div>
-          </div>
-        </section>
-      </RevealWrapper>
-      
-    </div>
-  );
-}
+// ---------------------------------------------------------
+// ENGINEERING DISCIPLINES DATABASE
+// ---------------------------------------------------------
+const engineeringDisciplines = [
+  {
+    id: "ARCH-01",
+    role: "Lead Systems Architect",
+    focus: "Low-Level Kernel Ops & Hypervisor Routing",
+    clearance: "Level 5 / Absolute",
+    icon: <Terminal className="w-6 h-6 text-cyan-400" />,
+    color: "cyan",
+    description: "Responsible for the overarching blueprint of client deployments. Specializes in bare-metal hypervisor configuration, Linux kernel optimization, and zero-latency routing protocols.",
+    skills: ["Proxmox VE", "BGP/OSPF", "Kernel Tuning", "C/Rust"],
+  },
+  {
+    id: "DEF-02",
+    role: "Network Defense Specialist",
+    focus: "Intrusion Prevention & Packet Auditing",
+    clearance: "Level 4 / Restricted",
+    icon: <ShieldAlert className="w-6 h-6 text-red-400" />,
+    color: "red",
+    description: "Operates on the philosophy of Zero-Trust. Designs military-grade VLAN micro-segmentation, deploys advanced persistent threat (APT) honey-pots, and actively audits network traffic anomalies.",
+    skills: ["Wireshark", "pfSense/OPNsense", "Deep Packet Inspection", "Zero-Trust Auth"],
+  },
+  {
+    id: "INF-03",
+    role: "Physical Infrastructure Engineer",
+    focus: "High-Density Rack Deployment & Thermal Dynamics",
+    clearance: "Level 4 / Restricted",
+    icon: <Cpu className="w-6 h-6 text-emerald-400" />,
+    color: "emerald",
+    description: "Translates digital blueprints into physical reality. Experts in power redundancy (N+1/2N), fiber optic cable management, and high-density thermal dissipation for massive computational loads.",
+    skills: ["Rack Topology", "Fiber Splicing", "Thermal Load Balancing", "Hardware Provisioning"],
+  },
+  {
+    id: "CRYP-04",
+    role: "Cryptography & Data Integrity Architect",
+    focus: "End-to-End Payload Encryption",
+    clearance: "Level 5 / Absolute",
+    icon: <Fingerprint className="w-6 h-6 text-purple-400" />,
+    color: "purple",
+    description: "Secures data at rest and in transit. Implements post-quantum cryptographic standards, manages secure key exchange lifecycles, and ensures total data sovereignty for high-value client payloads.",
+    skills: ["AES-256-GCM", "IPsec/WireGuard", "Key Management Systems", "Blockchain Integrity"],
+  }
+];
 
 export default function EngineerPage() {
   return (
-    <main className="min-h-[100svh] pt-24 pb-20 flex flex-col items-center overflow-hidden relative w-full">
-      {/* Global Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[600px] bg-indigo-600/5 rounded-[100%] blur-[150px] pointer-events-none z-0" aria-hidden="true" />
-      <div className="scanline opacity-10 pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
+    <div className="w-full flex flex-col items-center justify-start pt-12 md:pt-20">
       
-      <Suspense fallback={<div className="min-h-screen flex items-center justify-center w-full"><div className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" /></div>}>
-        <EngineerLogic />
-      </Suspense>
-    </main>
+      {/* --------------------------------------------------------- */}
+      {/* ENGINEERING HERO TERMINAL */}
+      {/* --------------------------------------------------------- */}
+      <section className="relative w-full max-w-4xl mx-auto text-center px-4 mb-24 z-10">
+        <div className="inline-flex items-center justify-center mb-6">
+          <div className="h-px w-12 bg-gradient-to-r from-transparent to-cyan-500 mr-4" />
+          <span className="text-xs font-mono text-cyan-400 tracking-[0.3em] uppercase">Technical Division</span>
+          <div className="h-px w-12 bg-gradient-to-l from-transparent to-cyan-500 ml-4" />
+        </div>
+        
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase mb-6 leading-tight text-white">
+          System <br />
+          <span className="text-gradient drop-shadow-[0_0_30px_rgba(34,211,238,0.3)]">Architects</span>
+        </h1>
+        
+        <p className="text-gray-400 text-sm md:text-base leading-relaxed font-medium max-w-2xl mx-auto">
+          Hardware is useless without the elite minds required to configure it. Meet the engineers who design, deploy, and defend Takumi Tech infrastructure protocols.
+        </p>
+      </section>
+
+      {/* --------------------------------------------------------- */}
+      {/* ENGINEERING GRID */}
+      {/* --------------------------------------------------------- */}
+      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 mb-32 z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          {engineeringDisciplines.map((engineer) => (
+            <div key={engineer.id} className="glass-card relative group flex flex-col rounded-[2rem] p-8 md:p-10 overflow-hidden hover:border-white/20 transition-all duration-500">
+              
+              {/* Dynamic Glow Based on Role */}
+              <div className={`absolute -bottom-20 -right-20 w-64 h-64 rounded-full blur-[100px] pointer-events-none opacity-10 group-hover:opacity-30 transition-opacity duration-700 bg-${engineer.color}-500`} />
+              
+              {/* Header: Clearance & ID */}
+              <div className="flex justify-between items-start mb-8 relative z-10">
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-${engineer.color}-500/10 border border-${engineer.color}-500/20 shadow-[inset_0_0_15px_rgba(0,0,0,0.5)]`}>
+                  {engineer.icon}
+                </div>
+                <div className="flex flex-col items-end text-right">
+                  <span className="text-[10px] font-mono text-gray-500 tracking-widest uppercase mb-1 flex items-center gap-2">
+                    <Lock className="w-3 h-3 text-gray-400" /> Clearance
+                  </span>
+                  <span className={`text-[10px] font-mono font-bold text-${engineer.color}-400 tracking-wider uppercase`}>{engineer.clearance}</span>
+                </div>
+              </div>
+
+              {/* Core Identity */}
+              <div className="relative z-10 flex-grow mb-8">
+                <span className="text-[10px] font-mono text-gray-500 tracking-[0.2em] uppercase mb-2 block border-b border-white/10 pb-2 w-max">ID: {engineer.id}</span>
+                <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white mb-2">{engineer.role}</h3>
+                <h4 className={`text-xs font-mono text-${engineer.color}-300 uppercase tracking-widest mb-6`}>{engineer.focus}</h4>
+                <p className="text-gray-400 text-sm leading-relaxed font-medium">
+                  {engineer.description}
+                </p>
+              </div>
+
+              {/* Technical Skill Arrays */}
+              <div className="relative z-10 border-t border-white/5 pt-6 mt-auto">
+                <span className="text-[10px] font-mono text-gray-500 tracking-widest uppercase mb-4 block">Verified Competencies:</span>
+                <div className="flex flex-wrap gap-2">
+                  {engineer.skills.map((skill, i) => (
+                    <span key={i} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-md text-[10px] font-mono text-gray-300 uppercase tracking-wider hover:bg-white/10 transition-colors">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+          ))}
+
+        </div>
+      </section>
+
+      {/* --------------------------------------------------------- */}
+      {/* DEPLOYMENT CTA TERMINAL */}
+      {/* --------------------------------------------------------- */}
+      <section className="w-full max-w-5xl mx-auto px-4 mb-24 z-10">
+        <div className="glass-card w-full rounded-[2.5rem] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10 bg-gradient-to-r from-[#050505] to-[#0a0a0a] border border-cyan-500/20 relative overflow-hidden group shadow-[0_0_50px_rgba(34,211,238,0.05)]">
+          
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-cyan-600/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-cyan-600/20 transition-colors duration-700 translate-x-1/2 -translate-y-1/2" />
+          
+          <div className="flex flex-col text-center md:text-left relative z-10 max-w-xl">
+            <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
+              <Zap className="w-5 h-5 text-cyan-400" />
+              <h2 className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white">Require Architectural Audit?</h2>
+            </div>
+            <p className="text-gray-400 text-sm font-medium leading-relaxed">
+              Deploy a Takumi Tech lead engineer to review your current physical infrastructure, routing protocols, and security matrices. We will identify vulnerabilities and draft a custom deployment blueprint.
+            </p>
+          </div>
+          
+          <Link 
+            href="/schedule" 
+            className="shrink-0 relative z-10 flex items-center justify-center gap-3 px-8 py-5 bg-cyan-600 hover:bg-cyan-500 text-white font-black uppercase tracking-widest text-xs rounded-xl shadow-[0_0_30px_rgba(34,211,238,0.3)] hover:shadow-[0_0_50px_rgba(34,211,238,0.5)] transition-all ring-1 ring-cyan-400/50 w-full md:w-auto"
+          >
+            Deploy Engineer <ArrowRight className="w-4 h-4" />
+          </Link>
+          
+        </div>
+      </section>
+
+    </div>
   );
 }

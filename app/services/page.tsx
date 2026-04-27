@@ -1,158 +1,143 @@
-"use client";
-import { Suspense } from "react";
-import { useRouter } from "next/navigation";
-import { Server, ShieldCheck, Network, Cpu, ArrowRight, Loader2, Zap, Layers } from "lucide-react";
-import DecodeText from "../components/DecodeText";
-import RevealWrapper from "../components/RevealWrapper";
-import MagneticWrapper from "../components/MagneticWrapper";
+import Link from "next/link";
+import { ArrowRight, ShieldCheck, Server, Network, Lock, Database, Cpu } from "lucide-react";
 
-const ARCHITECTURE_MODULES = [
-  {
-    id: "01",
-    title: "Network Architecture & Routing",
-    icon: <Network className="w-8 h-8 text-blue-400" />,
-    color: "blue",
-    description: "Design and deployment of high-availability network infrastructures. Specializing in enterprise-grade VLAN segmentation, latency reduction, and seamless inter-node communication.",
-    tags: ["VLAN Segmentation", "Packet Prioritization", "Failover Systems"]
-  },
-  {
-    id: "02",
-    title: "Enterprise IT Infrastructure",
-    icon: <Server className="w-8 h-8 text-indigo-400" />,
-    color: "indigo",
-    description: "End-to-end fabrication of physical and digital IT environments. From server rack installations to professional workstation deployments operating on the Takumi standard of precision.",
-    tags: ["Server Deployment", "Hardware Integration", "System Diagnostics"]
-  },
-  {
-    id: "03",
-    title: "Zero-Trust Security Protocols",
-    icon: <ShieldCheck className="w-8 h-8 text-cyan-400" />,
-    color: "cyan",
-    description: "Implementation of advanced, defense-in-depth security parameters. We lock down network perimeters, establish secure API routing, and prevent unauthorized telemetry leaks.",
-    tags: ["Endpoint Security", "Traffic Encryption", "Access Control"]
-  },
-  {
-    id: "04",
-    title: "Low-Level System Optimization",
-    icon: <Cpu className="w-8 h-8 text-emerald-400" />,
-    color: "emerald",
-    description: "Deep kernel-level tuning for maximum computational efficiency. Utilizing custom OS configurations (such as AtlasOS) to strip bloatware and maximize hardware resource allocation.",
-    tags: ["OS Stripping", "Resource Allocation", "Thermal Profiling"]
-  }
-];
-
-function ServicesLogic() {
-  const router = useRouter();
-
-  return (
-    <div className="w-full flex flex-col items-center relative z-10 px-4 md:px-6">
-      
-      {/* --------------------------------------------------------- */}
-      {/* HEADER SECTION */}
-      {/* --------------------------------------------------------- */}
-      <header className="w-full max-w-5xl mb-24 text-center mt-10">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-6 backdrop-blur-md">
-          <Layers className="w-4 h-4 text-cyan-400" />
-          <span className="text-xs font-mono text-cyan-300 uppercase tracking-widest">System Capabilities</span>
-        </div>
-        <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6 leading-none">
-          <DecodeText text="Infrastructure" /> <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 drop-shadow-[0_0_30px_rgba(34,211,238,0.3)]">
-            <DecodeText text="Architecture" delay={600} />
-          </span>
-        </h1>
-        <RevealWrapper delay={1000} direction="up">
-          <p className="text-gray-400 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed mb-8">
-            Takumi Tech engineers elite digital ecosystems. We do not offer pre-packaged solutions; every network, server, and system is meticulously custom-designed to match your exact operational requirements.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-xs font-mono text-blue-400 uppercase tracking-widest bg-blue-500/5 p-4 rounded-xl border border-blue-500/20 max-w-3xl mx-auto">
-            <Zap className="w-4 h-4 shrink-0" />
-            <span className="text-center sm:text-left leading-relaxed">
-              <strong>Dynamic Assessment:</strong> All infrastructure projects require a preliminary diagnostic. Costs scale dynamically based on the hardware scope and architectural complexity.
-            </span>
-          </div>
-        </RevealWrapper>
-      </header>
-
-      {/* --------------------------------------------------------- */}
-      {/* CAPABILITIES GRID */}
-      {/* --------------------------------------------------------- */}
-      <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-24">
-        {ARCHITECTURE_MODULES.map((module, idx) => (
-          <RevealWrapper key={module.id} delay={200 + (idx * 200)} direction="up" className="h-full">
-            <div className={`glass-card rounded-[2rem] p-8 md:p-10 border border-white/5 bg-[#080808] relative overflow-hidden h-full group hover:border-${module.color}-500/30 transition-colors duration-700 flex flex-col`}>
-              <div className={`absolute top-0 right-0 w-64 h-64 bg-${module.color}-600/5 rounded-full blur-[80px] pointer-events-none group-hover:bg-${module.color}-600/10 transition-colors duration-700`} />
-              
-              <div className="flex justify-between items-start mb-8 relative z-10">
-                <div className={`w-16 h-16 rounded-2xl bg-${module.color}-500/10 flex items-center justify-center border border-${module.color}-500/20 shadow-[0_0_20px_rgba(0,0,0,0)] group-hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] transition-all`}>
-                  {module.icon}
-                </div>
-                <span className={`text-4xl font-black text-white/5 group-hover:text-${module.color}-500/20 transition-colors select-none`}>
-                  {module.id}
-                </span>
-              </div>
-
-              <h2 className="text-2xl font-black text-white uppercase tracking-wider mb-4 relative z-10">
-                {module.title}
-              </h2>
-              
-              <p className="text-gray-400 text-sm md:text-base font-medium leading-relaxed mb-8 relative z-10 flex-grow">
-                {module.description}
-              </p>
-
-              <div className="flex flex-wrap gap-2 relative z-10 mt-auto pt-6 border-t border-white/5">
-                {module.tags.map(tag => (
-                  <span key={tag} className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-gray-400 uppercase tracking-widest">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </RevealWrapper>
-        ))}
-      </div>
-
-      {/* --------------------------------------------------------- */}
-      {/* CALL TO ACTION */}
-      {/* --------------------------------------------------------- */}
-      <RevealWrapper delay={400} direction="up" className="w-full max-w-4xl mb-24">
-        <div className="glass-card rounded-[2.5rem] p-10 md:p-14 border border-blue-500/30 bg-gradient-to-br from-blue-900/20 to-[#050505] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 pointer-events-none" />
-          
-          <div className="relative z-10 max-w-xl">
-            <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-4">
-              Require a Custom Deployment?
-            </h2>
-            <p className="text-blue-200 text-sm md:text-base font-medium leading-relaxed">
-              Initialize a diagnostic ticket. Our engineers will review your operational requirements and engineer a Takumi-grade solution.
-            </p>
-          </div>
-
-          <MagneticWrapper pullStrength={0.15} className="relative z-10 w-full md:w-auto shrink-0">
-            <button 
-              onClick={() => router.push("/contact")}
-              className="w-full md:w-auto px-10 py-6 bg-blue-600 hover:bg-blue-500 rounded-2xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all shadow-[0_10px_40px_rgba(37,99,235,0.4)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.6)] ring-1 ring-blue-400/50"
-            >
-              Log Diagnostic Ticket <ArrowRight className="w-5 h-5" />
-            </button>
-          </MagneticWrapper>
-        </div>
-      </RevealWrapper>
-
-    </div>
-  );
-}
+export const metadata = {
+  title: "Architecture Modules | Takumi Tech",
+  description: "Explore our proprietary methods for enterprise-grade VLAN segmentation, zero-trust security layers, and high-density network deployments.",
+};
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-[100svh] pt-24 flex flex-col items-center overflow-hidden relative w-full">
-      {/* Global Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[600px] bg-cyan-600/5 rounded-[100%] blur-[150px] pointer-events-none z-0" aria-hidden="true" />
-      <div className="scanline opacity-10 pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
+    <div className="w-full flex flex-col items-center justify-start pt-12 md:pt-20">
       
-      <Suspense fallback={<div className="min-h-screen flex items-center justify-center w-full"><Loader2 className="w-10 h-10 text-cyan-500 animate-spin" /></div>}>
-        <ServicesLogic />
-      </Suspense>
-    </main>
+      {/* --------------------------------------------------------- */}
+      {/* SERVICES HERO TERMINAL */}
+      {/* --------------------------------------------------------- */}
+      <section className="relative w-full max-w-4xl mx-auto text-center px-4 mb-24 z-10">
+        <div className="inline-flex items-center justify-center mb-6">
+          <div className="h-px w-12 bg-gradient-to-r from-transparent to-cyan-500 mr-4" />
+          <span className="text-xs font-mono text-cyan-400 tracking-[0.3em] uppercase">Operational Capabilities</span>
+          <div className="h-px w-12 bg-gradient-to-l from-transparent to-cyan-500 ml-4" />
+        </div>
+        
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase mb-6 leading-tight text-white">
+          Enterprise <br />
+          <span className="text-gradient">Architecture</span>
+        </h1>
+        
+        <p className="text-gray-400 text-sm md:text-base leading-relaxed font-medium max-w-2xl mx-auto">
+          We do not deploy off-the-shelf solutions. Every Takumi Tech deployment is a custom-engineered matrix designed for absolute security, zero latency, and infinite scalability.
+        </p>
+      </section>
+
+      {/* --------------------------------------------------------- */}
+      {/* CORE SERVICE MODULES (Z-Pattern Grid) */}
+      {/* --------------------------------------------------------- */}
+      <section className="w-full max-w-6xl mx-auto px-4 flex flex-col gap-24 md:gap-32 mb-32 z-10">
+
+        {/* Module 01: Zero-Trust Network Defense */}
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          <div className="w-full lg:w-1/2 relative group">
+            <div className="absolute inset-0 bg-blue-600/20 rounded-3xl blur-[80px] pointer-events-none group-hover:bg-blue-600/30 transition-colors duration-700" />
+            <div className="glass-card aspect-[4/3] rounded-3xl p-8 relative overflow-hidden border border-blue-500/20 flex items-center justify-center">
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-luminosity grayscale group-hover:scale-105 transition-transform duration-1000" />
+              <ShieldCheck className="w-32 h-32 text-blue-400 relative z-10 drop-shadow-[0_0_30px_rgba(59,130,246,0.5)]" />
+            </div>
+          </div>
+          <div className="w-full lg:w-1/2 flex flex-col items-start text-left">
+            <span className="text-[10px] font-mono text-blue-400 tracking-[0.2em] uppercase mb-4 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full">Module 01</span>
+            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-white mb-6">Zero-Trust Network Defense</h2>
+            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+              The perimeter is dead. We architect networks where no entity—internal or external—is implicitly trusted. Utilizing micro-segmentation, deeply encrypted packet routing, and dynamic access policies, we isolate your critical data payloads from lateral movement and advanced persistent threats (APTs).
+            </p>
+            <ul className="flex flex-col gap-3 mb-8 w-full">
+              {['VLAN Micro-segmentation', 'Intrusion Detection/Prevention (IDS/IPS)', 'Military-Grade Tunneling & VPNs'].map((item, i) => (
+                <li key={i} className="flex items-center gap-3 text-xs font-mono text-gray-300">
+                  <Lock className="w-4 h-4 text-blue-500" /> {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Module 02: High-Density Infrastructure */}
+        <div className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
+          <div className="w-full lg:w-1/2 relative group">
+            <div className="absolute inset-0 bg-emerald-600/20 rounded-3xl blur-[80px] pointer-events-none group-hover:bg-emerald-600/30 transition-colors duration-700" />
+            <div className="glass-card aspect-[4/3] rounded-3xl p-8 relative overflow-hidden border border-emerald-500/20 flex items-center justify-center">
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-luminosity grayscale group-hover:scale-105 transition-transform duration-1000" />
+              <Server className="w-32 h-32 text-emerald-400 relative z-10 drop-shadow-[0_0_30px_rgba(16,185,129,0.5)]" />
+            </div>
+          </div>
+          <div className="w-full lg:w-1/2 flex flex-col items-start text-left">
+            <span className="text-[10px] font-mono text-emerald-400 tracking-[0.2em] uppercase mb-4 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full">Module 02</span>
+            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-white mb-6">High-Density Infrastructure</h2>
+            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+              Physical and virtual deployment built for extreme computational loads. We engineer custom server racks, establish robust hypervisor layers, and guarantee 99.99% uptime via redundant power and automated failover systems. Built to handle massive I/O operations without thermal throttling.
+            </p>
+            <ul className="flex flex-col gap-3 mb-8 w-full">
+              {['Bare-Metal Server Provisioning', 'Proxmox & VMware Hypervisors', 'Automated Failover Clustering'].map((item, i) => (
+                <li key={i} className="flex items-center gap-3 text-xs font-mono text-gray-300">
+                  <Network className="w-4 h-4 text-emerald-500" /> {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Module 03: Data Logistics & Sourcing */}
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          <div className="w-full lg:w-1/2 relative group">
+            <div className="absolute inset-0 bg-purple-600/20 rounded-3xl blur-[80px] pointer-events-none group-hover:bg-purple-600/30 transition-colors duration-700" />
+            <div className="glass-card aspect-[4/3] rounded-3xl p-8 relative overflow-hidden border border-purple-500/20 flex items-center justify-center">
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-luminosity grayscale group-hover:scale-105 transition-transform duration-1000" />
+              <Database className="w-32 h-32 text-purple-400 relative z-10 drop-shadow-[0_0_30px_rgba(168,85,247,0.5)]" />
+            </div>
+          </div>
+          <div className="w-full lg:w-1/2 flex flex-col items-start text-left">
+            <span className="text-[10px] font-mono text-purple-400 tracking-[0.2em] uppercase mb-4 px-3 py-1 bg-purple-500/10 border border-purple-500/20 rounded-full">Module 03</span>
+            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-white mb-6">Logistics & Sourcing</h2>
+            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+              The bottleneck of innovation is hardware availability. Takumi Tech utilizes a private global sourcing matrix to secure enterprise-grade switches, rare compute nodes, and high-performance storage arrays. We handle the supply chain so you can focus on the deployment.
+            </p>
+            <ul className="flex flex-col gap-3 mb-8 w-full">
+              {['Global Supply Chain Access', 'Hardware Component Auditing', 'Dynamic Market Pricing'].map((item, i) => (
+                <li key={i} className="flex items-center gap-3 text-xs font-mono text-gray-300">
+                  <Cpu className="w-4 h-4 text-purple-500" /> {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+      </section>
+
+      {/* --------------------------------------------------------- */}
+      {/* INITIALIZATION PROTOCOL */}
+      {/* --------------------------------------------------------- */}
+      <section className="w-full bg-[#080808] border-t border-white/5 py-24 z-10">
+        <div className="max-w-4xl mx-auto px-4 text-center flex flex-col items-center">
+          <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-8 rotate-45">
+            <div className="-rotate-45">
+              <Lock className="w-6 h-6 text-white" />
+            </div>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-6 text-white">System Diagnostics Required</h2>
+          <p className="text-gray-400 text-sm md:text-base mb-10 max-w-xl mx-auto leading-relaxed">
+            Prior to any architectural deployment, our engineers must audit your current operational parameters. Initialize a briefing to begin the process.
+          </p>
+          <Link 
+            href="/schedule" 
+            className="group relative flex items-center justify-center gap-3 px-10 py-5 bg-white text-black font-black uppercase tracking-widest text-sm rounded-none overflow-hidden transition-all hover:scale-[1.02] active:scale-[0.98]"
+          >
+            <span className="relative z-10 flex items-center gap-2">
+              Schedule Briefing <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </span>
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-200 to-white opacity-0 group-hover:opacity-100 transition-opacity" />
+          </Link>
+        </div>
+      </section>
+
+    </div>
   );
 }
