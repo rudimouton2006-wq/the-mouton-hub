@@ -21,9 +21,13 @@
     @apply text-transparent bg-clip-text bg-gradient-to-r from-[#00E5FF] to-[#2563EB];
   }
 
-  /* Masterclass Glassmorphism Card */
+  /* Masterclass Glassmorphism Card - Engineered for absolute Turbopack build stability */
   .glass-card {
-    @apply bg-[#050505]/40 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)];
+    background-color: rgba(5, 5, 5, 0.4);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
   }
 
   /* Cyber Aesthetic Custom Scrollbar */
