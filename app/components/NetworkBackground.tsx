@@ -18,16 +18,18 @@ export default function NetworkBackground() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    // Alpha false optimizes rendering by telling the browser the canvas background is opaque
+    // We will draw the dark void background manually
     const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
 
     let animationFrameId: number;
     let nodes: NetworkNode[] = [];
     
-    // Configurable System Parameters - Tuned for enterprise aesthetics
+    // Configurable System Parameters - Tuned for the premium "Takumi Tech" aesthetic
     const NODE_COUNT = 60; 
-    const CONNECTION_DISTANCE = 160;
-    const NODE_SPEED = 0.25;
+    const CONNECTION_DISTANCE = 150;
+    const NODE_SPEED = 0.2; // Ultra-slow, deliberate movement for premium feel
 
     const initializeCanvas = () => {
       const { innerWidth, innerHeight } = window;
@@ -51,7 +53,7 @@ export default function NetworkBackground() {
           y: Math.random() * height,
           vx: (Math.random() - 0.5) * NODE_SPEED,
           vy: (Math.random() - 0.5) * NODE_SPEED,
-          radius: Math.random() * 1.5 + 0.5, // Subtle variation in node mass
+          radius: Math.random() * 1.2 + 0.5, // Subtle variation in node mass
         });
       }
     };
@@ -60,11 +62,11 @@ export default function NetworkBackground() {
       const width = canvas.width / (window.devicePixelRatio || 1);
       const height = canvas.height / (window.devicePixelRatio || 1);
 
-      // Deep space background clear (matches --background variable)
+      // 1. Clear the canvas with the ultra-deep obsidian base
       ctx.fillStyle = "#050505";
       ctx.fillRect(0, 0, width, height);
 
-      // Update node telemetry
+      // 2. Update node telemetry
       nodes.forEach(node => {
         node.x += node.vx;
         node.y += node.vy;
@@ -76,7 +78,7 @@ export default function NetworkBackground() {
         if (node.y > height) node.y = 0;
       });
 
-      // Render active network vectors
+      // 3. Render active network vectors (The connections)
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x;
@@ -85,11 +87,12 @@ export default function NetworkBackground() {
 
           if (distance < CONNECTION_DISTANCE) {
             // Dynamic opacity calculation based on proximity
-            const opacity = 1 - distance / CONNECTION_DISTANCE;
+            const opacity = 1 - (distance / CONNECTION_DISTANCE);
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
-            // Takumi Blue connection vectors
+            
+            // Takumi Royal Blue connection vectors for subtle depth
             ctx.strokeStyle = `rgba(37, 99, 235, ${opacity * 0.15})`;
             ctx.lineWidth = 1;
             ctx.stroke();
@@ -97,12 +100,12 @@ export default function NetworkBackground() {
         }
       }
 
-      // Render physical nodes
+      // 4. Render physical data nodes
       nodes.forEach(node => {
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-        // Takumi Cyan core
-        ctx.fillStyle = "rgba(34, 211, 238, 0.4)"; 
+        // Takumi Cyber Cyan core for high-tech accenting
+        ctx.fillStyle = "rgba(0, 229, 255, 0.3)"; 
         ctx.fill();
       });
 

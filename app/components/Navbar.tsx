@@ -10,18 +10,24 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // Scroll physics engine
+  // Scroll listener for the glassmorphic transition
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    
-    // Passive listener for 60fps performance
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is active
+  // Prevent background scrolling when mobile menu is active
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -36,8 +42,8 @@ export default function Navbar() {
   const navLinks = [
     { name: "Terminal", path: "/" },
     { name: "Services", path: "/services" },
-    { name: "Logistics", path: "/shop" },
-    { name: "Engineers", path: "/engineer" },
+    { name: "Support Hub", path: "/schedule" },
+    { name: "Engineer", path: "/engineer" },
   ];
 
   return (
@@ -55,19 +61,18 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             
-            {/* Brand Node */}
+            {/* Elite Brand Node */}
             <Link 
               href="/" 
               className="group flex items-center gap-3 z-[101]"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <div className="w-10 h-10 bg-white text-black flex items-center justify-center rounded-sm transition-transform duration-500 group-hover:rotate-90">
-                <Terminal className="w-5 h-5 transition-transform duration-500 group-hover:-rotate-90" />
+              <div className="w-8 h-8 rounded bg-white/5 border border-white/10 flex items-center justify-center transition-transform duration-500 group-hover:bg-[#00E5FF]/10 group-hover:border-[#00E5FF]/30">
+                <Terminal className="w-4 h-4 text-white transition-colors duration-500 group-hover:text-[#00E5FF]" />
               </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-black tracking-tighter uppercase leading-none text-white">Takumi</span>
-                <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-gray-400 leading-none mt-1">Systems</span>
-              </div>
+              <span className="text-xl font-bold tracking-tight text-white font-sans flex items-center gap-1">
+                Takumi Tech <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00E5FF] mb-1" />
+              </span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -78,13 +83,13 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     href={link.path}
-                    className={`relative text-xs font-mono uppercase tracking-widest transition-colors duration-300 py-2 ${
-                      isActive ? "text-cyan-400" : "text-gray-400 hover:text-white"
+                    className={`relative text-xs font-semibold uppercase tracking-widest transition-colors duration-300 py-2 ${
+                      isActive ? "text-[#00E5FF]" : "text-[#A1A1AA] hover:text-white"
                     }`}
                   >
                     {link.name}
                     {isActive && (
-                      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)] rounded-full" />
+                      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#00E5FF] shadow-[0_0_10px_#00E5FF] rounded-full" />
                     )}
                   </Link>
                 );
@@ -94,16 +99,16 @@ export default function Navbar() {
             {/* Desktop Call to Action */}
             <div className="hidden md:flex items-center">
               <Link
-                href="/schedule"
-                className="px-6 py-2.5 bg-transparent border border-white/20 text-white font-mono text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300"
+                href="/ticket"
+                className="px-6 py-2.5 bg-transparent border border-[#00E5FF]/30 text-white font-bold text-xs uppercase tracking-widest hover:bg-[#00E5FF]/10 hover:border-[#00E5FF] transition-all duration-300 rounded-md shadow-[0_0_15px_rgba(0,229,255,0.05)] hover:shadow-[0_0_20px_rgba(0,229,255,0.2)]"
               >
-                Initialize Comms
+                Log a Ticket
               </Link>
             </div>
 
             {/* Mobile Menu Toggle */}
             <button
-              className="md:hidden relative z-[101] p-2 text-white hover:text-cyan-400 transition-colors"
+              className="md:hidden relative z-[101] p-2 text-white hover:text-[#00E5FF] transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle navigation menu"
             >
@@ -117,14 +122,13 @@ export default function Navbar() {
       {/* MOBILE OVERLAY MATRIX */}
       {/* --------------------------------------------------------- */}
       <div
-        className={`fixed inset-0 z-[90] bg-[#050505] transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] md:hidden flex flex-col justify-center px-6 ${
-          isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"
+        className={`fixed inset-0 z-[90] bg-[#050505]/95 backdrop-blur-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] md:hidden flex flex-col justify-center px-6 ${
+          isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        {/* Background Ambient Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-cyan-600/10 rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#00E5FF]/10 rounded-full blur-[100px] pointer-events-none" />
 
-        <nav className="flex flex-col gap-6 relative z-10">
+        <nav className="flex flex-col gap-8 relative z-10">
           {navLinks.map((link, index) => {
             const isActive = pathname === link.path;
             return (
@@ -134,12 +138,12 @@ export default function Navbar() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="group flex items-center gap-4 overflow-hidden"
               >
-                <span className={`text-sm font-mono tracking-widest transition-colors duration-300 ${isActive ? 'text-cyan-400' : 'text-gray-600 group-hover:text-cyan-400'}`}>
+                <span className={`text-sm font-mono tracking-widest transition-colors duration-300 ${isActive ? 'text-[#00E5FF]' : 'text-gray-600 group-hover:text-[#00E5FF]'}`}>
                   0{index + 1}
                 </span>
                 <span
-                  className={`text-4xl sm:text-5xl font-black uppercase tracking-tighter transition-all duration-500 ${
-                    isActive ? "text-white translate-x-2" : "text-gray-400 group-hover:text-white group-hover:translate-x-2"
+                  className={`text-3xl font-black uppercase tracking-tight transition-all duration-500 ${
+                    isActive ? "text-white translate-x-2" : "text-[#A1A1AA] group-hover:text-white group-hover:translate-x-2"
                   }`}
                 >
                   {link.name}
@@ -152,11 +156,11 @@ export default function Navbar() {
         <div className="w-full h-px bg-white/10 my-10 relative z-10" />
 
         <Link
-          href="/schedule"
+          href="/ticket"
           onClick={() => setIsMobileMenuOpen(false)}
-          className="relative z-10 flex items-center justify-center w-full py-5 bg-white text-black font-black uppercase tracking-widest text-sm hover:bg-gray-200 transition-colors"
+          className="relative z-10 flex items-center justify-center w-full py-5 bg-[#00E5FF] text-[#050505] font-black uppercase tracking-widest text-sm rounded-lg shadow-[0_0_30px_rgba(0,229,255,0.3)] hover:bg-[#00E5FF]/90 transition-colors"
         >
-          Initialize Comms
+          Log a Ticket
         </Link>
       </div>
     </>

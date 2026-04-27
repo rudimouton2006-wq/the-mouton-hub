@@ -10,16 +10,18 @@ export async function POST(request: Request) {
 
     // 2. Extract core transmission parameters
     const { 
-      type,             // e.g., "diagnostic_schedule" or "direct_comm"
+      type,             // "diagnostic_ticket"
       designation,      // Client Name / Company
       returnVector,     // Email Address
-      module,           // Requested Service Module
-      timing,           // Requested Time Slot
+      module,           // Requested Service Category
+      urgency,          // Low / Standard / Critical
+      dynamicData,      // The morphing field (Serial #, Domain, etc.)
       payload,          // Message / Constraints
+      targetInbox       // Set to rudi@takumitech.co.za
     } = body;
 
     // 3. Strict Validation Matrix
-    if (!returnVector || !designation) {
+    if (!returnVector || !designation || !payload) {
       return NextResponse.json(
         { 
           status: "rejected", 
@@ -35,14 +37,26 @@ export async function POST(request: Request) {
 
     /* ===============================================================
       ENGINEERING NOTE FOR INTEGRATION:
-      This is the exact node where you will plug in your Email API.
+      This is the exact node where you will plug in your Email API to 
+      forward the data to rudi@takumitech.co.za.
+      
       Example (Using Resend):
       
+      import { Resend } from 'resend';
+      const resend = new Resend(process.env.RESEND_API_KEY);
+
       await resend.emails.send({
         from: 'system@takumitech.co.za',
-        to: 'sysadmin@takumitech.co.za',
-        subject: `[TAKUMI TECH] New ${type} from ${designation}`,
-        html: `<p>New Payload: ${payload}</p>`
+        to: targetInbox,
+        subject: `[URGENCY: ${urgency.toUpperCase()}] New ${module} Ticket from ${designation}`,
+        html: `
+          <h3>New Diagnostic Ticket Logged</h3>
+          <p><strong>Entity:</strong> ${designation}</p>
+          <p><strong>Return Vector:</strong> ${returnVector}</p>
+          <p><strong>Module:</strong> ${module}</p>
+          <p><strong>Specific Context:</strong> ${dynamicData}</p>
+          <p><strong>Payload:</strong><br/> ${payload}</p>
+        `
       });
       ===============================================================
     */

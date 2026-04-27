@@ -1,159 +1,150 @@
 import Link from "next/link";
-import { ArrowRight, Terminal, Cpu, Fingerprint, ShieldAlert, Zap, Lock } from "lucide-react";
+import { 
+  Terminal, GraduationCap, MapPin, Briefcase, 
+  Award, Cpu, Network, ArrowRight, ShieldCheck 
+} from "lucide-react";
 
 export const metadata = {
-  title: "Engineering Team & Diagnostics | Takumi Tech",
-  description: "Meet the elite system architects, network defense specialists, and infrastructure engineers driving Takumi Tech.",
+  title: "Lead Architect | Takumi Tech",
+  description: "Review the technical credentials, academic background, and professional trajectory of the Takumi Tech Lead Engineer.",
 };
-
-// ---------------------------------------------------------
-// ENGINEERING DISCIPLINES DATABASE
-// ---------------------------------------------------------
-const engineeringDisciplines = [
-  {
-    id: "ARCH-01",
-    role: "Lead Systems Architect",
-    focus: "Low-Level Kernel Ops & Hypervisor Routing",
-    clearance: "Level 5 / Absolute",
-    icon: <Terminal className="w-6 h-6 text-cyan-400" />,
-    color: "cyan",
-    description: "Responsible for the overarching blueprint of client deployments. Specializes in bare-metal hypervisor configuration, Linux kernel optimization, and zero-latency routing protocols.",
-    skills: ["Proxmox VE", "BGP/OSPF", "Kernel Tuning", "C/Rust"],
-  },
-  {
-    id: "DEF-02",
-    role: "Network Defense Specialist",
-    focus: "Intrusion Prevention & Packet Auditing",
-    clearance: "Level 4 / Restricted",
-    icon: <ShieldAlert className="w-6 h-6 text-red-400" />,
-    color: "red",
-    description: "Operates on the philosophy of Zero-Trust. Designs military-grade VLAN micro-segmentation, deploys advanced persistent threat (APT) honey-pots, and actively audits network traffic anomalies.",
-    skills: ["Wireshark", "pfSense/OPNsense", "Deep Packet Inspection", "Zero-Trust Auth"],
-  },
-  {
-    id: "INF-03",
-    role: "Physical Infrastructure Engineer",
-    focus: "High-Density Rack Deployment & Thermal Dynamics",
-    clearance: "Level 4 / Restricted",
-    icon: <Cpu className="w-6 h-6 text-emerald-400" />,
-    color: "emerald",
-    description: "Translates digital blueprints into physical reality. Experts in power redundancy (N+1/2N), fiber optic cable management, and high-density thermal dissipation for massive computational loads.",
-    skills: ["Rack Topology", "Fiber Splicing", "Thermal Load Balancing", "Hardware Provisioning"],
-  },
-  {
-    id: "CRYP-04",
-    role: "Cryptography & Data Integrity Architect",
-    focus: "End-to-End Payload Encryption",
-    clearance: "Level 5 / Absolute",
-    icon: <Fingerprint className="w-6 h-6 text-purple-400" />,
-    color: "purple",
-    description: "Secures data at rest and in transit. Implements post-quantum cryptographic standards, manages secure key exchange lifecycles, and ensures total data sovereignty for high-value client payloads.",
-    skills: ["AES-256-GCM", "IPsec/WireGuard", "Key Management Systems", "Blockchain Integrity"],
-  }
-];
 
 export default function EngineerPage() {
   return (
-    <div className="w-full flex flex-col items-center justify-start pt-12 md:pt-20">
+    <div className="w-full flex flex-col items-center justify-start pb-32 pt-12 md:pt-20 z-10">
       
       {/* --------------------------------------------------------- */}
-      {/* ENGINEERING HERO TERMINAL */}
+      {/* DOSSIER HERO TERMINAL */}
       {/* --------------------------------------------------------- */}
-      <section className="relative w-full max-w-4xl mx-auto text-center px-4 mb-24 z-10">
+      <section className="relative w-full max-w-4xl mx-auto text-center px-4 mb-20">
         <div className="inline-flex items-center justify-center mb-6">
-          <div className="h-px w-12 bg-gradient-to-r from-transparent to-cyan-500 mr-4" />
-          <span className="text-xs font-mono text-cyan-400 tracking-[0.3em] uppercase">Technical Division</span>
-          <div className="h-px w-12 bg-gradient-to-l from-transparent to-cyan-500 ml-4" />
+          <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#00E5FF] mr-4" />
+          <span className="text-xs font-mono text-[#00E5FF] tracking-[0.3em] uppercase">Personnel File</span>
+          <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#00E5FF] ml-4" />
         </div>
         
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase mb-6 leading-tight text-white">
-          System <br />
-          <span className="text-gradient drop-shadow-[0_0_30px_rgba(34,211,238,0.3)]">Architects</span>
+          Lead <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5FF] to-[#2563EB]">Architect</span>
         </h1>
         
-        <p className="text-gray-400 text-sm md:text-base leading-relaxed font-medium max-w-2xl mx-auto">
-          Hardware is useless without the elite minds required to configure it. Meet the engineers who design, deploy, and defend Takumi Tech infrastructure protocols.
+        <p className="text-[#A1A1AA] text-sm md:text-base leading-relaxed font-medium max-w-2xl mx-auto">
+          Hardware is useless without the elite minds required to configure it. Review the qualifications, academic rigor, and professional trajectory driving the Takumi Tech infrastructure.
         </p>
       </section>
 
       {/* --------------------------------------------------------- */}
-      {/* ENGINEERING GRID */}
+      {/* CORE IDENTITY & CLEARANCE MATRIX */}
       {/* --------------------------------------------------------- */}
-      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 mb-32 z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <section className="w-full max-w-5xl mx-auto px-4 sm:px-6 mb-16">
+        <div className="glass-card rounded-[2.5rem] p-8 md:p-12 border border-white/10 relative overflow-hidden bg-[#0A0A0A] flex flex-col md:flex-row gap-10 items-start">
           
-          {engineeringDisciplines.map((engineer) => (
-            <div key={engineer.id} className="glass-card relative group flex flex-col rounded-[2rem] p-8 md:p-10 overflow-hidden hover:border-white/20 transition-all duration-500">
-              
-              {/* Dynamic Glow Based on Role */}
-              <div className={`absolute -bottom-20 -right-20 w-64 h-64 rounded-full blur-[100px] pointer-events-none opacity-10 group-hover:opacity-30 transition-opacity duration-700 bg-${engineer.color}-500`} />
-              
-              {/* Header: Clearance & ID */}
-              <div className="flex justify-between items-start mb-8 relative z-10">
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-${engineer.color}-500/10 border border-${engineer.color}-500/20 shadow-[inset_0_0_15px_rgba(0,0,0,0.5)]`}>
-                  {engineer.icon}
-                </div>
-                <div className="flex flex-col items-end text-right">
-                  <span className="text-[10px] font-mono text-gray-500 tracking-widest uppercase mb-1 flex items-center gap-2">
-                    <Lock className="w-3 h-3 text-gray-400" /> Clearance
-                  </span>
-                  <span className={`text-[10px] font-mono font-bold text-${engineer.color}-400 tracking-wider uppercase`}>{engineer.clearance}</span>
-                </div>
-              </div>
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#00E5FF]/5 rounded-full blur-[100px] pointer-events-none" />
 
-              {/* Core Identity */}
-              <div className="relative z-10 flex-grow mb-8">
-                <span className="text-[10px] font-mono text-gray-500 tracking-[0.2em] uppercase mb-2 block border-b border-white/10 pb-2 w-max">ID: {engineer.id}</span>
-                <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white mb-2">{engineer.role}</h3>
-                <h4 className={`text-xs font-mono text-${engineer.color}-300 uppercase tracking-widest mb-6`}>{engineer.focus}</h4>
-                <p className="text-gray-400 text-sm leading-relaxed font-medium">
-                  {engineer.description}
-                </p>
-              </div>
-
-              {/* Technical Skill Arrays */}
-              <div className="relative z-10 border-t border-white/5 pt-6 mt-auto">
-                <span className="text-[10px] font-mono text-gray-500 tracking-widest uppercase mb-4 block">Verified Competencies:</span>
-                <div className="flex flex-wrap gap-2">
-                  {engineer.skills.map((skill, i) => (
-                    <span key={i} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-md text-[10px] font-mono text-gray-300 uppercase tracking-wider hover:bg-white/10 transition-colors">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
+          {/* Avatar / Designation Block */}
+          <div className="w-full md:w-1/3 flex flex-col gap-6 relative z-10">
+            <div className="w-32 h-32 rounded-2xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center shadow-[inset_0_0_20px_rgba(0,229,255,0.2)]">
+              <Terminal className="w-16 h-16 text-[#00E5FF]" />
             </div>
-          ))}
+            
+            <div>
+              <h2 className="text-3xl font-black uppercase tracking-tight text-white mb-1">Rudi Mouton</h2>
+              <h3 className="text-sm font-mono text-[#00E5FF] uppercase tracking-widest mb-4">Principal IT Engineer</h3>
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-[#10B981]/10 border border-[#10B981]/20 rounded-lg w-max">
+                <ShieldCheck className="w-4 h-4 text-[#10B981]" />
+                <span className="text-[10px] font-mono text-[#10B981] uppercase tracking-widest">Clearance: Absolute</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Mission Statement */}
+          <div className="w-full md:w-2/3 relative z-10 flex flex-col justify-center h-full pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-white/10 md:pl-10">
+            <h4 className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Operational Mandate</h4>
+            <p className="text-[#A1A1AA] text-sm md:text-base leading-relaxed font-medium mb-6">
+              "Technology should operate silently and flawlessly. My professional objective is to architect resilient digital environments—from granular hardware optimizations to scalable enterprise networks—ensuring our clients operate with zero latency and absolute security."
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {['Hardware Diagnostics', 'Network Topology', 'Web Architecture', 'System Optimization'].map((skill) => (
+                <span key={skill} className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-[10px] font-mono text-gray-300 uppercase tracking-wider">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
 
         </div>
       </section>
 
       {/* --------------------------------------------------------- */}
-      {/* DEPLOYMENT CTA TERMINAL */}
+      {/* TECHNICAL DOSSIER GRID */}
       {/* --------------------------------------------------------- */}
-      <section className="w-full max-w-5xl mx-auto px-4 mb-24 z-10">
-        <div className="glass-card w-full rounded-[2.5rem] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10 bg-gradient-to-r from-[#050505] to-[#0a0a0a] border border-cyan-500/20 relative overflow-hidden group shadow-[0_0_50px_rgba(34,211,238,0.05)]">
+      <section className="w-full max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-cyan-600/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-cyan-600/20 transition-colors duration-700 translate-x-1/2 -translate-y-1/2" />
-          
-          <div className="flex flex-col text-center md:text-left relative z-10 max-w-xl">
-            <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
-              <Zap className="w-5 h-5 text-cyan-400" />
-              <h2 className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white">Require Architectural Audit?</h2>
+          {/* Academic Blueprint */}
+          <div className="glass-card rounded-[2rem] p-8 border border-white/10 bg-[#0A0A0A] hover:border-white/20 transition-colors group relative overflow-hidden">
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#2563EB]/10 rounded-full blur-[50px] pointer-events-none group-hover:bg-[#2563EB]/20 transition-colors duration-500" />
+            
+            <div className="w-12 h-12 rounded-xl bg-[#2563EB]/10 border border-[#2563EB]/30 flex items-center justify-center mb-6 relative z-10">
+              <GraduationCap className="w-6 h-6 text-[#2563EB]" />
             </div>
-            <p className="text-gray-400 text-sm font-medium leading-relaxed">
-              Deploy a Takumi Tech lead engineer to review your current physical infrastructure, routing protocols, and security matrices. We will identify vulnerabilities and draft a custom deployment blueprint.
-            </p>
+            <h3 className="text-xl font-black uppercase tracking-wide text-white mb-6 relative z-10">Academic Blueprint</h3>
+            
+            <div className="flex flex-col gap-4 relative z-10">
+              <div className="flex flex-col border-l-2 border-[#2563EB]/30 pl-4">
+                <span className="text-[10px] font-mono text-[#2563EB] uppercase tracking-widest mb-1">Active Pursuit</span>
+                <strong className="text-sm text-white font-bold tracking-wide">Diploma in Engineering Technology</strong>
+                <span className="text-xs text-[#A1A1AA] font-medium mt-1">Computer Engineering via CPUT</span>
+                <p className="text-xs text-gray-500 mt-2 leading-relaxed">Focusing on advanced engineering mathematics, physical computing, and digital architecture.</p>
+              </div>
+            </div>
           </div>
-          
-          <Link 
-            href="/schedule" 
-            className="shrink-0 relative z-10 flex items-center justify-center gap-3 px-8 py-5 bg-cyan-600 hover:bg-cyan-500 text-white font-black uppercase tracking-widest text-xs rounded-xl shadow-[0_0_30px_rgba(34,211,238,0.3)] hover:shadow-[0_0_50px_rgba(34,211,238,0.5)] transition-all ring-1 ring-cyan-400/50 w-full md:w-auto"
-          >
-            Deploy Engineer <ArrowRight className="w-4 h-4" />
-          </Link>
-          
+
+          {/* Operational Experience */}
+          <div className="glass-card rounded-[2rem] p-8 border border-white/10 bg-[#0A0A0A] hover:border-white/20 transition-colors group relative overflow-hidden">
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#A855F7]/10 rounded-full blur-[50px] pointer-events-none group-hover:bg-[#A855F7]/20 transition-colors duration-500" />
+            
+            <div className="w-12 h-12 rounded-xl bg-[#A855F7]/10 border border-[#A855F7]/30 flex items-center justify-center mb-6 relative z-10">
+              <Briefcase className="w-6 h-6 text-[#A855F7]" />
+            </div>
+            <h3 className="text-xl font-black uppercase tracking-wide text-white mb-6 relative z-10">Industry Operations</h3>
+            
+            <div className="flex flex-col gap-6 relative z-10">
+              <div className="flex flex-col border-l-2 border-[#A855F7]/30 pl-4">
+                <span className="text-[10px] font-mono text-[#A855F7] uppercase tracking-widest mb-1">IT Professional</span>
+                <strong className="text-sm text-white font-bold tracking-wide">Flawless IT</strong>
+                <span className="text-xs text-[#A1A1AA] font-medium mt-1">Enterprise infrastructure maintenance and technical support.</span>
+              </div>
+              <div className="flex flex-col border-l-2 border-[#A855F7]/30 pl-4">
+                <span className="text-[10px] font-mono text-[#A855F7] uppercase tracking-widest mb-1">Technical Internship</span>
+                <strong className="text-sm text-white font-bold tracking-wide">Optimi College / College SA</strong>
+                <span className="text-xs text-[#A1A1AA] font-medium mt-1">Practical application of IT protocols and systems management.</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Base of Operations */}
+          <div className="glass-card rounded-[2rem] p-8 border border-white/10 bg-[#0A0A0A] hover:border-white/20 transition-colors group relative overflow-hidden md:col-span-2 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#10B981]/5 to-transparent pointer-events-none" />
+            
+            <div className="flex items-center gap-6 relative z-10 w-full md:w-auto">
+              <div className="w-14 h-14 rounded-xl bg-[#10B981]/10 border border-[#10B981]/30 flex items-center justify-center shrink-0">
+                <MapPin className="w-6 h-6 text-[#10B981]" />
+              </div>
+              <div className="flex flex-col">
+                <h3 className="text-xl font-black uppercase tracking-wide text-white mb-1">Central Hub</h3>
+                <span className="text-sm text-[#A1A1AA] font-medium">Oakdale, Bellville | Cape Town, ZA</span>
+              </div>
+            </div>
+
+            <Link 
+              href="/schedule" 
+              className="relative z-10 group/btn flex items-center justify-center gap-3 w-full md:w-auto px-8 py-4 bg-white/5 border border-white/10 hover:border-white/30 text-white font-black uppercase tracking-widest text-xs rounded-xl transition-all hover:bg-white/10 shrink-0"
+            >
+              Deploy Engineer <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
         </div>
       </section>
 

@@ -1,37 +1,31 @@
-import { Loader2, Terminal } from "lucide-react";
+import { Terminal } from "lucide-react";
 
-export default function GlobalLoading() {
+export default function Loading() {
   return (
-    <div className="fixed inset-0 z-[99999] bg-[#050505] flex flex-col items-center justify-center overflow-hidden">
+    <div className="w-full flex flex-col items-center justify-center min-h-[80vh] px-4 relative z-10">
       
-      {/* Deep Space Background Anomaly */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-[100%] blur-[120px] pointer-events-none z-0" aria-hidden="true" />
-      <div className="scanline opacity-10 pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
-      
-      {/* Centered Loading Console */}
-      <div className="relative z-10 flex flex-col items-center gap-8">
+      {/* Background Ambient Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-cyan-900/10 rounded-full blur-[100px] pointer-events-none z-0" />
+
+      <div className="flex flex-col items-center gap-6 relative z-10">
+        <div className="relative">
+          <div className="w-16 h-16 bg-cyan-500/10 border border-cyan-500/20 rounded-2xl flex items-center justify-center shadow-[inset_0_0_20px_rgba(34,211,238,0.2)]">
+            <Terminal className="w-8 h-8 text-cyan-400" />
+          </div>
+          {/* Hardware-Accelerated Ping Ring */}
+          <div className="absolute inset-0 border-2 border-cyan-500 rounded-2xl animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]" />
+        </div>
         
-        {/* Spinning Brand Node */}
-        <div className="relative flex items-center justify-center">
-          <div className="absolute inset-0 rounded-2xl border border-blue-500/30 animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]" />
-          <div className="w-20 h-20 rounded-2xl bg-[#080808] border border-white/10 flex items-center justify-center shadow-[0_0_50px_rgba(0,163,255,0.2)] backdrop-blur-md relative z-10">
-            <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />
-            <Terminal className="w-4 h-4 text-white absolute" />
-          </div>
-        </div>
-
-        {/* Telemetry Output */}
-        <div className="flex flex-col items-center gap-3">
-          <span className="text-[10px] md:text-xs font-mono text-blue-400 uppercase tracking-[0.3em] animate-pulse">
-            Connecting to Takumi Tech Node
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-sm font-mono text-cyan-400 uppercase tracking-widest animate-pulse">
+            Establishing Connection
           </span>
-          
-          {/* Faux Progress Bar */}
-          <div className="h-1 w-48 bg-white/5 rounded-full overflow-hidden relative border border-white/10">
-            <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-600 to-cyan-400 shadow-[0_0_10px_rgba(0,163,255,0.8)] animate-[pulse_1.5s_ease-in-out_infinite] w-[75%]" />
+          <div className="flex gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/50 animate-bounce" style={{ animationDelay: "0ms" }} />
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/50 animate-bounce" style={{ animationDelay: "150ms" }} />
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/50 animate-bounce" style={{ animationDelay: "300ms" }} />
           </div>
         </div>
-
       </div>
     </div>
   );
