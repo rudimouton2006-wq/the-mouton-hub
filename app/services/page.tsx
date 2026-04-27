@@ -1,10 +1,7 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, ShieldCheck, Server, Network, Wrench, Globe, Cpu } from "lucide-react";
-
-export const metadata = {
-  title: "Operational Modules | Takumi Tech",
-  description: "Explore our masterclass IT solutions, from zero-trust network deployments to absolute device optimization and hardware sourcing.",
-};
 
 // ---------------------------------------------------------
 // CORE SERVICES DATABASE
