@@ -5,7 +5,7 @@ import { useEffect, useState, useRef } from "react";
 export default function VisualEffects() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
-  const requestRef = useRef<number>();
+  const requestRef = useRef<number>(0);
 
   useEffect(() => {
     let ticking = false;
