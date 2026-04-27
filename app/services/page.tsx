@@ -143,9 +143,6 @@ export default function ServicesPage() {
                 <Link 
                   href={`/ticket?category=${service.id}`}
                   className="mt-auto group/btn flex items-center justify-center gap-3 w-full py-4 bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-xs rounded-xl transition-all duration-300"
-                  style={{ 
-                    hoverBackgroundColor: service.hex,
-                  }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = service.hex;
                     e.currentTarget.style.color = "#050505";
