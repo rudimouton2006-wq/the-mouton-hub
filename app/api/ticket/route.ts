@@ -27,11 +27,9 @@ export async function POST(request: Request) {
       );
     }
 
-    // 4. LIVE TRANSMISSION PROTOCOL
+    // 4. LIVE TRANSMISSION PROTOCOL - OFFICIAL DOMAIN ACTIVATED
     const { data, error } = await resend.emails.send({
-      // IMPORTANT: Leave this as onboarding@resend.dev until your domain is verified in Phase 2.
-      // Once verified, change this to: 'Takumi Tech System <system@takumitech.co.za>'
-      from: 'Takumi Tech Terminal <onboarding@resend.dev>', 
+      from: 'Takumi Tech System <system@takumitech.co.za>', 
       to: 'rudi@takumitech.co.za', 
       subject: `[URGENCY: ${urgency?.toUpperCase() || 'STANDARD'}] New ${module} Ticket from ${designation}`,
       html: `
