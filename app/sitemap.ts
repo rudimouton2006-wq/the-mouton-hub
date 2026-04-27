@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next'
 
+export const dynamic = 'force-dynamic' // This forces the server to register the route
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://takumitech.co.za'
 
-  // This matches your specific file architecture perfectly
   const routes = [
     '',
     '/services',
