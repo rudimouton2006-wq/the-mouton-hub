@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
+import { Resend } from "resend";
 
-// ---------------------------------------------------------
-// SECURE INTAKE PROTOCOL - POST HANDLER
-// ---------------------------------------------------------
+// Initialize the Resend Matrix
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 export async function POST(request: Request) {
   try {
     // 1. Intercept and parse the encrypted payload
@@ -10,62 +11,57 @@ export async function POST(request: Request) {
 
     // 2. Extract core transmission parameters
     const { 
-      type,             // "diagnostic_ticket"
-      designation,      // Client Name / Company
-      returnVector,     // Email Address
-      module,           // Requested Service Category
-      urgency,          // Low / Standard / Critical
-      dynamicData,      // The morphing field (Serial #, Domain, etc.)
-      payload,          // Message / Constraints
-      targetInbox       // Set to rudi@takumitech.co.za
+      type,             
+      designation,      
+      returnVector,     
+      module,           
+      urgency,          
+      dynamicData,      
+      payload,          
+      targetInbox       
     } = body;
 
     // 3. Strict Validation Matrix
     if (!returnVector || !designation || !payload) {
       return NextResponse.json(
-        { 
-          status: "rejected", 
-          message: "Critical parameters missing. Transmission aborted." 
-        },
+        { status: "rejected", message: "Critical parameters missing. Transmission aborted." },
         { status: 400 }
       );
     }
 
-    // 4. Simulated Cryptographic Processing Delay (1.5 seconds)
-    // This reinforces the "secure enterprise" aesthetic on the frontend loading state
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    // 4. LIVE TRANSMISSION PROTOCOL
+    const { data, error } = await resend.emails.send({
+      from: 'Takumi Tech Terminal <onboarding@resend.dev>', // Update to system@takumitech.co.za once domain is verified in Resend
+      to: 'rudi@takumitech.co.za', // Your target inbox
+      subject: `[URGENCY: ${urgency?.toUpperCase() || 'STANDARD'}] New ${module} Ticket from ${designation}`,
+      html: `
+        <div style="font-family: monospace; background-color: #050505; color: #00E5FF; padding: 40px; border-radius: 10px;">
+          <h2 style="color: #FFFFFF; text-transform: uppercase; border-bottom: 1px solid #00E5FF; padding-bottom: 10px;">Diagnostic Ticket Logged</h2>
+          <p><strong>Entity:</strong> <span style="color: #FFFFFF;">${designation}</span></p>
+          <p><strong>Return Vector:</strong> <span style="color: #FFFFFF;">${returnVector}</span></p>
+          <p><strong>Service Module:</strong> <span style="color: #FFFFFF;">${module}</span></p>
+          <p><strong>Specific Context (Serial/Domain):</strong> <span style="color: #FFFFFF;">${dynamicData || 'N/A'}</span></p>
+          <br/>
+          <h3 style="color: #FFFFFF; text-transform: uppercase;">Decrypted Payload:</h3>
+          <div style="background-color: #111; padding: 20px; border-left: 3px solid #00E5FF; color: #CCC;">
+            ${payload}
+          </div>
+          <br/>
+          <p style="font-size: 10px; color: #555;">Transmitted securely via Takumi Tech Edge Network.</p>
+        </div>
+      `
+    });
 
-    /* ===============================================================
-      ENGINEERING NOTE FOR INTEGRATION:
-      This is the exact node where you will plug in your Email API to 
-      forward the data to rudi@takumitech.co.za.
-      
-      Example (Using Resend):
-      
-      import { Resend } from 'resend';
-      const resend = new Resend(process.env.RESEND_API_KEY);
-
-      await resend.emails.send({
-        from: 'system@takumitech.co.za',
-        to: targetInbox,
-        subject: `[URGENCY: ${urgency.toUpperCase()}] New ${module} Ticket from ${designation}`,
-        html: `
-          <h3>New Diagnostic Ticket Logged</h3>
-          <p><strong>Entity:</strong> ${designation}</p>
-          <p><strong>Return Vector:</strong> ${returnVector}</p>
-          <p><strong>Module:</strong> ${module}</p>
-          <p><strong>Specific Context:</strong> ${dynamicData}</p>
-          <p><strong>Payload:</strong><br/> ${payload}</p>
-        `
-      });
-      ===============================================================
-    */
+    if (error) {
+      console.error("[TAKUMI_TRANSMISSION_ERROR]", error);
+      return NextResponse.json({ status: "error", message: "Email relay failed." }, { status: 500 });
+    }
 
     // 5. Success Acknowledgment Vector
     return NextResponse.json(
       { 
         status: "verified", 
-        message: "Payload securely received and logged into the Takumi Tech matrix.",
+        message: "Payload securely transmitted to Lead Architect.",
         receipt_id: `TK-${Math.random().toString(36).substring(2, 10).toUpperCase()}`,
         timestamp: new Date().toISOString()
       },
@@ -73,14 +69,9 @@ export async function POST(request: Request) {
     );
 
   } catch (error) {
-    // 6. Failsafe Error Catch
     console.error("[TAKUMI_SYSTEM_ERROR] Payload parsing failed:", error);
-    
     return NextResponse.json(
-      { 
-        status: "error", 
-        message: "Internal server anomaly. Support team notified." 
-      },
+      { status: "error", message: "Internal server anomaly." },
       { status: 500 }
     );
   }
