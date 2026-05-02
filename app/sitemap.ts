@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import { MetadataRoute } from 'next'
 
 export const dynamic = 'force-dynamic' // This forces the server to register the route
