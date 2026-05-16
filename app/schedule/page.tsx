@@ -1,13 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 import { MonitorPlay, PackageOpen, Map as MapIcon, ArrowRight, Download, ShieldAlert, MapPin } from "lucide-react";
 
 // ---------------------------------------------------------
-// ANIMATION VARIANTS
+// ANIMATION VARIANTS (Strictly Typed)
 // ---------------------------------------------------------
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -15,18 +15,18 @@ const containerVariants = {
   }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 40, filter: "blur(12px)", scale: 0.95 },
   visible: { 
     opacity: 1, 
     y: 0, 
     filter: "blur(0px)",
     scale: 1,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+    transition: { duration: 0.8, ease: "easeOut" } 
   }
 };
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 50 },
   visible: { 
     opacity: 1, 
@@ -40,14 +40,12 @@ export default function SchedulePage() {
     <div className="w-full min-h-screen flex flex-col items-center justify-start pb-32 pt-12 md:pt-24 z-10 relative selection:bg-[#00E5FF]/30 selection:text-white bg-transparent">
       
       {/* --------------------------------------------------------- */}
-      {/* INSANELY BEAUTIFUL AMBIENT BACKGROUND (WITH EDGE MASKING) */}
+      {/* INSANELY BEAUTIFUL AMBIENT BACKGROUND */}
       {/* --------------------------------------------------------- */}
       <div className="absolute inset-0 z-0 pointer-events-none [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
         <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,black_0%,black_80%,transparent_100%)]">
-          {/* Dynamic Architectural Grid */}
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
           
-          {/* Breathing Aurora Orbs */}
           <motion.div 
             animate={{ 
               scale: [1, 1.25, 1], 
@@ -69,7 +67,6 @@ export default function SchedulePage() {
             className="absolute top-[20%] -right-[10%] w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] bg-gradient-to-bl from-[#A855F7] to-transparent rounded-full blur-[130px] mix-blend-screen" 
           />
           
-          {/* Base Noise Texture for Premium Grain */}
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15] mix-blend-overlay z-0" />
         </div>
       </div>
@@ -125,7 +122,6 @@ export default function SchedulePage() {
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             className="relative group flex flex-col h-full bg-[#080B12]/80 backdrop-blur-3xl border border-white/[0.08] rounded-[2.5rem] p-8 md:p-10 overflow-hidden hover:border-[#00E5FF]/50 shadow-[0_10px_40px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_60px_rgba(0,229,255,0.15)] z-10"
           >
-            {/* Dynamic Hover Gradient Sweep */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#00E5FF]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
             
             <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-8 border border-[#00E5FF]/30 bg-[#00E5FF]/10 text-[#00E5FF] shadow-[inset_0_0_20px_rgba(0,229,255,0.2),0_0_20px_rgba(0,229,255,0.2)] group-hover:scale-110 transition-transform duration-500 relative z-10">
@@ -167,7 +163,6 @@ export default function SchedulePage() {
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             className="relative group flex flex-col h-full bg-[#080B12]/80 backdrop-blur-3xl border border-white/[0.08] rounded-[2.5rem] p-8 md:p-10 overflow-hidden hover:border-[#A855F7]/50 shadow-[0_10px_40px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_60px_rgba(168,85,247,0.15)] lg:-translate-y-8 z-20"
           >
-            {/* Dynamic Hover Gradient Sweep */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#A855F7]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
             
             <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-8 border border-[#A855F7]/30 bg-[#A855F7]/10 text-[#A855F7] shadow-[inset_0_0_20px_rgba(168,85,247,0.2),0_0_20px_rgba(168,85,247,0.2)] group-hover:scale-110 transition-transform duration-500 relative z-10">
@@ -203,7 +198,6 @@ export default function SchedulePage() {
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             className="relative group flex flex-col h-full bg-[#080B12]/80 backdrop-blur-3xl border border-white/[0.08] rounded-[2.5rem] p-8 md:p-10 overflow-hidden hover:border-[#10B981]/50 shadow-[0_10px_40px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_60px_rgba(16,185,129,0.15)] z-10"
           >
-            {/* Dynamic Hover Gradient Sweep */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#10B981]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
             
             <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-8 border border-[#10B981]/30 bg-[#10B981]/10 text-[#10B981] shadow-[inset_0_0_20px_rgba(16,185,129,0.2),0_0_20px_rgba(16,185,129,0.2)] group-hover:scale-110 transition-transform duration-500 relative z-10">
@@ -247,7 +241,6 @@ export default function SchedulePage() {
       >
         <div className="group rounded-[3rem] p-3 border border-white/[0.08] relative overflow-hidden bg-[#080B12]/60 backdrop-blur-3xl shadow-[0_30px_80px_rgba(0,0,0,0.8)] hover:border-[#00E5FF]/40 transition-all duration-700 hover:shadow-[0_30px_80px_rgba(0,229,255,0.15)]">
           
-          {/* Decorative Header Overlay */}
           <div className="absolute top-8 left-8 z-20 flex items-center gap-4 bg-[#030508]/90 backdrop-blur-2xl px-6 py-4 rounded-2xl border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.8)] pointer-events-none group-hover:border-[#00E5FF]/40 group-hover:shadow-[0_0_30px_rgba(0,229,255,0.2)] transition-all duration-500">
             <div className="w-12 h-12 rounded-xl bg-[#00E5FF]/10 flex items-center justify-center border border-[#00E5FF]/30 shadow-[inset_0_0_10px_rgba(0,229,255,0.2)]">
               <MapPin className="w-6 h-6 text-[#00E5FF] drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]" />
@@ -258,7 +251,6 @@ export default function SchedulePage() {
             </div>
           </div>
 
-          {/* Map Frame */}
           <div className="w-full h-[450px] md:h-[600px] rounded-[2.5rem] overflow-hidden relative grayscale-[0.8] contrast-125 group-hover:grayscale-[0.2] transition-all duration-1000">
              <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105886.72661845173!2d18.520268153106346!3d-33.91428581788755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc500f8826eed7%3A0x687fe1fc2828aa87!2sCape%20Town!5e0!3m2!1sen!2sza!4v1714486523932!5m2!1sen!2sza" 
@@ -270,9 +262,7 @@ export default function SchedulePage() {
                 referrerPolicy="no-referrer-when-downgrade"
                 className="absolute inset-0 scale-[1.02] group-hover:scale-100 transition-transform duration-1000 ease-out"
               />
-              {/* Overlaid styling tint */}
               <div className="absolute inset-0 bg-gradient-to-tr from-[#030508]/80 via-[#00E5FF]/5 to-transparent pointer-events-none mix-blend-overlay" />
-              {/* Inner shadow to blend edges perfectly into the dark theme */}
               <div className="absolute inset-0 shadow-[inset_0_0_80px_rgba(3,5,8,1),inset_0_0_30px_rgba(3,5,8,1)] pointer-events-none" />
           </div>
         </div>
