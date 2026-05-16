@@ -360,7 +360,7 @@ export default function ServicesPage() {
         <p className="text-gray-500 text-sm font-medium mb-6">Need to chat with us before booking?</p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <a 
-            href="https://wa.me/27123456789" 
+            href="https://wa.me/27818281861" 
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-6 py-3 bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] hover:bg-[#25D366] hover:text-white rounded-xl text-xs font-black uppercase tracking-widest transition-colors duration-300"
