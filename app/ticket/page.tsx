@@ -271,7 +271,7 @@ function SmartTicketForm() {
                     <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
                       <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Or contact directly:</span>
                       <div className="flex gap-2">
-                        <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 rounded-lg transition-colors group/wa">
+                        <a href="https://wa.me/27818281861" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 rounded-lg transition-colors group/wa">
                           <MessageCircle className="w-4 h-4 text-[#25D366] group-hover/wa:scale-110 transition-transform" />
                         </a>
                         <a href="mailto:rudi@takumitech.co.za" className="p-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-colors group/em">
