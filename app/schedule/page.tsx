@@ -37,13 +37,15 @@ const cardVariants: Variants = {
 
 export default function SchedulePage() {
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-start pb-32 pt-12 md:pt-24 z-10 relative selection:bg-[#00E5FF]/30 selection:text-white bg-transparent">
+    // CRITICAL FIX: overflow-x-hidden added here to prevent mobile horizontal scroll bugs
+    <div className="w-full min-h-screen flex flex-col items-center justify-start pb-32 pt-12 md:pt-24 z-10 relative selection:bg-[#00E5FF]/30 selection:text-white bg-transparent overflow-x-hidden">
       
       {/* --------------------------------------------------------- */}
       {/* INSANELY BEAUTIFUL AMBIENT BACKGROUND */}
       {/* --------------------------------------------------------- */}
       <div className="absolute inset-0 z-0 pointer-events-none [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
-        <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,black_0%,black_80%,transparent_100%)]">
+        {/* CRITICAL FIX: overflow-hidden added to trap the orbs inside the screen */}
+        <div className="absolute inset-0 overflow-hidden [mask-image:linear-gradient(to_bottom,black_0%,black_80%,transparent_100%)]">
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
           
           <motion.div 
@@ -236,7 +238,7 @@ export default function SchedulePage() {
         initial={{ opacity: 0, y: 50, scale: 0.98 }}
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 1, ease: "easeOut" }}
         className="w-full max-w-6xl mx-auto px-4 sm:px-6 z-10"
       >
         <div className="group rounded-[3rem] p-3 border border-white/[0.08] relative overflow-hidden bg-[#080B12]/60 backdrop-blur-3xl shadow-[0_30px_80px_rgba(0,0,0,0.8)] hover:border-[#00E5FF]/40 transition-all duration-700 hover:shadow-[0_30px_80px_rgba(0,229,255,0.15)]">

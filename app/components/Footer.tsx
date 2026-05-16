@@ -1,100 +1,113 @@
 "use client";
 
 import Link from "next/link";
-import { Terminal, Github, Twitter, Linkedin, Mail, ArrowRight } from "lucide-react";
+import { Terminal, Mail, ArrowRight, ShieldCheck } from "lucide-react";
 
 export default function Footer() {
-  return (
-    <footer className="w-full relative z-50 bg-[#030508] border-t border-white/[0.05] pt-20 pb-10 overflow-hidden mt-auto">
-      
-      {/* --------------------------------------------------------- */}
-      {/* AMBIENT GLOW & GRID */}
-      {/* --------------------------------------------------------- */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:linear-gradient(to_top,black_0%,transparent_100%)]" />
-      </div>
-      
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-t from-[#00E5FF]/10 to-transparent rounded-full blur-[120px] pointer-events-none mix-blend-screen animate-pulse" style={{ animationDuration: '8s' }} />
+  const currentYear = new Date().getFullYear();
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+  return (
+    <footer className="relative w-full border-t border-white/[0.05] bg-[#030508] pt-16 pb-8 overflow-hidden z-20">
+      
+      {/* Subtle Background Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-[#00E5FF]/5 to-transparent blur-[120px] pointer-events-none" />
+
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
           
-          {/* Brand & Mission Column */}
-          <div className="flex flex-col gap-6">
-            <Link href="/" className="flex items-center gap-3 w-max group">
-              <div className="w-10 h-10 bg-white/5 border border-white/10 text-white flex items-center justify-center rounded-xl transition-all duration-500 group-hover:bg-[#00E5FF]/10 group-hover:border-[#00E5FF]/30 group-hover:scale-105 shadow-inner">
-                <Terminal className="w-5 h-5 transition-colors duration-500 group-hover:text-[#00E5FF]" />
+          {/* BRAND COLUMN */}
+          <div className="md:col-span-4 flex flex-col gap-6">
+            <Link href="/" className="group flex items-center gap-3 w-max">
+              <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-500 group-hover:bg-[#00E5FF]/10 group-hover:border-[#00E5FF]/30 group-hover:scale-105 shadow-inner">
+                <Terminal className="w-5 h-5 text-white transition-colors duration-500 group-hover:text-[#00E5FF]" />
               </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-black tracking-tighter uppercase leading-none text-white">Takumi</span>
-                <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-[#00E5FF] leading-none mt-1.5 font-bold">Tech</span>
-              </div>
+              <span className="text-2xl font-bold tracking-tight text-white font-sans flex items-center gap-1.5">
+                Takumi Tech <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00E5FF] mb-1" />
+              </span>
             </Link>
-            <p className="text-sm text-[#94A3B8] leading-relaxed font-medium max-w-xs">
-              Premium computer repair, expert hardware upgrades, and fast website design built for your business.
+            <p className="text-[#A1A1AA] text-sm leading-relaxed font-medium max-w-xs">
+              Premium computer repair, expert hardware upgrades, and ultra-fast website design. Built for performance, built to last.
             </p>
           </div>
 
-          {/* Services Links */}
-          <div className="flex flex-col gap-4">
-            <h4 className="text-white font-black tracking-widest uppercase text-xs mb-2">Our Services</h4>
-            <Link href="/services" className="text-gray-400 hover:text-[#00E5FF] text-sm transition-colors duration-300 font-medium w-max hover:translate-x-1 inline-block">Website Design</Link>
-            <Link href="/services" className="text-gray-400 hover:text-[#00E5FF] text-sm transition-colors duration-300 font-medium w-max hover:translate-x-1 inline-block">Computer Repairs</Link>
-            <Link href="/services" className="text-gray-400 hover:text-[#00E5FF] text-sm transition-colors duration-300 font-medium w-max hover:translate-x-1 inline-block">Network Security</Link>
-            <Link href="/services" className="text-gray-400 hover:text-[#00E5FF] text-sm transition-colors duration-300 font-medium w-max hover:translate-x-1 inline-block">Hardware Upgrades</Link>
+          {/* QUICK LINKS COLUMN */}
+          <div className="md:col-span-3 flex flex-col gap-6">
+            <h3 className="text-white font-black uppercase tracking-wider text-xs flex items-center gap-2">
+              <div className="w-1 h-3 bg-[#00E5FF] rounded-full" /> Navigation
+            </h3>
+            <nav className="flex flex-col gap-4">
+              {[
+                { name: "Home", path: "/" },
+                { name: "Services", path: "/services" },
+                { name: "Support Hub", path: "/schedule" },
+                { name: "About Us", path: "/engineer" },
+              ].map((link) => (
+                <Link 
+                  key={link.name} 
+                  href={link.path}
+                  className="text-[#A1A1AA] text-sm font-medium hover:text-[#00E5FF] transition-colors w-max flex items-center gap-2 group"
+                >
+                  <ArrowRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
           </div>
 
-          {/* Support Links */}
-          <div className="flex flex-col gap-4">
-            <h4 className="text-white font-black tracking-widest uppercase text-xs mb-2">Support & Help</h4>
-            <Link href="/ticket" className="text-gray-400 hover:text-[#8B5CF6] text-sm transition-colors duration-300 font-medium w-max hover:translate-x-1 inline-block">Log a Ticket</Link>
-            <Link href="/schedule" className="text-gray-400 hover:text-[#8B5CF6] text-sm transition-colors duration-300 font-medium w-max hover:translate-x-1 inline-block">Support Hub</Link>
-            <Link href="/terms" className="text-gray-400 hover:text-[#8B5CF6] text-sm transition-colors duration-300 font-medium w-max hover:translate-x-1 inline-block">Terms of Service</Link>
-            <Link href="/terms" className="text-gray-400 hover:text-[#8B5CF6] text-sm transition-colors duration-300 font-medium w-max hover:translate-x-1 inline-block">Privacy Policy</Link>
-          </div>
-
-          {/* Newsletter Input Matrix */}
-          <div className="flex flex-col gap-4">
-            <h4 className="text-white font-black tracking-widest uppercase text-xs mb-2">Newsletter</h4>
-            <p className="text-xs text-[#94A3B8] font-medium leading-relaxed mb-2">Subscribe to receive tech tips, security alerts, and updates.</p>
-            <form className="flex w-full group relative" onSubmit={(e) => e.preventDefault()}>
-              <input 
-                type="email" 
-                placeholder="Enter your email address" 
-                className="w-full bg-[#0A0A0A]/50 border border-white/10 rounded-l-xl px-4 py-3 text-sm font-medium text-white placeholder:text-gray-600 focus:outline-none focus:border-[#00E5FF]/50 focus:bg-white/5 transition-all shadow-inner"
-                required
-              />
-              <button 
-                type="submit" 
-                className="bg-[#00E5FF] border border-[#00E5FF] rounded-r-xl px-4 py-3 hover:bg-[#00B8CC] transition-colors flex items-center justify-center shadow-[0_0_15px_rgba(0,229,255,0.2)]"
-                aria-label="Subscribe"
+          {/* LEGAL COLUMN */}
+          <div className="md:col-span-2 flex flex-col gap-6">
+            <h3 className="text-white font-black uppercase tracking-wider text-xs flex items-center gap-2">
+              <div className="w-1 h-3 bg-[#2563EB] rounded-full" /> Legal
+            </h3>
+            <nav className="flex flex-col gap-4">
+              <Link 
+                href="/terms"
+                className="text-[#A1A1AA] text-sm font-medium hover:text-white transition-colors w-max flex items-center gap-2 group"
               >
-                <ArrowRight className="w-5 h-5 text-[#030508]" />
-              </button>
-            </form>
+                <ShieldCheck className="w-3.5 h-3.5 text-gray-500 group-hover:text-[#00E5FF] transition-colors" />
+                Terms & Privacy
+              </Link>
+            </nav>
+          </div>
+
+          {/* GENERAL CONTACT COLUMN */}
+          <div className="md:col-span-3 flex flex-col gap-6">
+            <h3 className="text-white font-black uppercase tracking-wider text-xs flex items-center gap-2">
+              <div className="w-1 h-3 bg-[#8B5CF6] rounded-full" /> Email Us
+            </h3>
+            <p className="text-[#A1A1AA] text-sm leading-relaxed font-medium">
+              Have a general question or want to discuss a custom project? Send us an email anytime.
+            </p>
+            
+            {/* The Clean Email Button */}
+            <a 
+              href="mailto:rudi@takumitech.co.za"
+              className="group relative flex items-center gap-4 p-1 rounded-2xl bg-[#080B12]/80 border border-white/10 hover:border-[#00E5FF]/50 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,229,255,0.2)] overflow-hidden w-full"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/5 group-hover:bg-[#00E5FF]/20 group-hover:border-[#00E5FF]/30 transition-all duration-300 z-10 shrink-0">
+                <Mail className="w-5 h-5 text-gray-400 group-hover:text-[#00E5FF] transition-colors duration-300" />
+              </div>
+              <div className="flex flex-col z-10 overflow-hidden pr-4">
+                <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest group-hover:text-[#00E5FF] transition-colors">General Inquiries</span>
+                <span className="text-sm font-bold text-white truncate">rudi@takumitech.co.za</span>
+              </div>
+            </a>
           </div>
 
         </div>
 
-        {/* Global Legal & Social Base Bar */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="text-[10px] text-gray-500 font-mono tracking-widest uppercase text-center md:text-left">
-            &copy; {new Date().getFullYear()} Takumi Tech. All rights reserved.
+        {/* BOTTOM COPYRIGHT BAR */}
+        <div className="w-full pt-8 border-t border-white/[0.05] flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-[10px] sm:text-xs font-mono text-gray-500 uppercase tracking-widest text-center md:text-left">
+            © {currentYear} Takumi Tech. All rights reserved.
           </p>
-          
-          <div className="flex items-center gap-4">
-            <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#00E5FF] hover:border-[#00E5FF]/30 hover:bg-[#00E5FF]/10 hover:-translate-y-1 transition-all duration-300 shadow-[0_4px_10px_rgba(0,0,0,0.3)]">
-              <Twitter className="w-4 h-4" />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#00E5FF] hover:border-[#00E5FF]/30 hover:bg-[#00E5FF]/10 hover:-translate-y-1 transition-all duration-300 shadow-[0_4px_10px_rgba(0,0,0,0.3)]">
-              <Github className="w-4 h-4" />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#00E5FF] hover:border-[#00E5FF]/30 hover:bg-[#00E5FF]/10 hover:-translate-y-1 transition-all duration-300 shadow-[0_4px_10px_rgba(0,0,0,0.3)]">
-              <Linkedin className="w-4 h-4" />
-            </a>
-            <a href="mailto:sysadmin@takumitech.co.za" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#00E5FF] hover:border-[#00E5FF]/30 hover:bg-[#00E5FF]/10 hover:-translate-y-1 transition-all duration-300 shadow-[0_4px_10px_rgba(0,0,0,0.3)]">
-              <Mail className="w-4 h-4" />
-            </a>
+          <div className="flex items-center gap-2 text-[10px] sm:text-xs font-mono text-gray-500 uppercase tracking-widest">
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00E5FF] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00E5FF]"></span>
+            </span>
+            Systems Online
           </div>
         </div>
       </div>

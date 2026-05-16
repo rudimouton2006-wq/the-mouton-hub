@@ -3,6 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, ShieldCheck, Zap, Server, Activity, Globe } from "lucide-react";
+import FAQ from "./components/FAQ"; // IMPORTED FAQ COMPONENT
 
 // ---------------------------------------------------------
 // DATA: CORE SERVICES
@@ -74,7 +75,7 @@ const itemVariants: Variants = {
     y: 0,
     filter: "blur(0px)",
     scale: 1,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    transition: { duration: 0.8, ease: "easeOut" } // FIXED EASING FOR VERCEL COMPLIANCE
   }
 };
 
@@ -88,7 +89,7 @@ const ambientGlowVariants: Variants = {
 
 export default function HomePage() {
   return (
-    <main className="relative w-full flex flex-col items-center justify-start z-10 pb-32 min-h-screen bg-transparent selection:bg-[#00E5FF]/30 selection:text-white">
+    <main className="relative w-full flex flex-col items-center justify-start z-10 min-h-screen bg-transparent selection:bg-[#00E5FF]/30 selection:text-white">
       
       {/* --------------------------------------------------------- */}
       {/* AMBIENT BACKGROUND */}
@@ -126,7 +127,7 @@ export default function HomePage() {
       {/* --------------------------------------------------------- */}
       {/* HERO SECTION */}
       {/* --------------------------------------------------------- */}
-      <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-20">
+      <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-20 mb-20">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -172,7 +173,7 @@ export default function HomePage() {
       {/* --------------------------------------------------------- */}
       {/* CORE SERVICES GRID */}
       {/* --------------------------------------------------------- */}
-      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 pt-24 md:pt-32 relative z-10">
+      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 relative z-10 mb-32">
         <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between mb-16 gap-8">
           <div className="max-w-2xl">
             <div className="flex items-center gap-3 mb-6">
@@ -218,7 +219,7 @@ export default function HomePage() {
       {/* --------------------------------------------------------- */}
       {/* WEB DEPLOYMENT PACKAGES MATRIX */}
       {/* --------------------------------------------------------- */}
-      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 pt-24 md:pt-32 relative z-10">
+      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 relative z-10 mb-20">
         <div className="flex flex-col items-center text-center mb-16">
           <div className="flex items-center gap-3 mb-6">
             <div className="h-px w-8 bg-[#8B5CF6] shadow-[0_0_10px_#8B5CF6]" />
@@ -259,7 +260,8 @@ export default function HomePage() {
                 </li>
               </ul>
             </div>
-            <Link href="/schedule" className="w-full relative inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#00E5FF] text-[#030712] font-black uppercase tracking-widest text-xs rounded-xl hover:bg-[#00B8CC] transition-all duration-300 shadow-[0_0_20px_rgba(0,229,255,0.3)] z-10 hover:shadow-[0_0_30px_rgba(0,229,255,0.5)]">
+            {/* UPDATED BUTTON TO AUTOFILL TICKET */}
+            <Link href="/ticket?service=web-dev" className="w-full relative inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#00E5FF] text-[#030712] font-black uppercase tracking-widest text-xs rounded-xl hover:bg-[#00B8CC] transition-all duration-300 shadow-[0_0_20px_rgba(0,229,255,0.3)] z-10 hover:shadow-[0_0_30px_rgba(0,229,255,0.5)]">
               Start Your Build <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -288,13 +290,19 @@ export default function HomePage() {
                 </li>
               </ul>
             </div>
-            <Link href="/schedule" className="w-full relative inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#8B5CF6] text-white font-black uppercase tracking-widest text-xs rounded-xl hover:bg-[#7C3AED] transition-all duration-300 shadow-[0_0_20px_rgba(139,92,246,0.3)] z-10 hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]">
+            {/* UPDATED BUTTON TO AUTOFILL TICKET */}
+            <Link href="/ticket?service=web-dev" className="w-full relative inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#8B5CF6] text-white font-black uppercase tracking-widest text-xs rounded-xl hover:bg-[#7C3AED] transition-all duration-300 shadow-[0_0_20px_rgba(139,92,246,0.3)] z-10 hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]">
               Choose Managed Plan <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>
       </section>
-      
+
+      {/* --------------------------------------------------------- */}
+      {/* FAQ COMPONENT */}
+      {/* --------------------------------------------------------- */}
+      <FAQ />
+
     </main>
   );
 }
