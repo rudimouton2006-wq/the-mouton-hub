@@ -1,12 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Terminal, Cpu, Server, ShieldCheck, Zap, Code, PenTool, Wrench } from "lucide-react";
 
 // ---------------------------------------------------------
-// ANIMATION VARIANTS
+// ANIMATION VARIANTS (Strictly Typed for Vercel)
 // ---------------------------------------------------------
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -14,18 +14,18 @@ const containerVariants = {
   }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30, filter: "blur(12px)", scale: 0.98 },
   visible: { 
     opacity: 1, 
     y: 0, 
     filter: "blur(0px)",
     scale: 1,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+    transition: { duration: 0.8, ease: "easeOut" } 
   }
 };
 
-const profileVariants = {
+const profileVariants: Variants = {
   hidden: { opacity: 0, x: -40 },
   visible: { 
     opacity: 1, 
@@ -34,7 +34,7 @@ const profileVariants = {
   }
 };
 
-const textVariants = {
+const textVariants: Variants = {
   hidden: { opacity: 0, x: 40 },
   visible: { 
     opacity: 1, 
