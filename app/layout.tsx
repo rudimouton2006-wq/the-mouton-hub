@@ -1,5 +1,11 @@
-import "./globals.css"; // The crucial line that restores all your styling
+import "./globals.css";
 import type { Metadata } from "next";
+
+// IMPORT YOUR COMPONENTS HERE
+// Note: Adjust the paths (e.g., "./components/Navbar") if your components folder is located somewhere else!
+import Navbar from "./components/Navbar"; 
+import Footer from "./components/Footer";
+import FloatingActions from "./components/FloatingActions";
 
 // ---------------------------------------------------------
 // GLOBAL SEO & SOCIAL MEDIA METADATA
@@ -7,7 +13,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: {
     default: "Takumi Tech | Premium IT & Web Solutions",
-    template: "%s | Takumi Tech", // Automatically adds "| Takumi Tech" to other pages
+    template: "%s | Takumi Tech", 
   },
   description: "Premium computer repair, expert hardware upgrades, and fast website design built for your business in Cape Town.",
   keywords: [
@@ -54,8 +60,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-[#030508] text-white antialiased">
-        {children}
+      <body className="bg-[#030508] text-white antialiased min-h-screen flex flex-col">
+        
+        {/* The Navigation Bar sits at the very top */}
+        <Navbar />
+
+        {/* This renders whatever page you are currently on (Home, Services, etc.) */}
+        <div className="flex-grow flex flex-col">
+          {children}
+        </div>
+
+        {/* The Floating Quick Chat Widget */}
+        <FloatingActions />
+
+        {/* The Footer sits at the very bottom */}
+        <Footer />
+
       </body>
     </html>
   );
