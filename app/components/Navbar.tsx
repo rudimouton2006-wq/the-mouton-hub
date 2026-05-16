@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Terminal } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 
 // ---------------------------------------------------------
-// ANIMATION VARIANTS
+// ANIMATION VARIANTS (Now Strictly Typed for Vercel)
 // ---------------------------------------------------------
-const mobileMenuVariants = {
+const mobileMenuVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { 
     opacity: 1,
@@ -21,7 +21,7 @@ const mobileMenuVariants = {
   }
 };
 
-const mobileItemVariants = {
+const mobileItemVariants: Variants = {
   hidden: { opacity: 0, x: -20, filter: "blur(5px)" },
   visible: { 
     opacity: 1, 
