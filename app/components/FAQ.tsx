@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, HelpCircle } from "lucide-react";
 
 // ---------------------------------------------------------
-// FAQ DATA (Simple, Clear English)
+// FAQ DATA 
 // ---------------------------------------------------------
 const FAQ_DATA = [
   {
@@ -38,7 +38,7 @@ export default function FAQ() {
   };
 
   return (
-    <section className="relative w-full max-w-4xl mx-auto px-4 sm:px-6 py-24 z-10">
+    <section className="relative w-full max-w-4xl mx-auto px-4 sm:px-6 py-24 z-10 will-change-transform">
       
       {/* HEADER */}
       <div className="flex flex-col items-center text-center mb-12">
@@ -52,12 +52,12 @@ export default function FAQ() {
         <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-white mb-4">
           Frequently Asked Questions
         </h2>
-        <p className="text-[#A1A1AA] text-sm md:text-base font-medium max-w-xl mx-auto">
+        <p className="text-gray-400 text-sm md:text-base font-medium max-w-xl mx-auto">
           Everything you need to know about how we work, how we bill, and how we protect your tech.
         </p>
       </div>
 
-      {/* ACCORDION LIST */}
+      {/* ACCORDION LIST (SOLID STATE) */}
       <div className="flex flex-col gap-4">
         {FAQ_DATA.map((faq, index) => {
           const isActive = activeIndex === index;
@@ -69,8 +69,8 @@ export default function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`bg-[#080B12]/80 backdrop-blur-3xl border rounded-2xl overflow-hidden transition-all duration-300 ${
-                isActive ? "border-[#00E5FF]/40 shadow-[0_10px_30px_rgba(0,229,255,0.1)]" : "border-white/[0.08] hover:border-white/20"
+              className={`bg-[#05080F] border rounded-2xl overflow-hidden transition-all duration-300 transform-gpu ${
+                isActive ? "border-[#00E5FF]/40 shadow-lg" : "border-white/5 hover:border-white/20"
               }`}
             >
               <button
@@ -80,20 +80,21 @@ export default function FAQ() {
                 <span className={`text-sm md:text-base font-bold pr-4 transition-colors duration-300 ${isActive ? "text-[#00E5FF]" : "text-white group-hover:text-gray-200"}`}>
                   {faq.question}
                 </span>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors duration-300 ${isActive ? "bg-[#00E5FF]/10" : "bg-white/5 group-hover:bg-white/10"}`}>
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-500 ${isActive ? "rotate-180 text-[#00E5FF]" : "text-gray-400 group-hover:text-white"}`} />
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors duration-300 ${isActive ? "bg-[#00E5FF]/10" : "bg-[#080C16] border border-white/5 group-hover:bg-white/5"}`}>
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-500 transform-gpu ${isActive ? "rotate-180 text-[#00E5FF]" : "text-gray-400 group-hover:text-white"}`} />
                 </div>
               </button>
 
-              <AnimatePresence>
+              <AnimatePresence initial={false}>
                 {isActive && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
+                    className="will-change-transform"
                   >
-                    <div className="px-6 pb-6 pt-0 text-[#A1A1AA] text-sm leading-relaxed font-medium">
+                    <div className="px-6 pb-6 pt-0 text-gray-400 text-sm leading-relaxed font-medium">
                       {faq.answer}
                     </div>
                   </motion.div>
@@ -103,7 +104,6 @@ export default function FAQ() {
           );
         })}
       </div>
-
     </section>
   );
 }

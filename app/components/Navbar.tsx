@@ -3,238 +3,129 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Terminal } from "lucide-react";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { Terminal, Menu, X, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
-// ---------------------------------------------------------
-// ANIMATION VARIANTS (Strictly Typed for Vercel)
-// ---------------------------------------------------------
-const mobileMenuVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
-  },
-  exit: { 
-    opacity: 0,
-    transition: { staggerChildren: 0.05, staggerDirection: -1 }
-  }
-};
-
-const mobileItemVariants: Variants = {
-  hidden: { opacity: 0, x: -20, filter: "blur(5px)" },
-  visible: { 
-    opacity: 1, 
-    x: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.4, ease: "easeOut" }
-  },
-  exit: { 
-    opacity: 0, 
-    x: -20,
-    transition: { duration: 0.2 }
-  }
-};
+const NAV_LINKS = [
+  { name: "Home", href: "/" },
+  { name: "Services", href: "/services" },
+  { name: "Support Hub", href: "/schedule" },
+];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // Scroll listener for the glassmorphic transition
+  // Ultra-lightweight scroll listener
   useEffect(() => {
-    let ticking = false;
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setIsScrolled(window.scrollY > 20);
-          ticking = false;
-        });
-        ticking = true;
-      }
+      setIsScrolled(window.scrollY > 20);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent background scrolling when mobile menu is active
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
     }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
   }, [isMobileMenuOpen]);
-
-  // Simplified navigation terminology
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Services", path: "/services" },
-    { name: "Support Hub", path: "/schedule" },
-    { name: "About Us", path: "/engineer" },
-  ];
 
   return (
     <>
-      {/* --------------------------------------------------------- */}
-      {/* DESKTOP & HEADER MATRIX */}
-      {/* --------------------------------------------------------- */}
-      <header
-        className={`fixed top-0 w-full z-[100] transition-all duration-500 ${
-          isScrolled && !isMobileMenuOpen
-            ? "bg-[#030508]/80 backdrop-blur-2xl border-b border-white/[0.05] py-4 shadow-[0_10px_40px_rgba(0,0,0,0.8)]"
-            : "bg-transparent border-b border-transparent py-4 md:py-6"
+      <header 
+        className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 transform-gpu ${
+          isScrolled ? "bg-[#030508] border-b border-white/5 shadow-md py-4" : "bg-transparent py-6"
         }`}
       >
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            
-            {/* Elite Brand Node */}
-            <Link 
-              href="/" 
-              className="group flex items-center gap-3 z-[101]"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-500 group-hover:bg-[#00E5FF]/10 group-hover:border-[#00E5FF]/30 group-hover:scale-105 shadow-inner">
-                <Terminal className="w-4 h-4 text-white transition-colors duration-500 group-hover:text-[#00E5FF]" />
-              </div>
-              <span className="text-xl font-bold tracking-tight text-white font-sans flex items-center gap-1.5">
-                Takumi Tech <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00E5FF] mb-1" />
-              </span>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => {
-                const isActive = pathname === link.path;
-                return (
-                  <Link
-                    key={link.name}
-                    href={link.path}
-                    className={`relative text-xs font-bold uppercase tracking-widest transition-colors duration-300 py-2 group ${
-                      isActive ? "text-white" : "text-gray-400 hover:text-white"
-                    }`}
-                  >
-                    {link.name}
-                    {/* Active State Line */}
-                    {isActive && (
-                      <motion.span 
-                        layoutId="activeNavLine"
-                        className="absolute -bottom-1 left-0 w-full h-[2px] bg-[#00E5FF] shadow-[0_0_10px_#00E5FF] rounded-full" 
-                      />
-                    )}
-                    {/* Hover State Line */}
-                    {!isActive && (
-                      <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-white/30 rounded-full transition-all duration-300 group-hover:w-full" />
-                    )}
-                  </Link>
-                );
-              })}
-            </nav>
-
-            {/* Desktop Call to Action */}
-            <div className="hidden md:flex items-center">
-              <Link
-                href="/ticket"
-                className="group relative px-6 py-2.5 bg-transparent border border-white/10 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all duration-500 overflow-hidden isolate"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF]/20 to-[#2563EB]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
-                <div className="absolute inset-0 border border-[#00E5FF]/50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 shadow-[inset_0_0_20px_rgba(0,229,255,0.2)]" />
-                <span className="relative z-10 drop-shadow-md">Log a Ticket</span>
-              </Link>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+          
+          {/* BRAND LOGO */}
+          <Link href="/" className="group flex items-center gap-3 w-max" onClick={() => setIsMobileMenuOpen(false)}>
+            <div className="w-10 h-10 rounded-xl bg-[#080C16] border border-white/10 flex items-center justify-center transition-transform duration-300 group-hover:scale-105 transform-gpu">
+              <Terminal className="w-5 h-5 text-white transition-colors duration-300 group-hover:text-[#00E5FF]" />
             </div>
+            <span className="text-xl md:text-2xl font-bold tracking-tight text-white font-sans flex items-center gap-1.5">
+              Takumi Tech <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] mb-1" />
+            </span>
+          </Link>
 
-            {/* Mobile Menu Toggle */}
-            <button
-              className="md:hidden relative z-[101] p-2 -mr-2 text-white transition-colors"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle navigation menu"
+          {/* DESKTOP NAVIGATION */}
+          <nav className="hidden md:flex items-center gap-8">
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link 
+                  key={link.name} 
+                  href={link.href}
+                  className={`text-sm font-bold uppercase tracking-widest transition-colors duration-300 ${
+                    isActive ? "text-[#00E5FF]" : "text-gray-400 hover:text-white"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+            
+            {/* CALL TO ACTION BUTTON */}
+            <Link 
+              href="/ticket"
+              className="group flex items-center gap-2 px-6 py-2.5 bg-white text-[#030508] text-xs font-black uppercase tracking-widest rounded-lg hover:bg-gray-200 transition-colors duration-300"
             >
-              {isMobileMenuOpen ? (
-                <X className="w-7 h-7 text-[#00E5FF]" />
-              ) : (
-                <Menu className="w-7 h-7" />
-              )}
-            </button>
-          </div>
+              Log a Ticket <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </nav>
+
+          {/* MOBILE MENU TOGGLE */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-white focus:outline-none"
+            aria-label="Toggle Mobile Menu"
+          >
+            {isMobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+          </button>
         </div>
       </header>
 
-      {/* --------------------------------------------------------- */}
-      {/* MOBILE OVERLAY MATRIX */}
-      {/* --------------------------------------------------------- */}
+      {/* MOBILE MENU OVERLAY (HARDWARE ACCELERATED) */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 w-full h-[100dvh] z-[90] bg-[#030508]/95 backdrop-blur-3xl md:hidden flex flex-col justify-start pt-28 px-6 pb-6 overflow-y-auto"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed inset-0 z-40 bg-[#030508] pt-24 px-6 flex flex-col md:hidden will-change-transform"
           >
-            {/* Mobile Ambient Glow */}
-            <div className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-[#00E5FF]/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen" />
-            <div className="absolute bottom-1/4 left-0 w-[300px] h-[300px] bg-[#8B5CF6]/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen" />
-
-            <motion.nav 
-              variants={mobileMenuVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="flex flex-col gap-8 relative z-10 w-full mt-4"
-            >
-              {navLinks.map((link, index) => {
-                const isActive = pathname === link.path;
+            <div className="flex flex-col gap-6 mt-8">
+              {NAV_LINKS.map((link) => {
+                const isActive = pathname === link.href;
                 return (
-                  <motion.div key={link.name} variants={mobileItemVariants}>
-                    <Link
-                      href={link.path}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="group flex items-center gap-6 overflow-hidden w-full py-2"
-                    >
-                      <span className={`text-xs font-mono tracking-widest transition-colors duration-300 ${isActive ? 'text-[#00E5FF]' : 'text-gray-600 group-hover:text-[#00E5FF]'}`}>
-                        0{index + 1}
-                      </span>
-                      <span
-                        className={`text-3xl font-black uppercase tracking-tight transition-all duration-300 ${
-                          isActive ? "text-white translate-x-2" : "text-[#A1A1AA] group-hover:text-white group-hover:translate-x-2"
-                        }`}
-                      >
-                        {link.name}
-                      </span>
-                    </Link>
-                  </motion.div>
+                  <Link 
+                    key={link.name} 
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`text-2xl font-black uppercase tracking-widest border-b border-white/5 pb-4 transition-colors ${
+                      isActive ? "text-[#00E5FF]" : "text-white"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
                 );
               })}
-            </motion.nav>
-
-            <motion.div 
-              initial={{ opacity: 0, scaleX: 0 }} 
-              animate={{ opacity: 1, scaleX: 1 }} 
-              exit={{ opacity: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-10 relative z-10 origin-left" 
-            />
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ delay: 0.4 }}
-              className="w-full relative z-10 mt-auto"
-            >
-              <Link
+              
+              <Link 
                 href="/ticket"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center justify-center w-full py-5 bg-[#00E5FF] text-[#030508] font-black uppercase tracking-widest text-xs rounded-xl shadow-[0_0_30px_rgba(0,229,255,0.3)] hover:bg-white hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] transition-all duration-300"
+                className="mt-4 flex items-center justify-center gap-2 px-6 py-5 bg-[#00E5FF] text-[#030508] text-sm font-black uppercase tracking-widest rounded-xl"
               >
-                Log a Ticket
+                Log a Ticket <ArrowRight className="w-5 h-5" />
               </Link>
-            </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
