@@ -6,9 +6,11 @@ import { usePathname } from "next/navigation";
 import { Terminal, Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Added "The Engineer" to the navigation links
 const NAV_LINKS = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
+  { name: "The Engineer", href: "/engineer" },
   { name: "Support Hub", href: "/schedule" },
 ];
 
