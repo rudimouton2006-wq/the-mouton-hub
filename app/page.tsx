@@ -2,7 +2,7 @@
 
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Zap, Server, Activity, Globe } from "lucide-react";
+import { ArrowRight, ShieldCheck, Zap, Server, Activity, Globe, Mail, Cloud, Search } from "lucide-react";
 import FAQ from "./components/FAQ";
 
 // ---------------------------------------------------------
@@ -54,7 +54,6 @@ const containerVariants: Variants = {
   }
 };
 
-// Removed blur filters; using only GPU-friendly transform/opacity
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -72,9 +71,7 @@ export default function HomePage() {
       {/* STATIC AMBIENT BACKGROUND (ZERO CPU USAGE) */}
       {/* --------------------------------------------------------- */}
       <div className="absolute inset-0 z-0 pointer-events-none transform-gpu">
-        {/* Subtle top gradient */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1000px] h-[500px] bg-gradient-to-b from-[#00E5FF]/5 via-[#2563EB]/5 to-transparent blur-3xl opacity-50" />
-        {/* Minimal grid lines */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:linear-gradient(to_bottom,black_0%,transparent_60%)]" />
       </div>
 
@@ -248,6 +245,92 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* --------------------------------------------------------- */}
+      {/* OPTIONAL UPGRADES & ADD-ONS */}
+      {/* --------------------------------------------------------- */}
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={containerVariants}
+        className="w-full max-w-6xl mx-auto px-4 sm:px-6 mb-20 z-10 relative will-change-transform"
+      >
+        <div className="flex flex-col items-center text-center mb-12">
+          <div className="inline-flex items-center justify-center mb-4">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#00E5FF] mr-4 opacity-50" />
+            <span className="text-[10px] sm:text-xs font-mono text-[#00E5FF] tracking-[0.3em] uppercase font-bold">
+              Maximize Your Setup
+            </span>
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#00E5FF] ml-4 opacity-50" />
+          </div>
+          <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-white mb-4">
+            Optional Enhancements
+          </h2>
+          <p className="text-gray-400 text-sm md:text-base font-medium max-w-2xl">
+            Add these powerful upgrades to your project to look more professional or protect your business.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          {/* ADD-ON 1: BUSINESS EMAIL */}
+          <motion.div 
+            variants={itemVariants}
+            className="group relative flex flex-col bg-[#05080F] border border-white/5 hover:border-[#00E5FF]/40 rounded-[2rem] p-8 shadow-lg transition-all duration-300 transform-gpu hover:-translate-y-2 overflow-hidden"
+          >
+            <div className="w-12 h-12 rounded-xl bg-[#00E5FF]/10 flex items-center justify-center border border-[#00E5FF]/20 mb-6">
+              <Mail className="w-6 h-6 text-[#00E5FF]" />
+            </div>
+            <h3 className="text-lg font-black uppercase tracking-wider text-white mb-2">Professional Email</h3>
+            <span className="text-xs font-mono text-[#00E5FF] font-bold tracking-widest uppercase mb-4 block">R95 / Month</span>
+            <p className="text-gray-400 text-sm leading-relaxed font-medium mb-8 flex-grow">
+              Stop using Gmail for your business. We will set up and manage a professional email address (like info@yourbusiness.co.za) so you look 100% credible.
+            </p>
+            <Link href="/ticket?service=email" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#00E5FF] transition-colors mt-auto">
+              Request Setup <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+
+          {/* ADD-ON 2: SECURE CLOUD BACKUPS */}
+          <motion.div 
+            variants={itemVariants}
+            className="group relative flex flex-col bg-[#05080F] border border-white/5 hover:border-[#A855F7]/40 rounded-[2rem] p-8 shadow-lg transition-all duration-300 transform-gpu hover:-translate-y-2 overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-b from-[#A855F7]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <div className="w-12 h-12 rounded-xl bg-[#A855F7]/10 flex items-center justify-center border border-[#A855F7]/20 mb-6 group-hover:scale-110 transition-transform duration-500">
+              <Cloud className="w-6 h-6 text-[#A855F7]" />
+            </div>
+            <h3 className="text-lg font-black uppercase tracking-wider text-white mb-2">Secure Cloud Backups</h3>
+            <span className="text-xs font-mono text-[#A855F7] font-bold tracking-widest uppercase mb-4 block">R350 Once-off</span>
+            <p className="text-gray-400 text-sm leading-relaxed font-medium mb-8 flex-grow">
+              Never lose important business files to a broken hard drive or loadshedding. We will set up automated, silent cloud backups for your main work computers.
+            </p>
+            <Link href="/ticket?service=backup" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#A855F7] transition-colors mt-auto relative z-10">
+              Protect My Data <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+
+          {/* ADD-ON 3: GOOGLE SEO */}
+          <motion.div 
+            variants={itemVariants}
+            className="group relative flex flex-col bg-[#05080F] border border-white/5 hover:border-[#10B981]/40 rounded-[2rem] p-8 shadow-lg transition-all duration-300 transform-gpu hover:-translate-y-2 overflow-hidden"
+          >
+            <div className="w-12 h-12 rounded-xl bg-[#10B981]/10 flex items-center justify-center border border-[#10B981]/20 mb-6">
+              <Search className="w-6 h-6 text-[#10B981]" />
+            </div>
+            <h3 className="text-lg font-black uppercase tracking-wider text-white mb-2">Get Found On Google</h3>
+            <span className="text-xs font-mono text-[#10B981] font-bold tracking-widest uppercase mb-4 block">R350 Once-off</span>
+            <p className="text-gray-400 text-sm leading-relaxed font-medium mb-8 flex-grow">
+              We set up your complete Google Profile. This includes adding your website, trading hours, location, contact details, and uploading your logo so local clients find you easily.
+            </p>
+            <Link href="/ticket?service=google" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#10B981] transition-colors mt-auto">
+              Request Setup <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+
+        </div>
+      </motion.section>
 
       {/* --------------------------------------------------------- */}
       {/* FAQ COMPONENT */}

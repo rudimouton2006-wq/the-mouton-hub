@@ -2,7 +2,7 @@
 
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Server, Network, Wrench, Globe, Cpu, Mail, Search, Briefcase, Activity, BadgePercent, Clock, PenTool, MessageCircle, Layers } from "lucide-react";
+import { ArrowRight, ShieldCheck, Server, Network, Wrench, Globe, Cpu, Mail, Search, Briefcase, Activity, BadgePercent, Clock, MessageCircle, Layers, Cloud } from "lucide-react";
 
 // ---------------------------------------------------------
 // DATA: CORE SERVICES
@@ -284,7 +284,7 @@ export default function ServicesPage() {
             Optional Enhancements
           </h2>
           <p className="text-gray-400 text-sm md:text-base font-medium max-w-2xl">
-            Add these powerful upgrades to your project to look more professional or attract more local customers.
+            Add these powerful upgrades to your project to look more professional or protect your business.
           </p>
         </div>
 
@@ -308,21 +308,22 @@ export default function ServicesPage() {
             </Link>
           </motion.div>
 
-          {/* ADD-ON 2: LOGO DESIGN */}
+          {/* ADD-ON 2: SECURE CLOUD BACKUPS */}
           <motion.div 
             variants={itemVariants}
             className="group relative flex flex-col bg-[#05080F] border border-white/5 hover:border-[#A855F7]/40 rounded-[2rem] p-8 shadow-lg transition-all duration-300 transform-gpu hover:-translate-y-2 overflow-hidden"
           >
-            <div className="w-12 h-12 rounded-xl bg-[#A855F7]/10 flex items-center justify-center border border-[#A855F7]/20 mb-6">
-              <PenTool className="w-6 h-6 text-[#A855F7]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#A855F7]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <div className="w-12 h-12 rounded-xl bg-[#A855F7]/10 flex items-center justify-center border border-[#A855F7]/20 mb-6 group-hover:scale-110 transition-transform duration-500">
+              <Cloud className="w-6 h-6 text-[#A855F7]" />
             </div>
-            <h3 className="text-lg font-black uppercase tracking-wider text-white mb-2">Custom Logo Design</h3>
-            <span className="text-xs font-mono text-[#A855F7] font-bold tracking-widest uppercase mb-4 block">R450 Once-off</span>
+            <h3 className="text-lg font-black uppercase tracking-wider text-white mb-2">Secure Cloud Backups</h3>
+            <span className="text-xs font-mono text-[#A855F7] font-bold tracking-widest uppercase mb-4 block">R350 Once-off</span>
             <p className="text-gray-400 text-sm leading-relaxed font-medium mb-8 flex-grow">
-              A great business needs a great look. We will design a high-quality, modern logo for your brand to make you stand out from the competition.
+              Never lose important business files to a broken hard drive or loadshedding. We will set up automated, silent cloud backups for your main work computers.
             </p>
-            <Link href="/ticket?service=logo" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#A855F7] transition-colors mt-auto">
-              Request Design <ArrowRight className="w-4 h-4" />
+            <Link href="/ticket?service=backup" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#A855F7] transition-colors mt-auto relative z-10">
+              Protect My Data <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
 

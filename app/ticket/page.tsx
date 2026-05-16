@@ -2,7 +2,7 @@
 
 import { useState, FormEvent, useEffect, Suspense } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { Send, Terminal, ShieldCheck, CheckCircle, XCircle, ArrowLeft, Activity, Server, Globe, Layers, Network, Wrench, User, Mail, AlignLeft, ArrowRight, Briefcase, Search, PenTool, MapPin, MessageCircle } from "lucide-react";
+import { Send, Terminal, ShieldCheck, CheckCircle, XCircle, ArrowLeft, Activity, Server, Globe, Layers, Network, Wrench, User, Mail, AlignLeft, ArrowRight, Briefcase, Search, Cloud, MapPin, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
@@ -27,7 +27,7 @@ const HARDWARE_SERVICES = [
 const WEB_SERVICES = [
   { id: "web-dev", label: "Website Design", desc: "Professional landing pages and sites.", icon: Globe, color: "text-[#8B5CF6]" },
   { id: "email", label: "Professional Email", desc: "Business email setup (R95/month).", icon: Mail, color: "text-[#8B5CF6]" },
-  { id: "logo", label: "Custom Logo Design", desc: "Premium brand design (R450).", icon: PenTool, color: "text-[#8B5CF6]" },
+  { id: "backup", label: "Secure Cloud Backups", desc: "Automated data protection (R350).", icon: Cloud, color: "text-[#8B5CF6]" },
   { id: "google", label: "Google SEO Setup", desc: "Get found on local search (R350).", icon: Search, color: "text-[#8B5CF6]" },
 ];
 
@@ -88,7 +88,7 @@ function SmartTicketForm() {
         "pc-build": "Custom PC Assembly",
         "retainer": "Takumi Business Retainer",
         "email": "Professional Email Setup",
-        "logo": "Custom Logo Design",
+        "backup": "Secure Cloud Backups",
         "google": "Google SEO Setup",
         "dropoff": "Hardware Drop-Off",
         "onsite": "On-Site Deployment"
@@ -97,7 +97,7 @@ function SmartTicketForm() {
       const templateMap: Record<string, string> = {
         "retainer": "I am interested in applying for The Takumi Retainer (R450/month) for my business. Please contact me to set this up.",
         "email": "I would like to set up a Professional Business Email (R95/month).",
-        "logo": "I need a custom logo designed for my project/business.",
+        "backup": "I would like to set up Secure Cloud Backups to protect my business data.",
         "google": "I would like to get my business listed and optimized on Google.",
         "pc-build": "I have my own parts and need a custom PC assembled with professional cable management.",
         "network": "I am requesting an on-site deployment for an internet/network setup.",
