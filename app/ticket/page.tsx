@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Send, Terminal, ShieldCheck, CheckCircle, XCircle, ArrowLeft, Activity, Server, Globe, Layers, Network, Wrench, User, Mail, AlignLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
@@ -59,25 +59,25 @@ const WEB_SUB_SERVICES = [
 ];
 
 // ---------------------------------------------------------
-// ANIMATION VARIANTS
+// ANIMATION VARIANTS (Strictly Typed for Vercel)
 // ---------------------------------------------------------
-const stepVariants = {
+const stepVariants: Variants = {
   hidden: { opacity: 0, x: 40, filter: "blur(10px)" },
   visible: { 
     opacity: 1, 
     x: 0, 
     filter: "blur(0px)",
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } 
+    transition: { duration: 0.5, ease: "easeOut" } 
   },
   exit: { 
     opacity: 0, 
     x: -40, 
     filter: "blur(10px)",
-    transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } 
+    transition: { duration: 0.3, ease: "easeOut" } 
   }
 };
 
-const subMenuVariants = {
+const subMenuVariants: Variants = {
   hidden: { opacity: 0, scale: 0.95, filter: "blur(5px)" },
   visible: { opacity: 1, scale: 1, filter: "blur(0px)", transition: { duration: 0.4 } },
   exit: { opacity: 0, scale: 0.95, filter: "blur(5px)", transition: { duration: 0.3 } }
