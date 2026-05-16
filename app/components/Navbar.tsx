@@ -7,7 +7,7 @@ import { Menu, X, Terminal } from "lucide-react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 
 // ---------------------------------------------------------
-// ANIMATION VARIANTS (Now Strictly Typed for Vercel)
+// ANIMATION VARIANTS (Strictly Typed for Vercel)
 // ---------------------------------------------------------
 const mobileMenuVariants: Variants = {
   hidden: { opacity: 0 },
@@ -85,9 +85,9 @@ export default function Navbar() {
       {/* --------------------------------------------------------- */}
       <header
         className={`fixed top-0 w-full z-[100] transition-all duration-500 ${
-          isScrolled
+          isScrolled && !isMobileMenuOpen
             ? "bg-[#030508]/80 backdrop-blur-2xl border-b border-white/[0.05] py-4 shadow-[0_10px_40px_rgba(0,0,0,0.8)]"
-            : "bg-transparent border-b border-transparent py-6"
+            : "bg-transparent border-b border-transparent py-4 md:py-6"
         }`}
       >
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -150,14 +150,14 @@ export default function Navbar() {
 
             {/* Mobile Menu Toggle */}
             <button
-              className="md:hidden relative z-[101] p-2 text-white transition-colors"
+              className="md:hidden relative z-[101] p-2 -mr-2 text-white transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle navigation menu"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6 text-[#00E5FF]" />
+                <X className="w-7 h-7 text-[#00E5FF]" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-7 h-7" />
               )}
             </button>
           </div>
@@ -174,7 +174,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 w-full h-[100dvh] z-[90] bg-[#030508]/95 backdrop-blur-3xl md:hidden flex flex-col justify-center px-6 border-b border-white/5"
+            className="fixed inset-0 w-full h-[100dvh] z-[90] bg-[#030508]/95 backdrop-blur-3xl md:hidden flex flex-col justify-start pt-28 px-6 pb-6 overflow-y-auto"
           >
             {/* Mobile Ambient Glow */}
             <div className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-[#00E5FF]/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen" />
@@ -185,7 +185,7 @@ export default function Navbar() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="flex flex-col gap-6 relative z-10 w-full"
+              className="flex flex-col gap-8 relative z-10 w-full mt-4"
             >
               {navLinks.map((link, index) => {
                 const isActive = pathname === link.path;
@@ -225,7 +225,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ delay: 0.4 }}
-              className="w-full relative z-10"
+              className="w-full relative z-10 mt-auto"
             >
               <Link
                 href="/ticket"
