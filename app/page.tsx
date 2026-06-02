@@ -2,7 +2,7 @@
 
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Zap, Server, Activity, Globe, Mail, Cloud, Search } from "lucide-react";
+import { ArrowRight, ShieldCheck, Zap, Server, Activity, Globe, Mail, Cloud, Search, MessageCircle } from "lucide-react";
 import FAQ from "./components/FAQ";
 
 // ---------------------------------------------------------
