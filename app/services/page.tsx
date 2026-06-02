@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowRight, ShieldCheck, Server, Network, Wrench, Globe, Cpu, Mail, Search, Briefcase, Activity, Clock, MessageCircle, Layers, Cloud, Zap, BatteryCharging } from "lucide-react";
 
 // ---------------------------------------------------------
-// DATA: CORE SERVICES (EXPANDED PORTFOLIO)
+// DATA: CORE SERVICES (MERGED & PRICED)
 // ---------------------------------------------------------
 const SERVICES = [
   {
@@ -15,8 +15,20 @@ const SERVICES = [
     theme: "from-[#00E5FF]/10 to-transparent",
     hoverBorder: "hover:border-[#00E5FF]/40",
     iconColor: "text-[#00E5FF]",
+    price: "R150 / Hr",
     description: "Expert help for all your computer problems. We fix errors, recover lost data, and make sure your system runs smoothly.",
     features: ["Fast Troubleshooting", "Software Repairs", "Data Recovery"],
+  },
+  {
+    id: "os-tuning",
+    name: "Speed & OS Tuning",
+    icon: Zap,
+    theme: "from-[#D946EF]/10 to-transparent",
+    hoverBorder: "hover:border-[#D946EF]/40",
+    iconColor: "text-[#D946EF]",
+    price: "R350",
+    description: "Make your devices run like new. We strip out bloatware, remove viruses, and reduce system latency for maximum workflow speed and gaming FPS.",
+    features: ["Remote Service Available", "Virus & Bloat Removal", "Maximum FPS"],
   },
   {
     id: "network",
@@ -25,38 +37,20 @@ const SERVICES = [
     theme: "from-[#2563EB]/10 to-transparent",
     hoverBorder: "hover:border-[#2563EB]/40",
     iconColor: "text-[#2563EB]",
+    price: "From R350",
     description: "Reliable internet setups. We build fast, secure connections for your home or office so you never drop offline.",
     features: ["Secure Wi-Fi", "Router Setup", "Fast Connection"],
   },
   {
-    id: "web-dev",
-    name: "Website Design",
-    icon: Globe,
-    theme: "from-[#8B5CF6]/10 to-transparent",
-    hoverBorder: "hover:border-[#8B5CF6]/40",
-    iconColor: "text-[#8B5CF6]",
-    description: "Beautiful websites that load fast. We handle everything from the design to getting your professional web address.",
-    features: ["Modern Design", "Domain Setup", "Fast Loading"],
-  },
-  {
-    id: "sourcing",
-    name: "Buying Tech & Parts",
-    icon: Cpu,
-    theme: "from-[#10B981]/10 to-transparent",
-    hoverBorder: "hover:border-[#10B981]/40",
-    iconColor: "text-[#10B981]",
-    description: "We find the best computer parts for you. We help you buy the right equipment and build custom PCs at fair prices.",
-    features: ["Custom PC Builds", "Buying Parts", "Honest Tech Advice"],
-  },
-  {
-    id: "device-opt",
-    name: "Computer Speed-Up",
-    icon: ShieldCheck,
-    theme: "from-[#F43F5E]/10 to-transparent",
-    hoverBorder: "hover:border-[#F43F5E]/40",
-    iconColor: "text-[#F43F5E]",
-    description: "Make your devices run like new again. We remove slow apps, clean out viruses, and boost your overall speed.",
-    features: ["Performance Boost", "Virus Removal", "System Clean-up"],
+    id: "ups-network",
+    name: "Loadshedding Wi-Fi",
+    icon: BatteryCharging,
+    theme: "from-[#14B8A6]/10 to-transparent",
+    hoverBorder: "hover:border-[#14B8A6]/40",
+    iconColor: "text-[#14B8A6]",
+    price: "R350 + Hardware",
+    description: "Never lose internet during power cuts. We supply and configure specialized mini-UPS units for your fibre box and routers to keep you online.",
+    features: ["Supply & Install", "Fibre ONT Support", "Zero Downtime"],
   },
   {
     id: "repairs",
@@ -65,6 +59,7 @@ const SERVICES = [
     theme: "from-[#F59E0B]/10 to-transparent",
     hoverBorder: "hover:border-[#F59E0B]/40",
     iconColor: "text-[#F59E0B]",
+    price: "R150 / Hr + Parts",
     description: "Fixing broken tech. From cooling issues to power problems, we repair your physical devices so they work perfectly.",
     features: ["Hardware Testing", "Battery Fixes", "Thermal Paste"],
   },
@@ -75,30 +70,31 @@ const SERVICES = [
     theme: "from-[#0EA5E9]/10 to-transparent",
     hoverBorder: "hover:border-[#0EA5E9]/40",
     iconColor: "text-[#0EA5E9]",
+    price: "R450",
     description: "Already bought your own parts? Bring them to us! We will professionally assemble your gaming rig or workstation with perfect cable management.",
     features: ["Gaming & Office PCs", "Clean Cable Management", "BIOS Setup"],
   },
-  // NEW SERVICE 1: ZERO-LAG OS TUNE UP
   {
-    id: "os-tuning",
-    name: "Zero-Lag OS Tuning",
-    icon: Zap,
-    theme: "from-[#D946EF]/10 to-transparent",
-    hoverBorder: "hover:border-[#D946EF]/40",
-    iconColor: "text-[#D946EF]",
-    description: "100% remote service. We strip out Windows bloatware, optimize your registry, and reduce system latency for maximum gaming FPS and workflow speed.",
-    features: ["Remote Service", "Lower Ping/Latency", "Maximum FPS"],
+    id: "sourcing",
+    name: "Buying Tech & Parts",
+    icon: Cpu,
+    theme: "from-[#10B981]/10 to-transparent",
+    hoverBorder: "hover:border-[#10B981]/40",
+    iconColor: "text-[#10B981]",
+    price: "R150 Consult",
+    description: "We find the best computer parts for you. We help you buy the right equipment and build custom PCs at fair prices.",
+    features: ["Custom PC Builds", "Buying Parts", "Honest Tech Advice"],
   },
-  // NEW SERVICE 2: LOADSHEDDING NETWORKS
   {
-    id: "ups-network",
-    name: "Loadshedding Wi-Fi",
-    icon: BatteryCharging,
-    theme: "from-[#14B8A6]/10 to-transparent",
-    hoverBorder: "hover:border-[#14B8A6]/40",
-    iconColor: "text-[#14B8A6]",
-    description: "Never lose internet during power cuts. We supply and configure specialized mini-UPS units for your fibre box and routers to keep you online.",
-    features: ["Supply & Install", "Fibre ONT Support", "Zero Downtime"],
+    id: "web-dev",
+    name: "Website Design",
+    icon: Globe,
+    theme: "from-[#8B5CF6]/10 to-transparent",
+    hoverBorder: "hover:border-[#8B5CF6]/40",
+    iconColor: "text-[#8B5CF6]",
+    price: "From R950",
+    description: "Beautiful websites that load fast. We handle everything from the design to getting your professional web address.",
+    features: ["Modern Design", "Domain Setup", "Fast Loading"],
   }
 ];
 
@@ -160,12 +156,12 @@ export default function ServicesPage() {
         </motion.h1>
         
         <motion.p variants={itemVariants} className="text-gray-400 text-base md:text-lg leading-relaxed font-medium max-w-2xl mx-auto mt-8 px-4">
-          Professional tech help made simple. We offer high-quality computer support, fast internet setups, and beautiful business websites.
+          Professional tech help made simple. We offer high-quality computer support, fast internet setups, and unbeatable student-friendly pricing so you never overpay.
         </motion.p>
       </motion.section>
 
       {/* --------------------------------------------------------- */}
-      {/* SERVICES GRID MATRIX (PERFECTLY BALANCED 9 ITEMS) */}
+      {/* SERVICES GRID MATRIX (PERFECT 8-CARD LAYOUT) */}
       {/* --------------------------------------------------------- */}
       <motion.section 
         variants={containerVariants}
@@ -174,7 +170,8 @@ export default function ServicesPage() {
         viewport={{ once: true, margin: "-100px" }}
         className="w-full max-w-7xl mx-auto px-4 sm:px-6 z-10 mb-20 will-change-transform"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
+        {/* Adjusted to 4 columns on large screens for the 8 items */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
           {SERVICES.map((service) => {
             const Icon = service.icon;
 
@@ -182,26 +179,35 @@ export default function ServicesPage() {
               <motion.div 
                 key={service.id}
                 variants={itemVariants} 
-                className={`relative group flex flex-col h-full bg-[#05080F] border border-white/5 rounded-[2.5rem] p-8 md:p-10 overflow-hidden transition-all duration-300 shadow-lg transform-gpu hover:-translate-y-2 ${service.hoverBorder}`}
+                className={`relative group flex flex-col h-full bg-[#05080F] border border-white/5 rounded-[2rem] p-6 md:p-8 overflow-hidden transition-all duration-300 shadow-lg transform-gpu hover:-translate-y-2 ${service.hoverBorder}`}
               >
                 <div className={`absolute top-0 left-0 w-full h-32 bg-gradient-to-b ${service.theme} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
                 
                 <div className="relative z-10 flex flex-col h-full">
-                  <div className={`w-16 h-16 rounded-2xl bg-[#080C16] border border-white/5 flex items-center justify-center mb-8`}>
-                    <Icon className={`w-8 h-8 ${service.iconColor}`} />
+                  <div className="flex justify-between items-start mb-6">
+                    <div className={`w-14 h-14 rounded-2xl bg-[#080C16] border border-white/5 flex items-center justify-center`}>
+                      <Icon className={`w-7 h-7 ${service.iconColor}`} />
+                    </div>
                   </div>
-                  <h2 className="text-2xl font-black uppercase tracking-tight text-white mb-4">
+                  
+                  <h2 className="text-xl font-black uppercase tracking-tight text-white mb-2">
                     {service.name}
                   </h2>
-                  <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8 flex-grow font-medium group-hover:text-gray-300 transition-colors duration-300">
+                  
+                  {/* PRICING BADGE */}
+                  <div className="flex items-baseline gap-2 mb-4 border-b border-white/5 pb-4">
+                    <span className={`text-2xl font-black ${service.iconColor}`}>{service.price}</span>
+                  </div>
+
+                  <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow font-medium group-hover:text-gray-300 transition-colors duration-300">
                     {service.description}
                   </p>
                   
-                  <div className="flex flex-col gap-3 pt-6 border-t border-white/5 mb-10">
+                  <div className="flex flex-col gap-2.5 mb-8">
                     {service.features.map((feature, i) => (
                       <div key={i} className="flex items-center gap-3">
                         <div className={`w-1.5 h-1.5 rounded-full ${service.iconColor} bg-current`} />
-                        <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-gray-500 group-hover:text-gray-300 transition-colors">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500 group-hover:text-gray-300 transition-colors">
                           {feature}
                         </span>
                       </div>
@@ -211,7 +217,7 @@ export default function ServicesPage() {
                   <div className="mt-auto">
                     <Link 
                       href={`/ticket?service=${service.id}`}
-                      className={`inline-flex items-center justify-center gap-3 w-full py-4 rounded-xl bg-white/5 border border-white/5 text-xs font-black uppercase tracking-widest transition-colors duration-300 hover:bg-white/10 ${service.iconColor}`}
+                      className={`inline-flex items-center justify-center gap-3 w-full py-3.5 rounded-xl bg-white/5 border border-white/5 text-xs font-black uppercase tracking-widest transition-colors duration-300 hover:bg-white/10 ${service.iconColor}`}
                     >
                       <span>Get Started</span>
                       <ArrowRight className="w-4 h-4" />
