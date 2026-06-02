@@ -180,7 +180,7 @@ export default function HomePage() {
             Website Design Packages
           </h2>
           <p className="text-gray-400 text-base md:text-lg font-medium leading-relaxed max-w-2xl">
-            Choose a package that works for you. Manage your site yourself, or let us handle everything so you don't have to.
+            Choose a package that works for you. Manage your site yourself, or let us handle the technical updates so you don't have to.
           </p>
         </div>
 
@@ -192,7 +192,7 @@ export default function HomePage() {
             <div className="relative z-10 flex-grow">
               <h3 className="text-xl md:text-2xl font-bold text-white mb-2 uppercase tracking-tight">Option 1: The Foundation Build</h3>
               <div className="flex items-baseline gap-2 mb-8 border-b border-white/10 pb-6">
-                <span className="text-4xl font-black text-[#00E5FF]">R850</span>
+                <span className="text-4xl font-black text-[#00E5FF]">R950</span>
                 <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">Once-off</span>
               </div>
               <ul className="flex flex-col gap-5 text-gray-400 text-sm md:text-base mb-8">
@@ -202,11 +202,11 @@ export default function HomePage() {
                 </li>
                 <li className="flex items-start gap-4">
                   <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#00E5FF] shrink-0" />
-                  <span><strong>No</strong> monthly fees.</span>
+                  <span>Includes up to two rounds of design revisions to ensure it looks perfect.</span>
                 </li>
                 <li className="flex items-start gap-4">
                   <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#00E5FF] shrink-0" />
-                  <span>If you need updates later, we charge a simple rate of <strong>R100 per hour</strong>.</span>
+                  <span><strong>No monthly fees.</strong> If you need updates later, we charge a simple rate of <strong>R150 per hour</strong>.</span>
                 </li>
               </ul>
             </div>
@@ -221,7 +221,7 @@ export default function HomePage() {
             <div className="relative z-10 flex-grow">
               <h3 className="text-xl md:text-2xl font-bold text-white mb-2 uppercase tracking-tight">Option 2: The Managed Plan</h3>
               <div className="flex items-baseline gap-2 mb-8 border-b border-white/10 pb-6">
-                <span className="text-4xl font-black text-[#8B5CF6]">R150</span>
+                <span className="text-4xl font-black text-[#8B5CF6]">R250</span>
                 <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">/ Month</span>
               </div>
               <ul className="flex flex-col gap-5 text-gray-400 text-sm md:text-base mb-8">
@@ -231,11 +231,11 @@ export default function HomePage() {
                 </li>
                 <li className="flex items-start gap-4">
                   <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#8B5CF6] shrink-0" />
-                  <span>Covers your domain name, premium hosting, and <strong>unlimited basic updates</strong>.</span>
+                  <span>Covers your domain name, premium hosting, and <strong>up to 1 hour of requested updates per month</strong>.</span>
                 </li>
                 <li className="flex items-start gap-4">
                   <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#8B5CF6] shrink-0" />
-                  <span><strong>No hourly fees.</strong> Just message us with your new items or price changes, and we update it for you within 48 hours.</span>
+                  <span>Cancel anytime with 30 days notice. (Extra work beyond 1 hour is billed at our student-friendly hourly rate).</span>
                 </li>
               </ul>
             </div>
@@ -333,9 +333,32 @@ export default function HomePage() {
       </motion.section>
 
       {/* --------------------------------------------------------- */}
-      {/* FAQ COMPONENT */}
+      {/* QUICK CONTACT ALTERNATIVES */}
       {/* --------------------------------------------------------- */}
-      <FAQ />
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="w-full max-w-4xl mx-auto px-4 sm:px-6 mb-12 z-10 text-center will-change-transform"
+      >
+        <p className="text-gray-500 text-sm font-medium mb-6">Need to chat with us before booking?</p>
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <a 
+            href="https://wa.me/27818281861" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-6 py-3 bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] hover:bg-[#25D366] hover:text-white rounded-xl text-xs font-black uppercase tracking-widest transition-colors duration-300"
+          >
+            <MessageCircle className="w-4 h-4" /> WhatsApp Us
+          </a>
+          <a 
+            href="mailto:rudi@takumitech.co.za" 
+            className="flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/5 text-gray-300 hover:bg-white hover:text-black rounded-xl text-xs font-black uppercase tracking-widest transition-colors duration-300"
+          >
+            <Mail className="w-4 h-4" /> Email Us
+          </a>
+        </div>
+      </motion.section>
 
     </main>
   );
