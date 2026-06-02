@@ -2,10 +2,10 @@
 
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Server, Network, Wrench, Globe, Cpu, Mail, Search, Briefcase, Activity, BadgePercent, Clock, MessageCircle, Layers, Cloud } from "lucide-react";
+import { ArrowRight, ShieldCheck, Server, Network, Wrench, Globe, Cpu, Mail, Search, Briefcase, Activity, Clock, MessageCircle, Layers, Cloud, Zap, BatteryCharging } from "lucide-react";
 
 // ---------------------------------------------------------
-// DATA: CORE SERVICES
+// DATA: CORE SERVICES (EXPANDED PORTFOLIO)
 // ---------------------------------------------------------
 const SERVICES = [
   {
@@ -76,7 +76,29 @@ const SERVICES = [
     hoverBorder: "hover:border-[#0EA5E9]/40",
     iconColor: "text-[#0EA5E9]",
     description: "Already bought your own parts? Bring them to us! We will professionally assemble your gaming rig or workstation with perfect cable management.",
-    features: ["Gaming & Office PCs", "Clean Cable Management", "BIOS Setup & Testing"],
+    features: ["Gaming & Office PCs", "Clean Cable Management", "BIOS Setup"],
+  },
+  // NEW SERVICE 1: ZERO-LAG OS TUNE UP
+  {
+    id: "os-tuning",
+    name: "Zero-Lag OS Tuning",
+    icon: Zap,
+    theme: "from-[#D946EF]/10 to-transparent",
+    hoverBorder: "hover:border-[#D946EF]/40",
+    iconColor: "text-[#D946EF]",
+    description: "100% remote service. We strip out Windows bloatware, optimize your registry, and reduce system latency for maximum gaming FPS and workflow speed.",
+    features: ["Remote Service", "Lower Ping/Latency", "Maximum FPS"],
+  },
+  // NEW SERVICE 2: LOADSHEDDING NETWORKS
+  {
+    id: "ups-network",
+    name: "Loadshedding Wi-Fi",
+    icon: BatteryCharging,
+    theme: "from-[#14B8A6]/10 to-transparent",
+    hoverBorder: "hover:border-[#14B8A6]/40",
+    iconColor: "text-[#14B8A6]",
+    description: "Never lose internet during power cuts. We supply and configure specialized mini-UPS units for your fibre box and routers to keep you online.",
+    features: ["Supply & Install", "Fibre ONT Support", "Zero Downtime"],
   }
 ];
 
@@ -143,7 +165,7 @@ export default function ServicesPage() {
       </motion.section>
 
       {/* --------------------------------------------------------- */}
-      {/* SERVICES GRID MATRIX (PERFECTLY BALANCED FOR 7 ITEMS) */}
+      {/* SERVICES GRID MATRIX (PERFECTLY BALANCED 9 ITEMS) */}
       {/* --------------------------------------------------------- */}
       <motion.section 
         variants={containerVariants}
@@ -153,16 +175,14 @@ export default function ServicesPage() {
         className="w-full max-w-7xl mx-auto px-4 sm:px-6 z-10 mb-20 will-change-transform"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
-          {SERVICES.map((service, index) => {
+          {SERVICES.map((service) => {
             const Icon = service.icon;
-            // Center the 7th item on desktop
-            const isCenteredCard = index === 6 ? "md:col-span-2 lg:col-span-1 lg:col-start-2" : "";
 
             return (
               <motion.div 
                 key={service.id}
                 variants={itemVariants} 
-                className={`relative group flex flex-col h-full bg-[#05080F] border border-white/5 rounded-[2.5rem] p-8 md:p-10 overflow-hidden transition-all duration-300 shadow-lg transform-gpu hover:-translate-y-2 ${service.hoverBorder} ${isCenteredCard}`}
+                className={`relative group flex flex-col h-full bg-[#05080F] border border-white/5 rounded-[2.5rem] p-8 md:p-10 overflow-hidden transition-all duration-300 shadow-lg transform-gpu hover:-translate-y-2 ${service.hoverBorder}`}
               >
                 <div className={`absolute top-0 left-0 w-full h-32 bg-gradient-to-b ${service.theme} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
                 
