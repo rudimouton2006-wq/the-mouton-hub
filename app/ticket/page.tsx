@@ -37,12 +37,12 @@ const LOGISTICS_SERVICES = [
 ];
 
 // ---------------------------------------------------------
-// HARDWARE-ACCELERATED ANIMATION VARIANTS (ZERO BLUR)
+// HARDWARE-ACCELERATED ANIMATION VARIANTS
 // ---------------------------------------------------------
 const stepVariants: Variants = {
-  hidden: { opacity: 0, x: 20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } },
-  exit: { opacity: 0, x: -20, transition: { duration: 0.3, ease: "easeOut" } }
+  hidden: { opacity: 0, x: 15 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.35, ease: "easeOut" } },
+  exit: { opacity: 0, x: -15, transition: { duration: 0.25, ease: "easeIn" } }
 };
 
 const subMenuVariants: Variants = {
@@ -122,7 +122,8 @@ function SmartTicketForm() {
       setSelectedCategory(option.id);
     } else {
       setFormData({ ...formData, module: option.label });
-      setTimeout(() => setStep(3), 200); 
+      // Smoother transition delay
+      setTimeout(() => setStep(3), 150); 
     }
   };
 
@@ -183,7 +184,7 @@ function SmartTicketForm() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col gap-6 transform-gpu">
+    <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col gap-6 transform-gpu">
       
       {/* Back Navigation */}
       <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3 }}>
@@ -193,10 +194,10 @@ function SmartTicketForm() {
       </motion.div>
 
       {/* TICKET INTERFACE MATRIX (SOLID STATE) */}
-      <div className="bg-[#05080F] border border-white/5 rounded-[2.5rem] shadow-2xl relative overflow-hidden flex flex-col min-h-[550px]">
+      <div className="bg-[#0A0D14] border border-white/5 rounded-3xl shadow-2xl relative overflow-hidden flex flex-col min-h-[580px]">
         
-        {/* PROGRESS INDICATOR BAR */}
-        <div className="absolute top-0 left-0 w-full h-1 bg-white/5">
+        {/* ULTRA-THIN PROGRESS INDICATOR BAR */}
+        <div className="absolute top-0 left-0 w-full h-[2px] bg-white/5">
           <motion.div 
             className="h-full bg-gradient-to-r from-[#00E5FF] to-[#2563EB]"
             initial={{ width: "0%" }}
@@ -209,14 +210,14 @@ function SmartTicketForm() {
           
           {/* Header */}
           {step < 4 && (
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-6 border-b border-white/5 pb-8">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-6 border-b border-white/5 pb-6">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-[#080C16] border border-white/5 rounded-2xl flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 bg-[#030508] border border-white/5 rounded-xl flex items-center justify-center shrink-0">
                   <Terminal className="w-5 h-5 text-[#00E5FF]" />
                 </div>
                 <div>
-                  <h1 className="text-xl md:text-2xl font-black uppercase tracking-wider text-white">
-                    Step 0{step} <span className="text-gray-500">/ 03</span>
+                  <h1 className="text-xl md:text-2xl font-bold tracking-tight text-white">
+                    Step 0{step} <span className="text-gray-600 font-normal">/ 03</span>
                   </h1>
                   <p className="text-[10px] sm:text-xs font-mono text-[#00E5FF] uppercase tracking-widest mt-1">
                     {step === 1 && "Your Identity"}
@@ -234,10 +235,10 @@ function SmartTicketForm() {
               
               {/* STEP 1: IDENTITY */}
               {step === 1 && (
-                <motion.div key="step1" variants={stepVariants} initial="hidden" animate="visible" exit="exit" className="flex flex-col gap-6 flex-grow justify-center will-change-transform">
+                <motion.div key="step1" variants={stepVariants} initial="hidden" animate="visible" exit="exit" className="flex flex-col gap-5 flex-grow justify-center will-change-transform">
                   
                   {isPreselected && (
-                    <div className="p-4 rounded-xl bg-[#00E5FF]/10 border border-[#00E5FF]/20 mb-4 flex items-start gap-3">
+                    <div className="p-4 rounded-xl bg-[#00E5FF]/10 border border-[#00E5FF]/20 mb-2 flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-[#00E5FF] shrink-0 mt-0.5" />
                       <p className="text-sm font-medium text-[#00E5FF]">
                         We've selected <strong className="text-white">{formData.module}</strong> for you. Enter your details to continue.
@@ -251,40 +252,62 @@ function SmartTicketForm() {
                     </label>
                     <input 
                       type="text" name="designation" value={formData.designation} onChange={handleChange} onFocus={() => setActiveInput('designation')} onBlur={() => setActiveInput(null)}
-                      className={`w-full bg-[#080C16] border rounded-xl px-5 py-5 text-base md:text-lg font-medium text-white focus:outline-none transition-all ${activeInput === 'designation' ? 'border-[#00E5FF]/50 bg-[#00E5FF]/5' : 'border-white/5'}`}
+                      className={`w-full bg-[#030508] border rounded-xl px-5 py-4 text-base font-medium text-white focus:outline-none transition-all duration-300 ${activeInput === 'designation' ? 'border-[#00E5FF]/50 ring-1 ring-[#00E5FF]/20' : 'border-white/5 hover:border-white/10'}`}
                       placeholder="E.g., John Doe" autoFocus
                     />
                   </div>
 
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 mb-4">
                     <label className="text-[10px] font-mono text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-2">
                       <Mail className="w-3 h-3" /> Email Address
                     </label>
                     <input 
                       type="email" name="returnVector" value={formData.returnVector} onChange={handleChange} onFocus={() => setActiveInput('email')} onBlur={() => setActiveInput(null)}
-                      className={`w-full bg-[#080C16] border rounded-xl px-5 py-5 text-base md:text-lg font-medium text-white focus:outline-none transition-all ${activeInput === 'email' ? 'border-[#00E5FF]/50 bg-[#00E5FF]/5' : 'border-white/5'}`}
+                      className={`w-full bg-[#030508] border rounded-xl px-5 py-4 text-base font-medium text-white focus:outline-none transition-all duration-300 ${activeInput === 'email' ? 'border-[#00E5FF]/50 ring-1 ring-[#00E5FF]/20' : 'border-white/5 hover:border-white/10'}`}
                       placeholder="john@example.com"
                     />
                   </div>
 
-                  <div className="pt-6 mt-auto flex flex-col md:flex-row items-center justify-between gap-6 border-t border-white/5">
-                    <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
-                      <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest text-center sm:text-left">Or Message Us Directly:</span>
-                      <div className="flex flex-wrap gap-2 justify-center">
-                        <a href="https://wa.me/27614955695" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] rounded-xl transition-colors hover:bg-[#25D366] hover:text-white group">
-                          <MessageCircle className="w-3.5 h-3.5" /> 
-                          <span className="text-[10px] font-black uppercase tracking-wider">Alex <span className="opacity-70 font-mono font-medium">(Support)</span></span>
+                  {/* RE-ENGINEERED CONTACT & SUBMIT SECTION */}
+                  <div className="mt-auto flex flex-col gap-6 pt-4">
+                    
+                    {/* Primary Action */}
+                    <button 
+                      type="button" 
+                      onClick={handleNext} 
+                      disabled={!isStep1Valid} 
+                      className="group flex items-center justify-center gap-3 w-full py-4 bg-white text-[#030508] font-bold uppercase tracking-widest text-xs rounded-xl hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300 disabled:opacity-20 disabled:cursor-not-allowed disabled:hover:shadow-none"
+                    >
+                      Next Step <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </button>
+
+                    {/* Secondary Fallback Actions (Clean & Minimalist) */}
+                    <div className="flex flex-col items-center pt-6 border-t border-white/5">
+                      <span className="text-[10px] font-mono text-gray-600 uppercase tracking-widest mb-4">Or bypass the queue:</span>
+                      
+                      <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                        <a 
+                          href="https://wa.me/27818281861" 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="flex items-center justify-center gap-2 px-6 py-3 bg-[#030508] border border-white/5 text-gray-300 rounded-xl transition-all hover:border-[#00E5FF]/30 hover:text-[#00E5FF]"
+                        >
+                          <MessageCircle className="w-4 h-4" /> 
+                          <span className="text-xs font-bold uppercase tracking-wider">Rudi <span className="opacity-50 font-normal">(Tech)</span></span>
                         </a>
-                        <a href="https://wa.me/27818281861" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] rounded-xl transition-colors hover:bg-[#00E5FF] hover:text-[#030508] group">
-                          <MessageCircle className="w-3.5 h-3.5" /> 
-                          <span className="text-[10px] font-black uppercase tracking-wider">Rudi <span className="opacity-70 font-mono font-medium">(Tech)</span></span>
+                        
+                        <a 
+                          href="https://wa.me/27614955695" 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="flex items-center justify-center gap-2 px-6 py-3 bg-[#030508] border border-white/5 text-gray-300 rounded-xl transition-all hover:border-[#2563EB]/30 hover:text-[#2563EB]"
+                        >
+                          <MessageCircle className="w-4 h-4" /> 
+                          <span className="text-xs font-bold uppercase tracking-wider">Alex <span className="opacity-50 font-normal">(Support)</span></span>
                         </a>
                       </div>
                     </div>
 
-                    <button type="button" onClick={handleNext} disabled={!isStep1Valid} className="group flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#030508] font-black uppercase tracking-widest text-xs rounded-xl hover:bg-gray-200 transition-colors disabled:opacity-20 disabled:cursor-not-allowed w-full md:w-auto shrink-0">
-                      Next Step <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </button>
                   </div>
                 </motion.div>
               )}
@@ -297,18 +320,18 @@ function SmartTicketForm() {
                     {!selectedCategory && (
                       <motion.div key="main-categories" variants={subMenuVariants} initial="hidden" animate="visible" exit="exit" className="flex flex-col flex-grow">
                         <p className="text-gray-400 text-sm mb-4 font-medium">Select a department below.</p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 flex-grow content-start">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 flex-grow content-start">
                           {PRIMARY_SERVICES.map((option) => {
                             const Icon = option.icon;
                             return (
-                              <button key={option.id} type="button" onClick={() => handleServiceSelect(option)} className={`relative flex flex-col items-start p-6 rounded-2xl border transition-all duration-300 text-left bg-[#080C16] border-white/5 hover:bg-[#0A0F1C] hover:-translate-y-1 ${option.theme}`}>
-                                <div className="flex items-center justify-between w-full mb-4">
-                                  <Icon className="w-6 h-6 text-gray-500" />
-                                  {option.isCategory && <ArrowRight className="w-4 h-4 text-gray-600" />}
+                              <button key={option.id} type="button" onClick={() => handleServiceSelect(option)} className={`relative flex items-center justify-between p-5 rounded-xl border transition-all duration-300 text-left bg-[#030508] border-white/5 hover:-translate-y-0.5 ${option.theme}`}>
+                                <div className="flex items-center gap-4">
+                                  <Icon className="w-5 h-5 text-gray-500" />
+                                  <span className="text-sm font-bold transition-colors">
+                                    {option.label}
+                                  </span>
                                 </div>
-                                <span className="text-sm font-bold transition-colors">
-                                  {option.label}
-                                </span>
+                                {option.isCategory && <ArrowRight className="w-4 h-4 text-gray-600" />}
                               </button>
                             );
                           })}
@@ -319,15 +342,15 @@ function SmartTicketForm() {
                     {selectedCategory === "hardware-cat" && (
                       <motion.div key="sub-hardware" variants={subMenuVariants} initial="hidden" animate="visible" exit="exit" className="flex flex-col flex-grow">
                         <p className="text-[#00E5FF] text-sm mb-4 font-bold tracking-wide">Select your hardware service:</p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           {HARDWARE_SERVICES.map((option) => (
-                             <button key={option.id} type="button" onClick={() => handleServiceSelect(option)} className="flex items-center gap-4 p-5 rounded-2xl border border-white/5 bg-[#080C16] hover:bg-[#00E5FF]/5 hover:border-[#00E5FF]/30 transition-colors text-left group">
-                                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+                             <button key={option.id} type="button" onClick={() => handleServiceSelect(option)} className="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-[#030508] hover:bg-[#00E5FF]/5 hover:border-[#00E5FF]/30 transition-all text-left group">
+                                <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                                    <option.icon className={`w-5 h-5 ${option.color}`} />
                                 </div>
                                 <div>
                                    <span className="block text-sm font-bold text-gray-300 group-hover:text-[#00E5FF] transition-colors">{option.label}</span>
-                                   <span className="block text-[10px] text-gray-500 mt-1">{option.desc}</span>
+                                   <span className="block text-[10px] text-gray-500 mt-0.5">{option.desc}</span>
                                 </div>
                              </button>
                           ))}
@@ -338,15 +361,15 @@ function SmartTicketForm() {
                     {selectedCategory === "web-cat" && (
                       <motion.div key="sub-web" variants={subMenuVariants} initial="hidden" animate="visible" exit="exit" className="flex flex-col flex-grow">
                         <p className="text-[#8B5CF6] text-sm mb-4 font-bold tracking-wide">Select your web service:</p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           {WEB_SERVICES.map((option) => (
-                             <button key={option.id} type="button" onClick={() => handleServiceSelect(option)} className="flex items-center gap-4 p-5 rounded-2xl border border-white/5 bg-[#080C16] hover:bg-[#8B5CF6]/5 hover:border-[#8B5CF6]/30 transition-colors text-left group">
-                                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+                             <button key={option.id} type="button" onClick={() => handleServiceSelect(option)} className="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-[#030508] hover:bg-[#8B5CF6]/5 hover:border-[#8B5CF6]/30 transition-all text-left group">
+                                <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                                    <option.icon className={`w-5 h-5 ${option.color}`} />
                                 </div>
                                 <div>
                                    <span className="block text-sm font-bold text-gray-300 group-hover:text-[#8B5CF6] transition-colors">{option.label}</span>
-                                   <span className="block text-[10px] text-gray-500 mt-1">{option.desc}</span>
+                                   <span className="block text-[10px] text-gray-500 mt-0.5">{option.desc}</span>
                                 </div>
                              </button>
                           ))}
@@ -357,15 +380,15 @@ function SmartTicketForm() {
                     {selectedCategory === "logistics-cat" && (
                       <motion.div key="sub-logistics" variants={subMenuVariants} initial="hidden" animate="visible" exit="exit" className="flex flex-col flex-grow">
                         <p className="text-[#F43F5E] text-sm mb-4 font-bold tracking-wide">Select deployment type:</p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           {LOGISTICS_SERVICES.map((option) => (
-                             <button key={option.id} type="button" onClick={() => handleServiceSelect(option)} className="flex items-center gap-4 p-5 rounded-2xl border border-white/5 bg-[#080C16] hover:bg-[#F43F5E]/5 hover:border-[#F43F5E]/30 transition-colors text-left group">
-                                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+                             <button key={option.id} type="button" onClick={() => handleServiceSelect(option)} className="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-[#030508] hover:bg-[#F43F5E]/5 hover:border-[#F43F5E]/30 transition-all text-left group">
+                                <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                                    <option.icon className={`w-5 h-5 ${option.color}`} />
                                 </div>
                                 <div>
                                    <span className="block text-sm font-bold text-gray-300 group-hover:text-[#F43F5E] transition-colors">{option.label}</span>
-                                   <span className="block text-[10px] text-gray-500 mt-1">{option.desc}</span>
+                                   <span className="block text-[10px] text-gray-500 mt-0.5">{option.desc}</span>
                                 </div>
                              </button>
                           ))}
@@ -376,8 +399,8 @@ function SmartTicketForm() {
                   </AnimatePresence>
 
                   <div className="pt-6 mt-auto flex justify-start border-t border-white/5">
-                    <button type="button" onClick={handleBack} className="text-xs font-mono text-gray-500 hover:text-white transition-colors uppercase tracking-widest flex items-center gap-2">
-                      <ArrowLeft className="w-3 h-3" /> Go Back
+                    <button type="button" onClick={handleBack} className="text-xs font-bold text-gray-500 hover:text-white transition-colors uppercase tracking-widest flex items-center gap-2">
+                      <ArrowLeft className="w-4 h-4" /> Go Back
                     </button>
                   </div>
                 </motion.div>
@@ -392,8 +415,7 @@ function SmartTicketForm() {
                     </label>
                     <textarea 
                       name="payload" value={formData.payload} onChange={handleChange} onFocus={() => setActiveInput('payload')} onBlur={() => setActiveInput(null)}
-                      rows={8}
-                      className={`w-full h-full bg-[#080C16] border rounded-xl px-5 py-5 text-sm font-medium text-white focus:outline-none transition-all resize-y min-h-[250px] ${activeInput === 'payload' ? 'border-[#00E5FF]/50 bg-[#00E5FF]/5' : 'border-white/5'}`}
+                      className={`w-full flex-grow bg-[#030508] border rounded-xl px-5 py-5 text-sm font-medium text-white focus:outline-none transition-all duration-300 resize-none min-h-[220px] ${activeInput === 'payload' ? 'border-[#00E5FF]/50 ring-1 ring-[#00E5FF]/20' : 'border-white/5 hover:border-white/10'}`}
                       placeholder="Tell us exactly what you need help with..." autoFocus
                     />
                   </div>
@@ -405,11 +427,11 @@ function SmartTicketForm() {
                   )}
 
                   <div className="pt-4 flex flex-col sm:flex-row items-center justify-between mt-auto gap-4 border-t border-white/5 pt-6">
-                    <button type="button" onClick={handleBack} disabled={isSubmitting} className="text-xs font-mono text-gray-500 hover:text-white transition-colors uppercase tracking-widest flex items-center gap-2 disabled:opacity-50 w-full sm:w-auto justify-center">
-                      <ArrowLeft className="w-3 h-3" /> Go Back
+                    <button type="button" onClick={handleBack} disabled={isSubmitting} className="text-xs font-bold text-gray-500 hover:text-white transition-colors uppercase tracking-widest flex items-center gap-2 disabled:opacity-50 w-full sm:w-auto justify-center sm:justify-start">
+                      <ArrowLeft className="w-4 h-4" /> Go Back
                     </button>
 
-                    <button type="submit" disabled={!isStep3Valid || isSubmitting} className="group relative flex items-center justify-center gap-3 px-10 py-4 bg-white text-[#030508] font-black uppercase tracking-widest text-xs rounded-xl hover:bg-gray-200 transition-colors disabled:opacity-20 disabled:cursor-not-allowed w-full sm:w-auto overflow-hidden">
+                    <button type="submit" disabled={!isStep3Valid || isSubmitting} className="group relative flex items-center justify-center gap-3 px-10 py-4 bg-white text-[#030508] font-bold uppercase tracking-widest text-xs rounded-xl hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300 disabled:opacity-20 disabled:cursor-not-allowed w-full sm:w-auto overflow-hidden disabled:hover:shadow-none">
                       {isSubmitting ? (
                         <span className="flex items-center gap-2">
                           <Activity className="w-4 h-4 animate-spin" /> Sending...
@@ -428,14 +450,14 @@ function SmartTicketForm() {
               {/* STEP 4: SUCCESS STATE */}
               {step === 4 && (
                 <motion.div key="step4" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center justify-center text-center flex-grow py-10 will-change-transform">
-                  <div className="mb-8">
-                    <CheckCircle className="w-24 h-24 text-emerald-400" />
+                  <div className="mb-6">
+                    <CheckCircle className="w-20 h-20 text-[#10B981]" />
                   </div>
-                  <h2 className="text-3xl font-black uppercase tracking-wider text-white mb-4">Request Sent Successfully</h2>
-                  <p className="text-gray-400 max-w-sm leading-relaxed mb-10">
-                    We have received your message. We will review your request and get back to you at <strong>{formData.returnVector}</strong> as soon as possible.
+                  <h2 className="text-2xl font-bold tracking-tight text-white mb-3">Request Sent Successfully</h2>
+                  <p className="text-gray-400 text-sm max-w-sm leading-relaxed mb-10">
+                    We have received your message. We will review your request and get back to you at <strong className="text-white">{formData.returnVector}</strong> shortly.
                   </p>
-                  <button type="button" onClick={() => window.location.reload()} className="px-8 py-3 bg-[#080C16] border border-white/10 rounded-xl text-xs font-mono text-white uppercase tracking-widest hover:bg-white/5 transition-colors">
+                  <button type="button" onClick={() => window.location.reload()} className="px-8 py-3 bg-[#030508] border border-white/10 rounded-xl text-xs font-bold text-gray-300 uppercase tracking-widest hover:bg-white/5 hover:text-white transition-colors">
                     Send Another Request
                   </button>
                 </motion.div>
@@ -467,8 +489,8 @@ export default function TicketPage() {
       
       {/* Background Matrix */}
       <div className="absolute inset-0 z-0 pointer-events-none transform-gpu">
-        <div className="absolute top-0 left-[20%] w-[600px] h-[600px] bg-gradient-to-br from-[#00E5FF]/5 to-transparent blur-3xl opacity-50" />
-        <div className="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] bg-gradient-to-bl from-[#2563EB]/5 to-transparent blur-3xl opacity-50" />
+        <div className="absolute top-0 left-[20%] w-[600px] h-[600px] bg-gradient-to-br from-[#00E5FF]/5 to-transparent blur-3xl opacity-40" />
+        <div className="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] bg-gradient-to-bl from-[#2563EB]/5 to-transparent blur-3xl opacity-40" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:linear-gradient(to_bottom,black_0%,transparent_80%)]" />
       </div>
 

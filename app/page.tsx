@@ -1,9 +1,9 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
+import { useState } from "react";
+import { motion, Variants, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Zap, Server, Activity, Globe, Mail, Cloud, Search, MessageCircle, Users, Terminal } from "lucide-react";
-import FAQ from "./components/FAQ";
+import { ArrowRight, ShieldCheck, Zap, Server, Globe, Mail, Cloud, Search, MessageCircle, Users, Terminal, X, ArrowUpRight } from "lucide-react";
 
 // ---------------------------------------------------------
 // DATA: CORE SERVICES
@@ -23,7 +23,7 @@ const CAPABILITIES = [
     iconColor: "text-[#2563EB]",
     hoverBorder: "hover:border-[#2563EB]/40",
     title: "Total Security",
-    description: "We protect your internet network and business data from outside threats, keeping everything safe and private."
+    description: "We protect your internet network and business data from outside threats, keeping everything safe."
   },
   {
     icon: Server,
@@ -39,7 +39,7 @@ const CAPABILITIES = [
     iconColor: "text-[#8B5CF6]",
     hoverBorder: "hover:border-[#8B5CF6]/40",
     title: "Custom Websites",
-    description: "Beautiful, fast websites built for your business. Choose a one-time build or let us manage everything for you."
+    description: "Beautiful, fast websites built for your business. Manage it yourself or let us handle everything."
   }
 ];
 
@@ -55,7 +55,7 @@ const containerVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 15 },
   visible: {
     opacity: 1,
     y: 0,
@@ -64,14 +64,103 @@ const itemVariants: Variants = {
 };
 
 export default function HomePage() {
+  // State to handle the contact modal visibility
+  const [isContactOpen, setIsContactOpen] = useState(false);
+
   return (
-    <main className="relative w-full flex flex-col items-center justify-start z-10 min-h-screen bg-[#030508] selection:bg-[#00E5FF]/30 selection:text-white overflow-hidden">
+    <main className="relative w-full flex flex-col items-center justify-start z-10 min-h-screen bg-[#030508] selection:bg-[#00E5FF]/30 selection:text-white">
       
       {/* --------------------------------------------------------- */}
-      {/* STATIC AMBIENT BACKGROUND (ZERO CPU USAGE) */}
+      {/* CONTACT MODAL (POPUP) */}
       {/* --------------------------------------------------------- */}
-      <div className="absolute inset-0 z-0 pointer-events-none transform-gpu">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1000px] h-[500px] bg-gradient-to-b from-[#00E5FF]/5 via-[#2563EB]/5 to-transparent blur-3xl opacity-50" />
+      <AnimatePresence>
+        {isContactOpen && (
+          <>
+            {/* Background Blur Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsContactOpen(false)}
+              className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm"
+            />
+            
+            {/* Modal Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[101] w-full max-w-md px-4"
+            >
+              <div className="bg-[#0A0D14] border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00E5FF] to-[#2563EB]" />
+                
+                <button 
+                  onClick={() => setIsContactOpen(false)}
+                  className="absolute top-6 right-6 text-gray-500 hover:text-white transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
+                <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">Get in Touch</h3>
+                <p className="text-gray-400 text-sm mb-8">Select who you'd like to speak with, and we'll get back to you immediately.</p>
+
+                <div className="flex flex-col gap-4">
+                  {/* Rudi Contact */}
+                  <a 
+                    href="https://wa.me/27818281861" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="group flex items-center p-4 rounded-2xl bg-[#030508] border border-white/5 hover:border-[#00E5FF]/40 transition-colors"
+                  >
+                    <div className="w-12 h-12 rounded-full bg-[#00E5FF]/10 flex items-center justify-center border border-[#00E5FF]/20 shrink-0 mr-4 group-hover:scale-110 transition-transform">
+                      <Terminal className="w-5 h-5 text-[#00E5FF]" />
+                    </div>
+                    <div className="flex-grow">
+                      <h4 className="text-white font-bold text-sm">Message Rudi Mouton</h4>
+                      <p className="text-[#00E5FF] text-xs font-mono tracking-widest uppercase mt-1">Founder & Lead Engineer</p>
+                    </div>
+                    <ArrowUpRight className="w-5 h-5 text-gray-500 group-hover:text-[#00E5FF] transition-colors" />
+                  </a>
+
+                  {/* Alex Contact */}
+                  <a 
+                    href="https://wa.me/27614955695" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="group flex items-center p-4 rounded-2xl bg-[#030508] border border-white/5 hover:border-[#2563EB]/40 transition-colors"
+                  >
+                    <div className="w-12 h-12 rounded-full bg-[#2563EB]/10 flex items-center justify-center border border-[#2563EB]/20 shrink-0 mr-4 group-hover:scale-110 transition-transform">
+                      <Users className="w-5 h-5 text-[#2563EB]" />
+                    </div>
+                    <div className="flex-grow">
+                      <h4 className="text-white font-bold text-sm">Message Alex</h4>
+                      <p className="text-[#2563EB] text-xs font-mono tracking-widest uppercase mt-1">Client Relations Manager</p>
+                    </div>
+                    <ArrowUpRight className="w-5 h-5 text-gray-500 group-hover:text-[#2563EB] transition-colors" />
+                  </a>
+
+                  <div className="w-full h-px bg-white/5 my-2" />
+
+                  {/* Email Fallback */}
+                  <a 
+                    href="mailto:info@takumitech.co.za"
+                    className="flex items-center justify-center gap-2 w-full py-3 text-sm text-gray-400 hover:text-white transition-colors"
+                  >
+                    <Mail className="w-4 h-4" /> Prefer email? info@takumitech.co.za
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* --------------------------------------------------------- */}
+      {/* STATIC AMBIENT BACKGROUND */}
+      {/* --------------------------------------------------------- */}
+      <div className="absolute inset-0 z-0 pointer-events-none transform-gpu overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1000px] h-[500px] bg-gradient-to-b from-[#00E5FF]/5 via-[#2563EB]/5 to-transparent blur-3xl opacity-40" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:linear-gradient(to_bottom,black_0%,transparent_60%)]" />
       </div>
 
@@ -83,37 +172,38 @@ export default function HomePage() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="flex flex-col items-center w-full max-w-5xl will-change-transform"
+          className="flex flex-col items-center w-full max-w-4xl will-change-transform"
         >
-          <motion.div variants={itemVariants} className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-[#05080F] border border-white/10 mb-10 md:mb-12 shadow-sm">
+          <motion.div variants={itemVariants} className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-[#0A0D14] border border-white/5 mb-8 shadow-sm">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00E5FF] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00E5FF]"></span>
             </span>
-            <span className="text-[10px] sm:text-xs font-mono text-gray-300 tracking-[0.25em] uppercase font-bold">
-              Ready to Help
+            <span className="text-[10px] sm:text-xs font-mono text-gray-400 tracking-[0.2em] uppercase font-semibold">
+              Systems Online & Ready
             </span>
           </motion.div>
 
-          <motion.h1 variants={itemVariants} className="text-5xl sm:text-6xl md:text-8xl lg:text-[6.5rem] font-black tracking-tighter leading-[1.05] mb-8 text-white w-full">
+          <motion.h1 variants={itemVariants} className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold tracking-tight leading-[1.1] mb-8 text-white w-full">
             Premium IT & <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5FF] to-[#3B82F6]">
               Web Solutions.
             </span>
           </motion.h1>
 
-          <motion.p variants={itemVariants} className="max-w-3xl text-base sm:text-lg md:text-xl text-gray-400 mb-12 md:mb-16 leading-relaxed font-medium px-4">
-            Welcome to <span className="text-white font-bold tracking-wide">Takumi Tech</span>. We build fast websites and provide top-tier computer support. Built for people who want things done right the first time.
+          <motion.p variants={itemVariants} className="max-w-2xl text-base sm:text-lg text-gray-400 mb-12 leading-relaxed font-medium px-4">
+            Welcome to Takumi Tech. We build incredibly fast websites and provide expert-level computer support. Built for individuals and businesses who want things done right the first time.
           </motion.p>
 
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-5 w-full sm:w-auto px-6 sm:px-0">
-            <Link href="/schedule" className="group flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#030508] font-black uppercase tracking-[0.15em] text-xs sm:text-sm rounded-xl transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg w-full sm:w-auto transform-gpu">
-              <Activity className="w-4 h-4" />
-              <span>Get Support</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-            </Link>
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto px-6 sm:px-0">
+            <button 
+              onClick={() => setIsContactOpen(true)}
+              className="flex items-center justify-center px-8 py-4 bg-white text-[#030508] font-bold uppercase tracking-widest text-xs sm:text-sm rounded-xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:-translate-y-0.5 w-full sm:w-auto"
+            >
+              Contact Us
+            </button>
             
-            <Link href="/services" className="group flex items-center justify-center gap-3 px-8 py-4 bg-[#05080F] border border-white/10 text-gray-300 font-bold uppercase tracking-[0.15em] text-xs sm:text-sm rounded-xl transition-all duration-300 hover:bg-white/5 hover:text-white w-full sm:w-auto transform-gpu hover:-translate-y-1">
+            <Link href="/services" className="flex items-center justify-center px-8 py-4 bg-[#0A0D14] border border-white/10 text-gray-300 font-bold uppercase tracking-widest text-xs sm:text-sm rounded-xl transition-all duration-300 hover:bg-white/5 hover:text-white w-full sm:w-auto hover:-translate-y-0.5">
               View Services
             </Link>
           </motion.div>
@@ -123,40 +213,36 @@ export default function HomePage() {
       {/* --------------------------------------------------------- */}
       {/* CORE SERVICES GRID */}
       {/* --------------------------------------------------------- */}
-      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 relative z-10 mb-32">
-        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between mb-16 gap-8">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="h-px w-8 bg-[#00E5FF]" />
-              <span className="text-[#00E5FF] font-mono text-xs font-bold uppercase tracking-widest">What We Do</span>
-            </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tighter text-white mb-6 leading-none">
-              Our Core <br className="hidden md:block" /> Services
+      <section className="w-full max-w-6xl mx-auto px-4 sm:px-6 relative z-10 mb-32">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div className="max-w-xl">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
+              Our Core Services
             </h2>
-            <p className="text-gray-400 text-base md:text-lg font-medium leading-relaxed">
-              Stop dealing with quick fixes that break again. We offer permanent, high-quality solutions for your computers, networks, and business websites.
+            <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+              Permanent, high-quality solutions for your computers, networks, and business platforms. No shortcuts.
             </p>
           </div>
           
-          <Link href="/services" className="shrink-0 group flex items-center gap-3 px-6 py-3 rounded-lg bg-[#05080F] border border-white/10 text-xs font-mono font-bold text-white uppercase tracking-widest transition-all duration-300 hover:bg-white/5 hover:border-white/20 transform-gpu hover:-translate-y-1">
-            See All Services <ArrowRight className="w-4 h-4 group-hover:translate-x-1 group-hover:text-[#00E5FF] transition-transform" />
+          <Link href="/services" className="group flex items-center gap-2 text-sm font-semibold text-[#00E5FF] hover:text-white transition-colors shrink-0">
+            See All Services <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
           {CAPABILITIES.map((capability, index) => {
             const Icon = capability.icon;
             return (
-              <div key={index} className={`group relative p-8 md:p-10 rounded-[2rem] bg-[#05080F] border border-white/5 flex flex-col overflow-hidden transition-all duration-300 transform-gpu hover:-translate-y-2 ${capability.hoverBorder} shadow-lg`}>
-                <div className={`absolute top-0 left-0 w-full h-32 bg-gradient-to-b ${capability.theme} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+              <div key={index} className={`group relative p-8 rounded-3xl bg-[#0A0D14] border border-white/5 flex flex-col transition-all duration-300 ${capability.hoverBorder} hover:shadow-xl`}>
+                <div className={`absolute top-0 left-0 w-full h-32 bg-gradient-to-b ${capability.theme} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-3xl pointer-events-none`} />
                 <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-2xl bg-[#080C16] border border-white/5 flex items-center justify-center mb-8">
-                    <Icon className={`w-7 h-7 ${capability.iconColor}`} />
+                  <div className="w-12 h-12 rounded-xl bg-[#030508] border border-white/5 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform">
+                    <Icon className={`w-5 h-5 ${capability.iconColor}`} />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-4 tracking-tight">
+                  <h3 className="text-lg font-bold text-white mb-3 tracking-tight">
                     {capability.title}
                   </h3>
-                  <p className="text-gray-400 text-sm md:text-base leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
+                  <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors">
                     {capability.description}
                   </p>
                 </div>
@@ -167,82 +253,75 @@ export default function HomePage() {
       </section>
 
       {/* --------------------------------------------------------- */}
-      {/* WEB DEPLOYMENT PACKAGES MATRIX */}
+      {/* WEB DEPLOYMENT PACKAGES */}
       {/* --------------------------------------------------------- */}
-      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 relative z-10 mb-20">
-        <div className="flex flex-col items-center text-center mb-16">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="h-px w-8 bg-[#8B5CF6]" />
-            <span className="text-[#8B5CF6] font-mono text-xs font-bold uppercase tracking-widest">Website Pricing</span>
-            <div className="h-px w-8 bg-[#8B5CF6]" />
-          </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tighter text-white mb-6 leading-none">
+      <section className="w-full max-w-5xl mx-auto px-4 sm:px-6 relative z-10 mb-32">
+        <div className="flex flex-col items-center text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
             Website Design Packages
           </h2>
-          <p className="text-gray-400 text-base md:text-lg font-medium leading-relaxed max-w-2xl">
-            Choose a package that works for you. Manage your site yourself, or let us handle the technical updates so you don't have to.
+          <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-xl">
+            Choose a foundation build to manage yourself, or opt for our managed plan where we handle all the technical heavy lifting.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
           
-          {/* OPTION 1: THE FOUNDATION BUILD */}
-          <div className="relative p-8 md:p-10 rounded-[2rem] bg-[#05080F] border border-white/5 flex flex-col overflow-hidden transition-all duration-300 transform-gpu hover:-translate-y-2 hover:border-[#00E5FF]/40 shadow-xl group">
-            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#00E5FF]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-            <div className="relative z-10 flex-grow">
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-2 uppercase tracking-tight">Option 1: The Foundation Build</h3>
-              <div className="flex items-baseline gap-2 mb-8 border-b border-white/10 pb-6">
-                <span className="text-4xl font-black text-[#00E5FF]">R950</span>
-                <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">Once-off</span>
-              </div>
-              <ul className="flex flex-col gap-5 text-gray-400 text-sm md:text-base mb-8">
-                <li className="flex items-start gap-4">
-                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#00E5FF] shrink-0" />
-                  <span>Includes full setup and your <strong>.co.za</strong> domain name.</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#00E5FF] shrink-0" />
-                  <span>Includes up to two rounds of design revisions to ensure it looks perfect.</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#00E5FF] shrink-0" />
-                  <span><strong>No monthly fees.</strong> If you need updates later, we charge a simple rate of <strong>R150 per hour</strong>.</span>
-                </li>
-              </ul>
+          {/* OPTION 1 */}
+          <div className="p-8 md:p-10 rounded-3xl bg-[#0A0D14] border border-white/5 flex flex-col transition-all duration-300 hover:border-[#00E5FF]/30 hover:shadow-xl">
+            <h3 className="text-xl font-bold text-white mb-2 tracking-tight">The Foundation Build</h3>
+            <div className="flex items-baseline gap-2 mb-6 border-b border-white/5 pb-6">
+              <span className="text-4xl font-bold text-[#00E5FF]">R950</span>
+              <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">Once-off</span>
             </div>
-            <Link href="/ticket?service=web-dev" className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-[#00E5FF] text-[#030508] font-black uppercase tracking-widest text-xs rounded-xl hover:bg-[#00B8CC] transition-colors duration-300 z-10">
-              Start Your Build <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            <ul className="flex flex-col gap-4 text-gray-400 text-sm flex-grow mb-8">
+              <li className="flex items-start gap-3">
+                <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#00E5FF] shrink-0" />
+                <span>Includes full setup and your <strong>.co.za</strong> domain.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#00E5FF] shrink-0" />
+                <span>Up to two rounds of design revisions.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#00E5FF] shrink-0" />
+                <span><strong>No monthly fees.</strong> Future updates billed at R150/hr.</span>
+              </li>
+            </ul>
+            <button onClick={() => setIsContactOpen(true)} className="w-full py-4 bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/20 font-bold uppercase tracking-widest text-xs rounded-xl hover:bg-[#00E5FF] hover:text-[#030508] transition-all duration-300">
+              Start Foundation Build
+            </button>
           </div>
 
-          {/* OPTION 2: THE MANAGED ENVIRONMENT */}
-          <div className="relative p-8 md:p-10 rounded-[2rem] bg-[#05080F] border border-white/5 flex flex-col overflow-hidden transition-all duration-300 transform-gpu hover:-translate-y-2 hover:border-[#8B5CF6]/40 shadow-xl group">
-            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#8B5CF6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-            <div className="relative z-10 flex-grow">
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-2 uppercase tracking-tight">Option 2: The Managed Plan</h3>
-              <div className="flex items-baseline gap-2 mb-8 border-b border-white/10 pb-6">
-                <span className="text-4xl font-black text-[#8B5CF6]">R250</span>
-                <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">/ Month</span>
-              </div>
-              <ul className="flex flex-col gap-5 text-gray-400 text-sm md:text-base mb-8">
-                <li className="flex items-start gap-4">
-                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#8B5CF6] shrink-0" />
-                  <span><strong>R0 upfront</strong> (The entire initial setup is free).</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#8B5CF6] shrink-0" />
-                  <span>Covers your domain name, premium hosting, and <strong>up to 1 hour of requested updates per month</strong>.</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#8B5CF6] shrink-0" />
-                  <span>Cancel anytime with 30 days notice. (Extra work beyond 1 hour is billed at our student-friendly hourly rate).</span>
-                </li>
-              </ul>
+          {/* OPTION 2 */}
+          <div className="p-8 md:p-10 rounded-3xl bg-[#0A0D14] border border-[#8B5CF6]/30 flex flex-col transition-all duration-300 hover:border-[#8B5CF6]/60 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)] relative">
+            <div className="absolute top-0 right-8 -translate-y-1/2 px-3 py-1 bg-[#8B5CF6] text-white text-[10px] font-bold uppercase tracking-widest rounded-full">
+              Most Popular
             </div>
-            <Link href="/ticket?service=web-dev" className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-[#8B5CF6] text-white font-black uppercase tracking-widest text-xs rounded-xl hover:bg-[#7C3AED] transition-colors duration-300 z-10">
-              Choose Managed Plan <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            <h3 className="text-xl font-bold text-white mb-2 tracking-tight">The Managed Plan</h3>
+            <div className="flex items-baseline gap-2 mb-6 border-b border-white/5 pb-6">
+              <span className="text-4xl font-bold text-[#8B5CF6]">R250</span>
+              <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">/ Month</span>
+            </div>
+            <ul className="flex flex-col gap-4 text-gray-400 text-sm flex-grow mb-8">
+              <li className="flex items-start gap-3">
+                <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#8B5CF6] shrink-0" />
+                <span><strong>R0 upfront</strong> (Initial setup is completely free).</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#8B5CF6] shrink-0" />
+                <span>Covers premium hosting and domain name.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#8B5CF6] shrink-0" />
+                <span>Includes <strong>1 hour</strong> of technical updates every month.</span>
+              </li>
+            </ul>
+            <button onClick={() => setIsContactOpen(true)} className="w-full py-4 bg-[#8B5CF6] text-white font-bold uppercase tracking-widest text-xs rounded-xl hover:bg-[#7C3AED] transition-colors duration-300">
+              Choose Managed Plan
+            </button>
           </div>
+
         </div>
       </section>
 
@@ -254,134 +333,70 @@ export default function HomePage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={containerVariants}
-        className="w-full max-w-6xl mx-auto px-4 sm:px-6 mb-20 z-10 relative will-change-transform"
+        className="w-full max-w-6xl mx-auto px-4 sm:px-6 mb-24 z-10 relative will-change-transform"
       >
         <div className="flex flex-col items-center text-center mb-12">
-          <div className="inline-flex items-center justify-center mb-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#00E5FF] mr-4 opacity-50" />
-            <span className="text-[10px] sm:text-xs font-mono text-[#00E5FF] tracking-[0.3em] uppercase font-bold">
-              Maximize Your Setup
-            </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#00E5FF] ml-4 opacity-50" />
-          </div>
-          <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-4">
             Optional Enhancements
           </h2>
-          <p className="text-gray-400 text-sm md:text-base font-medium max-w-2xl">
-            Add these powerful upgrades to your project to look more professional or protect your business.
+          <p className="text-gray-400 text-sm md:text-base max-w-xl">
+            Add these powerful upgrades to look more professional or protect your business data.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           
-          {/* ADD-ON 1: BUSINESS EMAIL */}
-          <motion.div 
-            variants={itemVariants}
-            className="group relative flex flex-col bg-[#05080F] border border-white/5 hover:border-[#00E5FF]/40 rounded-[2rem] p-8 shadow-lg transition-all duration-300 transform-gpu hover:-translate-y-2 overflow-hidden"
-          >
-            <div className="w-12 h-12 rounded-xl bg-[#00E5FF]/10 flex items-center justify-center border border-[#00E5FF]/20 mb-6">
-              <Mail className="w-6 h-6 text-[#00E5FF]" />
+          {/* ADD-ON 1 */}
+          <motion.div variants={itemVariants} className="group flex flex-col bg-[#0A0D14] border border-white/5 hover:border-[#00E5FF]/30 rounded-3xl p-6 transition-all duration-300">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-10 h-10 rounded-lg bg-[#00E5FF]/10 flex items-center justify-center border border-[#00E5FF]/20">
+                <Mail className="w-5 h-5 text-[#00E5FF]" />
+              </div>
+              <span className="text-xs font-mono text-[#00E5FF] font-semibold tracking-widest uppercase">R95 / Mo</span>
             </div>
-            <h3 className="text-lg font-black uppercase tracking-wider text-white mb-2">Professional Email</h3>
-            <span className="text-xs font-mono text-[#00E5FF] font-bold tracking-widest uppercase mb-4 block">R95 / Month</span>
-            <p className="text-gray-400 text-sm leading-relaxed font-medium mb-8 flex-grow">
-              Stop using Gmail for your business. We will set up and manage a professional email address (like info@yourbusiness.co.za) so you look 100% credible.
+            <h3 className="text-base font-bold text-white mb-2">Professional Email</h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+              Stop using Gmail. We manage a custom email (info@yourbusiness.co.za) for ultimate credibility.
             </p>
-            <Link href="/ticket?service=email" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#00E5FF] transition-colors mt-auto">
-              Request Setup <ArrowRight className="w-4 h-4" />
-            </Link>
+            <button onClick={() => setIsContactOpen(true)} className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#00E5FF] transition-colors text-left">
+              Request Setup →
+            </button>
           </motion.div>
 
-          {/* ADD-ON 2: SECURE CLOUD BACKUPS */}
-          <motion.div 
-            variants={itemVariants}
-            className="group relative flex flex-col bg-[#05080F] border border-white/5 hover:border-[#A855F7]/40 rounded-[2rem] p-8 shadow-lg transition-all duration-300 transform-gpu hover:-translate-y-2 overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-[#A855F7]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-            <div className="w-12 h-12 rounded-xl bg-[#A855F7]/10 flex items-center justify-center border border-[#A855F7]/20 mb-6 group-hover:scale-110 transition-transform duration-500">
-              <Cloud className="w-6 h-6 text-[#A855F7]" />
+          {/* ADD-ON 2 */}
+          <motion.div variants={itemVariants} className="group flex flex-col bg-[#0A0D14] border border-white/5 hover:border-[#A855F7]/30 rounded-3xl p-6 transition-all duration-300">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-10 h-10 rounded-lg bg-[#A855F7]/10 flex items-center justify-center border border-[#A855F7]/20">
+                <Cloud className="w-5 h-5 text-[#A855F7]" />
+              </div>
+              <span className="text-xs font-mono text-[#A855F7] font-semibold tracking-widest uppercase">R350 Once</span>
             </div>
-            <h3 className="text-lg font-black uppercase tracking-wider text-white mb-2">Secure Cloud Backups</h3>
-            <span className="text-xs font-mono text-[#A855F7] font-bold tracking-widest uppercase mb-4 block">R350 Once-off</span>
-            <p className="text-gray-400 text-sm leading-relaxed font-medium mb-8 flex-grow">
-              Never lose important business files to a broken hard drive or loadshedding. We will set up automated, silent cloud backups for your main work computers.
+            <h3 className="text-base font-bold text-white mb-2">Secure Cloud Backups</h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+              Never lose files to a broken drive. We configure silent, automated cloud backups for your computers.
             </p>
-            <Link href="/ticket?service=backup" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#A855F7] transition-colors mt-auto relative z-10">
-              Protect My Data <ArrowRight className="w-4 h-4" />
-            </Link>
+            <button onClick={() => setIsContactOpen(true)} className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#A855F7] transition-colors text-left">
+              Protect Data →
+            </button>
           </motion.div>
 
-          {/* ADD-ON 3: GOOGLE SEO */}
-          <motion.div 
-            variants={itemVariants}
-            className="group relative flex flex-col bg-[#05080F] border border-white/5 hover:border-[#10B981]/40 rounded-[2rem] p-8 shadow-lg transition-all duration-300 transform-gpu hover:-translate-y-2 overflow-hidden"
-          >
-            <div className="w-12 h-12 rounded-xl bg-[#10B981]/10 flex items-center justify-center border border-[#10B981]/20 mb-6">
-              <Search className="w-6 h-6 text-[#10B981]" />
+          {/* ADD-ON 3 */}
+          <motion.div variants={itemVariants} className="group flex flex-col bg-[#0A0D14] border border-white/5 hover:border-[#10B981]/30 rounded-3xl p-6 transition-all duration-300">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-10 h-10 rounded-lg bg-[#10B981]/10 flex items-center justify-center border border-[#10B981]/20">
+                <Search className="w-5 h-5 text-[#10B981]" />
+              </div>
+              <span className="text-xs font-mono text-[#10B981] font-semibold tracking-widest uppercase">R350 Once</span>
             </div>
-            <h3 className="text-lg font-black uppercase tracking-wider text-white mb-2">Get Found On Google</h3>
-            <span className="text-xs font-mono text-[#10B981] font-bold tracking-widest uppercase mb-4 block">R350 Once-off</span>
-            <p className="text-gray-400 text-sm leading-relaxed font-medium mb-8 flex-grow">
-              We set up your complete Google Profile. This includes adding your website, trading hours, location, contact details, and uploading your logo so local clients find you easily.
+            <h3 className="text-base font-bold text-white mb-2">Google SEO Setup</h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+              We build your complete Google Profile so local clients can easily find your location and trading hours.
             </p>
-            <Link href="/ticket?service=google" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#10B981] transition-colors mt-auto">
-              Request Setup <ArrowRight className="w-4 h-4" />
-            </Link>
+            <button onClick={() => setIsContactOpen(true)} className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#10B981] transition-colors text-left">
+              Get Listed →
+            </button>
           </motion.div>
 
-        </div>
-      </motion.section>
-
-      {/* --------------------------------------------------------- */}
-      {/* DIRECT TEAM CONTACT */}
-      {/* --------------------------------------------------------- */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="w-full max-w-5xl mx-auto px-4 sm:px-6 mb-16 z-10 will-change-transform"
-      >
-        <div className="flex flex-col items-center text-center mb-8">
-          <p className="text-gray-500 text-sm font-medium mb-2">Need to chat with us before booking?</p>
-          <h2 className="text-2xl font-black uppercase tracking-tight text-white">Select Your Contact</h2>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
-          
-          {/* ALEX - Client Relations */}
-          <div className="bg-[#05080F] border border-white/5 rounded-[2rem] p-6 sm:p-8 flex flex-col items-center text-center hover:border-[#2563EB]/40 transition-colors group relative overflow-hidden shadow-lg">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#2563EB] to-[#8B5CF6] opacity-50 group-hover:opacity-100 transition-opacity" />
-            <div className="w-12 h-12 rounded-xl bg-[#2563EB]/10 flex items-center justify-center border border-[#2563EB]/20 mb-4">
-               <Users className="w-6 h-6 text-[#2563EB]" />
-            </div>
-            <h3 className="text-lg font-black text-white uppercase tracking-wider mb-1">Alexander de Wet</h3>
-            <span className="text-[10px] font-mono text-[#2563EB] uppercase tracking-widest mb-3 block">Client Relations Manager</span>
-            <p className="text-gray-400 text-xs sm:text-sm mb-8 flex-grow">General inquiries, project updates, pricing, and booking assistance.</p>
-            <a href="https://wa.me/27614955695" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] hover:bg-[#25D366] hover:text-white rounded-xl text-xs font-black uppercase tracking-widest transition-colors duration-300 mt-auto">
-              <MessageCircle className="w-4 h-4" /> Message Alex
-            </a>
-          </div>
-
-          {/* RUDI - Engineering */}
-          <div className="bg-[#05080F] border border-white/5 rounded-[2rem] p-6 sm:p-8 flex flex-col items-center text-center hover:border-[#00E5FF]/40 transition-colors group relative overflow-hidden shadow-lg">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00E5FF] to-[#2563EB] opacity-50 group-hover:opacity-100 transition-opacity" />
-            <div className="w-12 h-12 rounded-xl bg-[#00E5FF]/10 flex items-center justify-center border border-[#00E5FF]/20 mb-4">
-               <Terminal className="w-6 h-6 text-[#00E5FF]" />
-            </div>
-            <h3 className="text-lg font-black text-white uppercase tracking-wider mb-1">Rudi Mouton</h3>
-            <span className="text-[10px] font-mono text-[#00E5FF] uppercase tracking-widest mb-3 block">Founder & Lead Engineer</span>
-            <p className="text-gray-400 text-xs sm:text-sm mb-8 flex-grow">Complex technical support, hardware diagnostics, and deep coding.</p>
-            <a href="https://wa.me/27818281861" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] hover:bg-[#25D366] hover:text-white rounded-xl text-xs font-black uppercase tracking-widest transition-colors duration-300 mt-auto">
-              <MessageCircle className="w-4 h-4" /> Message Rudi
-            </a>
-          </div>
-
-        </div>
-
-        <div className="mt-8 flex justify-center">
-          <a href="mailto:info@takumitech.co.za" className="flex items-center justify-center gap-3 px-8 py-4 bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-xs rounded-xl hover:bg-white/10 transition-colors duration-300">
-            <Mail className="w-4 h-4" /> Or Email info@takumitech.co.za
-          </a>
         </div>
       </motion.section>
 
