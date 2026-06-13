@@ -110,7 +110,7 @@ export default function HomePage() {
               href="/ticket"
               className="group flex items-center justify-center gap-2 px-8 py-4 bg-white text-[#030508] font-bold uppercase tracking-widest text-xs sm:text-sm rounded-xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:-translate-y-0.5 w-full sm:w-auto"
             >
-              Go to Support Hub <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              Log a Ticket <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             
             <Link 
@@ -266,7 +266,7 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           
           {/* ADD-ON 1 */}
-          <motion.div variants={itemVariants} className="group flex flex-col bg-[#0A0D14] border border-white/5 hover:border-[#00E5FF]/30 rounded-3xl p-6 transition-all duration-300">
+          <motion.div variants={itemVariants} className="group flex flex-col bg-[#0A0D14] border border-white/5 hover:border-[#00E5FF]/30 rounded-3xl p-6 transition-all duration-300 shadow-lg">
             <div className="flex items-center justify-between mb-4">
               <div className="w-10 h-10 rounded-lg bg-[#00E5FF]/10 flex items-center justify-center border border-[#00E5FF]/20">
                 <Mail className="w-5 h-5 text-[#00E5FF]" />
@@ -278,12 +278,12 @@ export default function HomePage() {
               Stop using Gmail. We set up a custom email (info@yourbusiness.co.za) so your business looks credible.
             </p>
             <Link href="/ticket?service=email" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#00E5FF] transition-colors text-left flex items-center gap-1">
-              Request Setup <ArrowRight className="w-3 h-3" />
+              Request Setup <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
 
           {/* ADD-ON 2 */}
-          <motion.div variants={itemVariants} className="group flex flex-col bg-[#0A0D14] border border-white/5 hover:border-[#A855F7]/30 rounded-3xl p-6 transition-all duration-300">
+          <motion.div variants={itemVariants} className="group flex flex-col bg-[#0A0D14] border border-white/5 hover:border-[#A855F7]/30 rounded-3xl p-6 transition-all duration-300 shadow-lg">
             <div className="flex items-center justify-between mb-4">
               <div className="w-10 h-10 rounded-lg bg-[#A855F7]/10 flex items-center justify-center border border-[#A855F7]/20">
                 <Cloud className="w-5 h-5 text-[#A855F7]" />
@@ -292,15 +292,15 @@ export default function HomePage() {
             </div>
             <h3 className="text-base font-bold text-white mb-2">Secure Cloud Backups</h3>
             <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
-              Never lose files to a broken drive. We configure silent, automatic cloud backups for your computers.
+              Never lose files to a broken drive. We configure silent, automated cloud backups for your computers.
             </p>
             <Link href="/ticket?service=backup" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#A855F7] transition-colors text-left flex items-center gap-1">
-              Protect Data <ArrowRight className="w-3 h-3" />
+              Protect Data <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
 
           {/* ADD-ON 3 */}
-          <motion.div variants={itemVariants} className="group flex flex-col bg-[#0A0D14] border border-white/5 hover:border-[#10B981]/30 rounded-3xl p-6 transition-all duration-300">
+          <motion.div variants={itemVariants} className="group flex flex-col bg-[#0A0D14] border border-white/5 hover:border-[#10B981]/30 rounded-3xl p-6 transition-all duration-300 shadow-lg">
             <div className="flex items-center justify-between mb-4">
               <div className="w-10 h-10 rounded-lg bg-[#10B981]/10 flex items-center justify-center border border-[#10B981]/20">
                 <Search className="w-5 h-5 text-[#10B981]" />
@@ -312,7 +312,7 @@ export default function HomePage() {
               We build your complete Google Profile so local clients can easily find your location and trading hours.
             </p>
             <Link href="/ticket?service=google" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#10B981] transition-colors text-left flex items-center gap-1">
-              Get Listed <ArrowRight className="w-3 h-3" />
+              Get Listed <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
 
@@ -331,13 +331,13 @@ export default function HomePage() {
         <div className="bg-[#0A0D14] border border-white/5 rounded-3xl p-8 md:p-12 shadow-xl">
           <h2 className="text-2xl font-bold tracking-tight text-white mb-3">Ready to get started?</h2>
           <p className="text-gray-400 text-sm mb-8 max-w-lg mx-auto">
-            Log a support ticket or reach out to our team directly via our support hub if you have any questions before booking.
+            Log a support ticket or reach out to our team directly if you have any questions before booking.
           </p>
           <Link 
             href="/ticket"
             className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-[#030508] font-bold uppercase tracking-widest text-xs rounded-xl hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto"
           >
-            Go to Support Hub <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            Log a Ticket <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </motion.section>

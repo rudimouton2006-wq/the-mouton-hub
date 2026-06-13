@@ -367,13 +367,13 @@ export default function ServicesPage() {
         <div className="bg-[#0A0D14] border border-white/5 rounded-3xl p-8 md:p-12 shadow-xl">
           <h2 className="text-2xl font-bold tracking-tight text-white mb-3">Ready to get started?</h2>
           <p className="text-gray-400 text-sm mb-8 max-w-lg mx-auto">
-            Log a support ticket or reach out to our team directly via our support hub if you have any questions before booking.
+            Log a support ticket or reach out to our team directly if you have any questions before booking.
           </p>
           <Link 
             href="/ticket"
             className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-[#030508] font-bold uppercase tracking-widest text-xs rounded-xl hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto"
           >
-            Go to Support Hub <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            Log a Ticket <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </motion.section>
