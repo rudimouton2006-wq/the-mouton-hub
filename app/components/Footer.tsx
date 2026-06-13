@@ -40,7 +40,7 @@ export default function Footer() {
                 { name: "Home", path: "/" },
                 { name: "Services & Pricing", path: "/services" },
                 { name: "The Core Team", path: "/engineer" },
-                { name: "Log a Ticket", path: "/ticket" },
+                { name: "Support Hub", path: "/ticket" },
               ].map((link) => (
                 <Link 
                   key={link.name} 

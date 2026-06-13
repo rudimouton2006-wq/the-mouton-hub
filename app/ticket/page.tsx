@@ -58,7 +58,7 @@ const subMenuVariants: Variants = {
 // ---------------------------------------------------------
 // SMART TICKET FORM COMPONENT
 // ---------------------------------------------------------
-function SmartTicketForm() {
+function SupportHubInterface() {
   const searchParams = useSearchParams();
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -186,7 +186,7 @@ function SmartTicketForm() {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col gap-6 transform-gpu">
+    <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col gap-8 transform-gpu">
       
       {/* Back Navigation */}
       <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3 }}>
@@ -195,8 +195,70 @@ function SmartTicketForm() {
         </Link>
       </motion.div>
 
+      {/* --------------------------------------------------------- */}
+      {/* DIRECT COMMS GRID (Always Visible at Top) */}
+      {/* --------------------------------------------------------- */}
+      <motion.div 
+        initial={{ opacity: 0, y: 15 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full"
+      >
+        <a 
+          href="https://wa.me/27818281861" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="group flex flex-col items-center p-6 rounded-3xl bg-[#0A0D14] border border-white/5 hover:border-[#00E5FF]/30 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+        >
+          <div className="w-12 h-12 rounded-xl bg-[#030508] border border-white/5 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+            <Terminal className="w-5 h-5 text-gray-300 group-hover:text-[#00E5FF] transition-colors" />
+          </div>
+          <h4 className="text-white font-bold text-base mb-1">Message Rudi</h4>
+          <p className="text-gray-500 text-xs uppercase tracking-widest font-mono">Tech & Hardware</p>
+        </a>
+
+        <a 
+          href="https://wa.me/27614955695" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="group flex flex-col items-center p-6 rounded-3xl bg-[#0A0D14] border border-white/5 hover:border-[#2563EB]/30 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+        >
+          <div className="w-12 h-12 rounded-xl bg-[#030508] border border-white/5 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+            <Users className="w-5 h-5 text-gray-300 group-hover:text-[#2563EB] transition-colors" />
+          </div>
+          <h4 className="text-white font-bold text-base mb-1">Message Alex</h4>
+          <p className="text-gray-500 text-xs uppercase tracking-widest font-mono">Client Relations</p>
+        </a>
+
+        <a 
+          href="mailto:info@takumitech.co.za"
+          className="group flex flex-col items-center p-6 rounded-3xl bg-[#0A0D14] border border-white/5 hover:border-[#8B5CF6]/30 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+        >
+          <div className="w-12 h-12 rounded-xl bg-[#030508] border border-white/5 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+            <Mail className="w-5 h-5 text-gray-300 group-hover:text-[#8B5CF6] transition-colors" />
+          </div>
+          <h4 className="text-white font-bold text-base mb-1">Email Us</h4>
+          <p className="text-gray-500 text-xs uppercase tracking-widest font-mono">General Inquiries</p>
+        </a>
+      </motion.div>
+
+      {/* DIVIDER */}
+      <motion.div 
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.3 }}
+        className="flex items-center gap-4 py-2"
+      >
+        <div className="flex-grow h-px bg-white/5" />
+        <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Or Log A Formal Ticket</span>
+        <div className="flex-grow h-px bg-white/5" />
+      </motion.div>
+
+      {/* --------------------------------------------------------- */}
       {/* TICKET INTERFACE MATRIX */}
-      <div className="bg-[#0A0D14] border border-white/5 rounded-3xl shadow-2xl relative overflow-hidden flex flex-col min-h-[580px]">
+      {/* --------------------------------------------------------- */}
+      <motion.div 
+        initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
+        className="bg-[#0A0D14] border border-white/5 rounded-3xl shadow-2xl relative overflow-hidden flex flex-col min-h-[500px]"
+      >
         
         {/* PROGRESS INDICATOR BAR */}
         <div className="absolute top-0 left-0 w-full h-[2px] bg-white/5">
@@ -208,7 +270,7 @@ function SmartTicketForm() {
           />
         </div>
 
-        <div className="p-6 sm:p-10 md:p-12 flex flex-col flex-grow">
+        <div className="p-6 sm:p-10 flex flex-col flex-grow">
           
           {/* Header */}
           {step < 4 && (
@@ -235,7 +297,7 @@ function SmartTicketForm() {
           <form onSubmit={handleSubmit} className="flex flex-col flex-grow relative">
             <AnimatePresence mode="wait">
               
-              {/* STEP 1: IDENTITY & DIRECT CONTACT */}
+              {/* STEP 1: IDENTITY */}
               {step === 1 && (
                 <motion.div key="step1" variants={stepVariants} initial="hidden" animate="visible" exit="exit" className="flex flex-col gap-5 flex-grow justify-center will-change-transform">
                   
@@ -279,45 +341,6 @@ function SmartTicketForm() {
                     >
                       Next Step <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </button>
-
-                    {/* DIRECT CONTACT FALLBACK (Matches the Modal Design) */}
-                    <div className="flex flex-col pt-6 border-t border-white/5">
-                      <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-4">Or bypass the queue:</span>
-                      
-                      <div className="flex flex-col sm:flex-row gap-3 w-full">
-                        <a 
-                          href="https://wa.me/27818281861" 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="group flex items-center p-3 rounded-xl bg-[#030508] border border-white/5 hover:border-[#00E5FF]/40 transition-colors flex-1"
-                        >
-                          <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 mr-3">
-                            <Terminal className="w-4 h-4 text-gray-300 group-hover:text-[#00E5FF] transition-colors" />
-                          </div>
-                          <div className="flex-grow">
-                            <h4 className="text-white font-bold text-xs">Message Rudi</h4>
-                            <p className="text-gray-500 text-[10px] mt-0.5">Tech & Engineering</p>
-                          </div>
-                          <ArrowUpRight className="w-4 h-4 text-gray-500 group-hover:text-[#00E5FF] transition-colors" />
-                        </a>
-                        
-                        <a 
-                          href="https://wa.me/27614955695" 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="group flex items-center p-3 rounded-xl bg-[#030508] border border-white/5 hover:border-[#2563EB]/40 transition-colors flex-1"
-                        >
-                          <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 mr-3">
-                            <Users className="w-4 h-4 text-gray-300 group-hover:text-[#2563EB] transition-colors" />
-                          </div>
-                          <div className="flex-grow">
-                            <h4 className="text-white font-bold text-xs">Message Alex</h4>
-                            <p className="text-gray-500 text-[10px] mt-0.5">Client Relations</p>
-                          </div>
-                          <ArrowUpRight className="w-4 h-4 text-gray-500 group-hover:text-[#2563EB] transition-colors" />
-                        </a>
-                      </div>
-                    </div>
                   </div>
                 </motion.div>
               )}
@@ -485,7 +508,7 @@ function SmartTicketForm() {
           )}
 
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
@@ -504,8 +527,15 @@ export default function TicketPage() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:linear-gradient(to_bottom,black_0%,transparent_80%)]" />
       </div>
 
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 text-center mb-8">
+        <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">Support Hub</h1>
+        <p className="text-gray-400 text-sm md:text-base max-w-xl mx-auto">
+          Reach out directly to a team member below, or log a formal ticket to have your request queued immediately.
+        </p>
+      </div>
+
       <Suspense fallback={<div className="relative z-10 text-[#00E5FF] font-mono tracking-widest uppercase">Initializing Secure Terminal...</div>}>
-        <SmartTicketForm />
+        <SupportHubInterface />
       </Suspense>
       
     </div>
