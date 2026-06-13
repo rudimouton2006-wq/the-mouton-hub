@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Zap, Server, Globe, Mail, Cloud, Search, MessageCircle, Users, Terminal, X, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ShieldCheck, Zap, Server, Globe, Mail, Cloud, Search, Users, Terminal, X, ArrowUpRight, Ticket } from "lucide-react";
 
 // ---------------------------------------------------------
 // DATA: CORE SERVICES
@@ -44,7 +44,7 @@ const CAPABILITIES = [
 ];
 
 // ---------------------------------------------------------
-// HARDWARE-ACCELERATED ANIMATION VARIANTS
+// ANIMATION VARIANTS
 // ---------------------------------------------------------
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -64,19 +64,17 @@ const itemVariants: Variants = {
 };
 
 export default function HomePage() {
-  // State to handle the contact modal visibility
   const [isContactOpen, setIsContactOpen] = useState(false);
 
   return (
     <main className="relative w-full flex flex-col items-center justify-start z-10 min-h-screen bg-[#030508] selection:bg-[#00E5FF]/30 selection:text-white">
       
       {/* --------------------------------------------------------- */}
-      {/* CONTACT MODAL (POPUP) */}
+      {/* UNIVERSAL CONTACT MODAL */}
       {/* --------------------------------------------------------- */}
       <AnimatePresence>
         {isContactOpen && (
           <>
-            {/* Background Blur Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -85,7 +83,6 @@ export default function HomePage() {
               className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm"
             />
             
-            {/* Modal Content */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -102,25 +99,42 @@ export default function HomePage() {
                   <X className="w-5 h-5" />
                 </button>
 
-                <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">Get in Touch</h3>
-                <p className="text-gray-400 text-sm mb-8">Select who you'd like to speak with, and we'll get back to you immediately.</p>
+                <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">How can we help?</h3>
+                <p className="text-gray-400 text-sm mb-6">Choose an option below to get in touch or log a formal support request.</p>
 
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-3">
+                  {/* Log a Ticket */}
+                  <Link 
+                    href="/ticket"
+                    className="group flex items-center p-4 rounded-2xl bg-[#00E5FF]/5 border border-[#00E5FF]/20 hover:bg-[#00E5FF]/10 transition-colors"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-[#00E5FF]/10 flex items-center justify-center shrink-0 mr-4">
+                      <Ticket className="w-5 h-5 text-[#00E5FF]" />
+                    </div>
+                    <div className="flex-grow">
+                      <h4 className="text-[#00E5FF] font-bold text-sm tracking-wide">Log a Support Ticket</h4>
+                      <p className="text-gray-400 text-xs mt-0.5">Best for new service requests.</p>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-[#00E5FF] group-hover:translate-x-1 transition-transform" />
+                  </Link>
+
+                  <div className="w-full h-px bg-white/5 my-1" />
+
                   {/* Rudi Contact */}
                   <a 
                     href="https://wa.me/27818281861" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="group flex items-center p-4 rounded-2xl bg-[#030508] border border-white/5 hover:border-[#00E5FF]/40 transition-colors"
+                    className="group flex items-center p-4 rounded-2xl bg-[#030508] border border-white/5 hover:border-white/20 transition-colors"
                   >
-                    <div className="w-12 h-12 rounded-full bg-[#00E5FF]/10 flex items-center justify-center border border-[#00E5FF]/20 shrink-0 mr-4 group-hover:scale-110 transition-transform">
-                      <Terminal className="w-5 h-5 text-[#00E5FF]" />
+                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center shrink-0 mr-4">
+                      <Terminal className="w-4 h-4 text-gray-300" />
                     </div>
                     <div className="flex-grow">
-                      <h4 className="text-white font-bold text-sm">Message Rudi Mouton</h4>
-                      <p className="text-[#00E5FF] text-xs font-mono tracking-widest uppercase mt-1">Founder & Lead Engineer</p>
+                      <h4 className="text-white font-semibold text-sm">Message Rudi</h4>
+                      <p className="text-gray-500 text-xs mt-0.5">Founder & Lead Engineer</p>
                     </div>
-                    <ArrowUpRight className="w-5 h-5 text-gray-500 group-hover:text-[#00E5FF] transition-colors" />
+                    <ArrowUpRight className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" />
                   </a>
 
                   {/* Alex Contact */}
@@ -128,26 +142,24 @@ export default function HomePage() {
                     href="https://wa.me/27614955695" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="group flex items-center p-4 rounded-2xl bg-[#030508] border border-white/5 hover:border-[#2563EB]/40 transition-colors"
+                    className="group flex items-center p-4 rounded-2xl bg-[#030508] border border-white/5 hover:border-white/20 transition-colors"
                   >
-                    <div className="w-12 h-12 rounded-full bg-[#2563EB]/10 flex items-center justify-center border border-[#2563EB]/20 shrink-0 mr-4 group-hover:scale-110 transition-transform">
-                      <Users className="w-5 h-5 text-[#2563EB]" />
+                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center shrink-0 mr-4">
+                      <Users className="w-4 h-4 text-gray-300" />
                     </div>
                     <div className="flex-grow">
-                      <h4 className="text-white font-bold text-sm">Message Alex</h4>
-                      <p className="text-[#2563EB] text-xs font-mono tracking-widest uppercase mt-1">Client Relations Manager</p>
+                      <h4 className="text-white font-semibold text-sm">Message Alex</h4>
+                      <p className="text-gray-500 text-xs mt-0.5">Client Relations</p>
                     </div>
-                    <ArrowUpRight className="w-5 h-5 text-gray-500 group-hover:text-[#2563EB] transition-colors" />
+                    <ArrowUpRight className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" />
                   </a>
 
-                  <div className="w-full h-px bg-white/5 my-2" />
-
-                  {/* Email Fallback */}
+                  {/* Email */}
                   <a 
                     href="mailto:info@takumitech.co.za"
-                    className="flex items-center justify-center gap-2 w-full py-3 text-sm text-gray-400 hover:text-white transition-colors"
+                    className="flex items-center justify-center gap-2 w-full pt-4 pb-2 text-sm text-gray-400 hover:text-white transition-colors"
                   >
-                    <Mail className="w-4 h-4" /> Prefer email? info@takumitech.co.za
+                    <Mail className="w-4 h-4" /> info@takumitech.co.za
                   </a>
                 </div>
               </div>
@@ -157,7 +169,7 @@ export default function HomePage() {
       </AnimatePresence>
 
       {/* --------------------------------------------------------- */}
-      {/* STATIC AMBIENT BACKGROUND */}
+      {/* BACKGROUND */}
       {/* --------------------------------------------------------- */}
       <div className="absolute inset-0 z-0 pointer-events-none transform-gpu overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1000px] h-[500px] bg-gradient-to-b from-[#00E5FF]/5 via-[#2563EB]/5 to-transparent blur-3xl opacity-40" />
@@ -192,7 +204,7 @@ export default function HomePage() {
           </motion.h1>
 
           <motion.p variants={itemVariants} className="max-w-2xl text-base sm:text-lg text-gray-400 mb-12 leading-relaxed font-medium px-4">
-            Welcome to Takumi Tech. We build incredibly fast websites and provide expert-level computer support. Built for individuals and businesses who want things done right the first time.
+            Welcome to Takumi Tech. We build extremely fast websites and provide expert computer support. Simple, honest, and done right the first time.
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto px-6 sm:px-0">
@@ -220,7 +232,7 @@ export default function HomePage() {
               Our Core Services
             </h2>
             <p className="text-gray-400 text-sm md:text-base leading-relaxed">
-              Permanent, high-quality solutions for your computers, networks, and business platforms. No shortcuts.
+              Permanent, high-quality solutions for your computers, networks, and business websites. We do not take shortcuts.
             </p>
           </div>
           
@@ -253,15 +265,15 @@ export default function HomePage() {
       </section>
 
       {/* --------------------------------------------------------- */}
-      {/* WEB DEPLOYMENT PACKAGES */}
+      {/* WEBSITE DESIGN OPTIONS */}
       {/* --------------------------------------------------------- */}
       <section className="w-full max-w-5xl mx-auto px-4 sm:px-6 relative z-10 mb-32">
         <div className="flex flex-col items-center text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-            Website Design Packages
+            Website Design Options
           </h2>
           <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-xl">
-            Choose a foundation build to manage yourself, or opt for our managed plan where we handle all the technical heavy lifting.
+            Choose a foundation build to manage yourself, or choose our managed plan where we handle all the technical heavy lifting.
           </p>
         </div>
 
@@ -277,15 +289,15 @@ export default function HomePage() {
             <ul className="flex flex-col gap-4 text-gray-400 text-sm flex-grow mb-8">
               <li className="flex items-start gap-3">
                 <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#00E5FF] shrink-0" />
-                <span>Includes full setup and your <strong>.co.za</strong> domain.</span>
+                <span>Includes full setup and your <strong>.co.za</strong> web address.</span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#00E5FF] shrink-0" />
-                <span>Up to two rounds of design revisions.</span>
+                <span>Up to two rounds of design changes to ensure you are happy.</span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#00E5FF] shrink-0" />
-                <span><strong>No monthly fees.</strong> Future updates billed at R150/hr.</span>
+                <span><strong>No monthly fees.</strong> Future updates are billed at just R150/hr.</span>
               </li>
             </ul>
             <button onClick={() => setIsContactOpen(true)} className="w-full py-4 bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/20 font-bold uppercase tracking-widest text-xs rounded-xl hover:bg-[#00E5FF] hover:text-[#030508] transition-all duration-300">
@@ -306,15 +318,15 @@ export default function HomePage() {
             <ul className="flex flex-col gap-4 text-gray-400 text-sm flex-grow mb-8">
               <li className="flex items-start gap-3">
                 <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#8B5CF6] shrink-0" />
-                <span><strong>R0 upfront</strong> (Initial setup is completely free).</span>
+                <span><strong>R0 upfront</strong> (The entire initial setup is free).</span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#8B5CF6] shrink-0" />
-                <span>Covers premium hosting and domain name.</span>
+                <span>Covers premium hosting and your web address.</span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#8B5CF6] shrink-0" />
-                <span>Includes <strong>1 hour</strong> of technical updates every month.</span>
+                <span>Includes <strong>1 hour</strong> of technical updates from us every month.</span>
               </li>
             </ul>
             <button onClick={() => setIsContactOpen(true)} className="w-full py-4 bg-[#8B5CF6] text-white font-bold uppercase tracking-widest text-xs rounded-xl hover:bg-[#7C3AED] transition-colors duration-300">
@@ -326,7 +338,7 @@ export default function HomePage() {
       </section>
 
       {/* --------------------------------------------------------- */}
-      {/* OPTIONAL UPGRADES & ADD-ONS */}
+      {/* OPTIONAL ADD-ONS */}
       {/* --------------------------------------------------------- */}
       <motion.section 
         initial="hidden"
@@ -340,7 +352,7 @@ export default function HomePage() {
             Optional Enhancements
           </h2>
           <p className="text-gray-400 text-sm md:text-base max-w-xl">
-            Add these powerful upgrades to look more professional or protect your business data.
+            Add these powerful upgrades to look more professional and protect your business data.
           </p>
         </div>
 
@@ -356,10 +368,10 @@ export default function HomePage() {
             </div>
             <h3 className="text-base font-bold text-white mb-2">Professional Email</h3>
             <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
-              Stop using Gmail. We manage a custom email (info@yourbusiness.co.za) for ultimate credibility.
+              Stop using Gmail. We set up a custom email (info@yourbusiness.co.za) so your business looks credible.
             </p>
-            <button onClick={() => setIsContactOpen(true)} className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#00E5FF] transition-colors text-left">
-              Request Setup →
+            <button onClick={() => setIsContactOpen(true)} className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#00E5FF] transition-colors text-left flex items-center gap-1">
+              Request Setup <ArrowRight className="w-3 h-3" />
             </button>
           </motion.div>
 
@@ -373,10 +385,10 @@ export default function HomePage() {
             </div>
             <h3 className="text-base font-bold text-white mb-2">Secure Cloud Backups</h3>
             <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
-              Never lose files to a broken drive. We configure silent, automated cloud backups for your computers.
+              Never lose files to a broken drive. We configure silent, automatic cloud backups for your computers.
             </p>
-            <button onClick={() => setIsContactOpen(true)} className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#A855F7] transition-colors text-left">
-              Protect Data →
+            <button onClick={() => setIsContactOpen(true)} className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#A855F7] transition-colors text-left flex items-center gap-1">
+              Protect Data <ArrowRight className="w-3 h-3" />
             </button>
           </motion.div>
 
@@ -392,11 +404,34 @@ export default function HomePage() {
             <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
               We build your complete Google Profile so local clients can easily find your location and trading hours.
             </p>
-            <button onClick={() => setIsContactOpen(true)} className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#10B981] transition-colors text-left">
-              Get Listed →
+            <button onClick={() => setIsContactOpen(true)} className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#10B981] transition-colors text-left flex items-center gap-1">
+              Get Listed <ArrowRight className="w-3 h-3" />
             </button>
           </motion.div>
 
+        </div>
+      </motion.section>
+
+      {/* --------------------------------------------------------- */}
+      {/* BOTTOM CONTACT CTA */}
+      {/* --------------------------------------------------------- */}
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="w-full max-w-3xl mx-auto px-4 sm:px-6 mb-16 z-10 text-center will-change-transform"
+      >
+        <div className="bg-[#0A0D14] border border-white/5 rounded-3xl p-8 md:p-12">
+          <h2 className="text-2xl font-bold tracking-tight text-white mb-3">Ready to get started?</h2>
+          <p className="text-gray-400 text-sm mb-8 max-w-lg mx-auto">
+            Log a support ticket or reach out to our team directly if you have any questions before booking.
+          </p>
+          <button 
+            onClick={() => setIsContactOpen(true)}
+            className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#030508] font-bold uppercase tracking-widest text-xs rounded-xl hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto"
+          >
+            Contact Us
+          </button>
         </div>
       </motion.section>
 

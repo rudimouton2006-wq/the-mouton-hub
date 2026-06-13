@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Terminal, Mail, ArrowRight, ShieldCheck, ArrowUpRight } from "lucide-react";
+import { Terminal, Mail, ArrowRight, ShieldCheck, MessageCircle } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -45,7 +45,7 @@ export default function Footer() {
                 <Link 
                   key={link.name} 
                   href={link.path}
-                  className="text-gray-400 text-sm hover:text-white transition-colors w-max flex items-center gap-2 group"
+                  className="text-gray-400 text-sm font-medium hover:text-white transition-colors w-max flex items-center gap-2 group"
                 >
                   <ArrowRight className="w-3 h-3 text-[#00E5FF] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                   {link.name}
@@ -54,7 +54,7 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* 3. LEGAL & DOCS COLUMN */}
+          {/* 3. LEGAL COLUMN */}
           <div className="md:col-span-2 flex flex-col gap-5">
             <h3 className="text-white font-bold uppercase tracking-widest text-xs flex items-center gap-2">
               Legal
@@ -62,7 +62,7 @@ export default function Footer() {
             <nav className="flex flex-col gap-3">
               <Link 
                 href="/terms"
-                className="text-gray-400 text-sm hover:text-white transition-colors w-max flex items-center gap-2 group"
+                className="text-gray-400 text-sm font-medium hover:text-white transition-colors w-max flex items-center gap-2 group"
               >
                 <ShieldCheck className="w-3.5 h-3.5 text-gray-500 group-hover:text-[#2563EB] transition-colors" />
                 Terms of Service
@@ -70,35 +70,50 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* 4. DIRECT CONTACT COLUMN */}
+          {/* 4. DIRECT CONTACT COLUMN (Re-engineered for uniform comms) */}
           <div className="md:col-span-3 flex flex-col gap-5">
             <h3 className="text-white font-bold uppercase tracking-widest text-xs flex items-center gap-2">
               Direct Comms
             </h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-1">
-              Have a custom request? Reach out to the team directly.
-            </p>
-            
-            <a 
-              href="mailto:info@takumitech.co.za"
-              className="group flex items-center gap-3 text-sm text-gray-300 hover:text-[#00E5FF] transition-colors w-max"
-            >
-              <div className="w-8 h-8 rounded-lg bg-[#0A0D14] border border-white/5 flex items-center justify-center group-hover:border-[#00E5FF]/30 transition-colors">
-                <Mail className="w-3.5 h-3.5" />
-              </div>
-              <span className="font-medium">info@takumitech.co.za</span>
-              <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </a>
+            <div className="flex flex-col gap-4">
+              <a 
+                href="https://wa.me/27818281861" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 text-sm text-gray-400 hover:text-white transition-colors w-max"
+              >
+                <MessageCircle className="w-4 h-4 text-gray-500 group-hover:text-[#00E5FF] transition-colors" />
+                <span className="font-bold">Message Rudi <span className="text-[10px] font-normal uppercase tracking-widest opacity-50 ml-1">Tech</span></span>
+              </a>
+              
+              <a 
+                href="https://wa.me/27614955695" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 text-sm text-gray-400 hover:text-white transition-colors w-max"
+              >
+                <MessageCircle className="w-4 h-4 text-gray-500 group-hover:text-[#2563EB] transition-colors" />
+                <span className="font-bold">Message Alex <span className="text-[10px] font-normal uppercase tracking-widest opacity-50 ml-1">Support</span></span>
+              </a>
+
+              <a 
+                href="mailto:info@takumitech.co.za"
+                className="group flex items-center gap-3 text-sm text-gray-400 hover:text-white transition-colors w-max mt-2"
+              >
+                <Mail className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" />
+                <span className="font-medium">info@takumitech.co.za</span>
+              </a>
+            </div>
           </div>
 
         </div>
 
         {/* BOTTOM COPYRIGHT BAR */}
         <div className="w-full pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest text-center md:text-left">
+          <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest text-center md:text-left">
             © {currentYear} Takumi Tech. All rights reserved.
           </p>
-          <div className="flex items-center gap-2 text-[10px] font-mono text-gray-500 uppercase tracking-widest bg-[#0A0D14] px-4 py-2 rounded-full border border-white/5">
+          <div className="flex items-center gap-2 text-[10px] font-bold text-gray-500 uppercase tracking-widest bg-[#0A0D14] px-4 py-2 rounded-full border border-white/5">
             <span className="flex h-2 w-2 relative">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00E5FF] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00E5FF]"></span>

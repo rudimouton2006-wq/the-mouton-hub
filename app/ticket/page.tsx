@@ -2,7 +2,11 @@
 
 import { useState, FormEvent, useEffect, Suspense } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { Send, Terminal, ShieldCheck, CheckCircle, XCircle, ArrowLeft, Activity, Server, Globe, Layers, Network, Wrench, User, Mail, AlignLeft, ArrowRight, Briefcase, Search, Cloud, MapPin, MessageCircle, Users } from "lucide-react";
+import { 
+  Send, Terminal, ShieldCheck, CheckCircle, XCircle, ArrowLeft, 
+  Activity, Server, Globe, Layers, Network, Wrench, User, Mail, 
+  AlignLeft, ArrowRight, Briefcase, Search, Cloud, MapPin, Users, ArrowUpRight 
+} from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
@@ -122,15 +126,13 @@ function SmartTicketForm() {
       setSelectedCategory(option.id);
     } else {
       setFormData({ ...formData, module: option.label });
-      // Smoother transition delay
       setTimeout(() => setStep(3), 150); 
     }
   };
 
-  // SMART NAVIGATION LOGIC
   const handleNext = () => {
     if (step === 1 && isPreselected) {
-      setStep(3); // Skip category selection if URL pre-filled it
+      setStep(3);
     } else {
       setStep((prev) => prev + 1);
     }
@@ -138,7 +140,7 @@ function SmartTicketForm() {
   
   const handleBack = () => {
     if (step === 3 && isPreselected) {
-      setStep(1); // Jump back to name/email
+      setStep(1);
     } else if (step === 2 && selectedCategory) {
       setSelectedCategory(null);
     } else {
@@ -188,15 +190,15 @@ function SmartTicketForm() {
       
       {/* Back Navigation */}
       <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3 }}>
-        <Link href="/" className="inline-flex items-center gap-2 text-xs font-mono text-gray-500 hover:text-white transition-colors uppercase tracking-widest group">
+        <Link href="/" className="inline-flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-white transition-colors uppercase tracking-widest group">
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform text-[#00E5FF]" /> Back to Home
         </Link>
       </motion.div>
 
-      {/* TICKET INTERFACE MATRIX (SOLID STATE) */}
+      {/* TICKET INTERFACE MATRIX */}
       <div className="bg-[#0A0D14] border border-white/5 rounded-3xl shadow-2xl relative overflow-hidden flex flex-col min-h-[580px]">
         
-        {/* ULTRA-THIN PROGRESS INDICATOR BAR */}
+        {/* PROGRESS INDICATOR BAR */}
         <div className="absolute top-0 left-0 w-full h-[2px] bg-white/5">
           <motion.div 
             className="h-full bg-gradient-to-r from-[#00E5FF] to-[#2563EB]"
@@ -233,7 +235,7 @@ function SmartTicketForm() {
           <form onSubmit={handleSubmit} className="flex flex-col flex-grow relative">
             <AnimatePresence mode="wait">
               
-              {/* STEP 1: IDENTITY */}
+              {/* STEP 1: IDENTITY & DIRECT CONTACT */}
               {step === 1 && (
                 <motion.div key="step1" variants={stepVariants} initial="hidden" animate="visible" exit="exit" className="flex flex-col gap-5 flex-grow justify-center will-change-transform">
                   
@@ -247,7 +249,7 @@ function SmartTicketForm() {
                   )}
 
                   <div className="flex flex-col gap-2">
-                    <label className="text-[10px] font-mono text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-2">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-2">
                       <User className="w-3 h-3" /> Your Full Name
                     </label>
                     <input 
@@ -258,7 +260,7 @@ function SmartTicketForm() {
                   </div>
 
                   <div className="flex flex-col gap-2 mb-4">
-                    <label className="text-[10px] font-mono text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-2">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-2">
                       <Mail className="w-3 h-3" /> Email Address
                     </label>
                     <input 
@@ -268,10 +270,7 @@ function SmartTicketForm() {
                     />
                   </div>
 
-                  {/* RE-ENGINEERED CONTACT & SUBMIT SECTION */}
                   <div className="mt-auto flex flex-col gap-6 pt-4">
-                    
-                    {/* Primary Action */}
                     <button 
                       type="button" 
                       onClick={handleNext} 
@@ -281,33 +280,44 @@ function SmartTicketForm() {
                       Next Step <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </button>
 
-                    {/* Secondary Fallback Actions (Clean & Minimalist) */}
-                    <div className="flex flex-col items-center pt-6 border-t border-white/5">
-                      <span className="text-[10px] font-mono text-gray-600 uppercase tracking-widest mb-4">Or bypass the queue:</span>
+                    {/* DIRECT CONTACT FALLBACK (Matches the Modal Design) */}
+                    <div className="flex flex-col pt-6 border-t border-white/5">
+                      <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-4">Or bypass the queue:</span>
                       
-                      <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                      <div className="flex flex-col sm:flex-row gap-3 w-full">
                         <a 
                           href="https://wa.me/27818281861" 
                           target="_blank" 
                           rel="noopener noreferrer" 
-                          className="flex items-center justify-center gap-2 px-6 py-3 bg-[#030508] border border-white/5 text-gray-300 rounded-xl transition-all hover:border-[#00E5FF]/30 hover:text-[#00E5FF]"
+                          className="group flex items-center p-3 rounded-xl bg-[#030508] border border-white/5 hover:border-[#00E5FF]/40 transition-colors flex-1"
                         >
-                          <MessageCircle className="w-4 h-4" /> 
-                          <span className="text-xs font-bold uppercase tracking-wider">Rudi <span className="opacity-50 font-normal">(Tech)</span></span>
+                          <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 mr-3">
+                            <Terminal className="w-4 h-4 text-gray-300 group-hover:text-[#00E5FF] transition-colors" />
+                          </div>
+                          <div className="flex-grow">
+                            <h4 className="text-white font-bold text-xs">Message Rudi</h4>
+                            <p className="text-gray-500 text-[10px] mt-0.5">Tech & Engineering</p>
+                          </div>
+                          <ArrowUpRight className="w-4 h-4 text-gray-500 group-hover:text-[#00E5FF] transition-colors" />
                         </a>
                         
                         <a 
                           href="https://wa.me/27614955695" 
                           target="_blank" 
                           rel="noopener noreferrer" 
-                          className="flex items-center justify-center gap-2 px-6 py-3 bg-[#030508] border border-white/5 text-gray-300 rounded-xl transition-all hover:border-[#2563EB]/30 hover:text-[#2563EB]"
+                          className="group flex items-center p-3 rounded-xl bg-[#030508] border border-white/5 hover:border-[#2563EB]/40 transition-colors flex-1"
                         >
-                          <MessageCircle className="w-4 h-4" /> 
-                          <span className="text-xs font-bold uppercase tracking-wider">Alex <span className="opacity-50 font-normal">(Support)</span></span>
+                          <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 mr-3">
+                            <Users className="w-4 h-4 text-gray-300 group-hover:text-[#2563EB] transition-colors" />
+                          </div>
+                          <div className="flex-grow">
+                            <h4 className="text-white font-bold text-xs">Message Alex</h4>
+                            <p className="text-gray-500 text-[10px] mt-0.5">Client Relations</p>
+                          </div>
+                          <ArrowUpRight className="w-4 h-4 text-gray-500 group-hover:text-[#2563EB] transition-colors" />
                         </a>
                       </div>
                     </div>
-
                   </div>
                 </motion.div>
               )}
@@ -410,7 +420,7 @@ function SmartTicketForm() {
               {step === 3 && (
                 <motion.div key="step3" variants={stepVariants} initial="hidden" animate="visible" exit="exit" className="flex flex-col gap-6 flex-grow will-change-transform">
                   <div className="flex flex-col gap-2 flex-grow">
-                    <label className="text-[10px] font-mono text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-2">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-2">
                       <AlignLeft className="w-3 h-3" /> Provide Request Details
                     </label>
                     <textarea 

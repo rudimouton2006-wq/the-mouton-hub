@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
-import { Terminal, Cpu, ShieldCheck, Mail, MessageCircle, Activity, Users, X, ArrowUpRight, Code } from "lucide-react";
+import Link from "next/link";
+import { Terminal, Cpu, ShieldCheck, Mail, Activity, Users, X, ArrowUpRight, Code, Ticket, ArrowRight } from "lucide-react";
 
 // ---------------------------------------------------------
-// HARDWARE-ACCELERATED ANIMATION VARIANTS
+// ANIMATION VARIANTS
 // ---------------------------------------------------------
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -31,7 +32,7 @@ export default function EngineerPage() {
     <main className="relative w-full min-h-screen flex flex-col items-center justify-start pb-32 pt-12 md:pt-24 z-10 overflow-x-hidden selection:bg-[#00E5FF]/30 selection:text-white bg-[#030508]">
       
       {/* --------------------------------------------------------- */}
-      {/* CONTACT MODAL (POPUP) */}
+      {/* UNIVERSAL CONTACT MODAL */}
       {/* --------------------------------------------------------- */}
       <AnimatePresence>
         {isContactOpen && (
@@ -60,25 +61,42 @@ export default function EngineerPage() {
                   <X className="w-5 h-5" />
                 </button>
 
-                <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">Direct Comms</h3>
-                <p className="text-gray-400 text-sm mb-8">Select a team member to speak with, or send us an email directly.</p>
+                <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">How can we help?</h3>
+                <p className="text-gray-400 text-sm mb-6">Choose an option below to get in touch or log a formal support request.</p>
 
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-3">
+                  {/* Log a Ticket */}
+                  <Link 
+                    href="/ticket"
+                    className="group flex items-center p-4 rounded-2xl bg-[#00E5FF]/5 border border-[#00E5FF]/20 hover:bg-[#00E5FF]/10 transition-colors"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-[#00E5FF]/10 flex items-center justify-center shrink-0 mr-4">
+                      <Ticket className="w-5 h-5 text-[#00E5FF]" />
+                    </div>
+                    <div className="flex-grow">
+                      <h4 className="text-[#00E5FF] font-bold text-sm tracking-wide">Log a Support Ticket</h4>
+                      <p className="text-gray-400 text-xs mt-0.5">Best for new service requests.</p>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-[#00E5FF] group-hover:translate-x-1 transition-transform" />
+                  </Link>
+
+                  <div className="w-full h-px bg-white/5 my-1" />
+
                   {/* Rudi Contact */}
                   <a 
                     href="https://wa.me/27818281861" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="group flex items-center p-4 rounded-2xl bg-[#030508] border border-white/5 hover:border-[#00E5FF]/40 transition-colors"
+                    className="group flex items-center p-4 rounded-2xl bg-[#030508] border border-white/5 hover:border-white/20 transition-colors"
                   >
-                    <div className="w-12 h-12 rounded-full bg-[#00E5FF]/10 flex items-center justify-center border border-[#00E5FF]/20 shrink-0 mr-4 group-hover:scale-110 transition-transform">
-                      <Terminal className="w-5 h-5 text-[#00E5FF]" />
+                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center shrink-0 mr-4">
+                      <Terminal className="w-4 h-4 text-gray-300" />
                     </div>
                     <div className="flex-grow">
-                      <h4 className="text-white font-bold text-sm">Message Rudi</h4>
-                      <p className="text-[#00E5FF] text-xs font-mono tracking-widest uppercase mt-1">Founder & Lead Engineer</p>
+                      <h4 className="text-white font-semibold text-sm">Message Rudi</h4>
+                      <p className="text-gray-500 text-xs mt-0.5">Founder & Lead Engineer</p>
                     </div>
-                    <ArrowUpRight className="w-5 h-5 text-gray-500 group-hover:text-[#00E5FF] transition-colors" />
+                    <ArrowUpRight className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" />
                   </a>
 
                   {/* Alex Contact */}
@@ -86,24 +104,22 @@ export default function EngineerPage() {
                     href="https://wa.me/27614955695" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="group flex items-center p-4 rounded-2xl bg-[#030508] border border-white/5 hover:border-[#2563EB]/40 transition-colors"
+                    className="group flex items-center p-4 rounded-2xl bg-[#030508] border border-white/5 hover:border-white/20 transition-colors"
                   >
-                    <div className="w-12 h-12 rounded-full bg-[#2563EB]/10 flex items-center justify-center border border-[#2563EB]/20 shrink-0 mr-4 group-hover:scale-110 transition-transform">
-                      <Users className="w-5 h-5 text-[#2563EB]" />
+                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center shrink-0 mr-4">
+                      <Users className="w-4 h-4 text-gray-300" />
                     </div>
                     <div className="flex-grow">
-                      <h4 className="text-white font-bold text-sm">Message Alex</h4>
-                      <p className="text-[#2563EB] text-xs font-mono tracking-widest uppercase mt-1">Client Relations Manager</p>
+                      <h4 className="text-white font-semibold text-sm">Message Alex</h4>
+                      <p className="text-gray-500 text-xs mt-0.5">Client Relations</p>
                     </div>
-                    <ArrowUpRight className="w-5 h-5 text-gray-500 group-hover:text-[#2563EB] transition-colors" />
+                    <ArrowUpRight className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" />
                   </a>
-
-                  <div className="w-full h-px bg-white/5 my-2" />
 
                   {/* Email */}
                   <a 
                     href="mailto:info@takumitech.co.za"
-                    className="flex items-center justify-center gap-2 w-full py-3 text-sm text-gray-400 hover:text-white transition-colors"
+                    className="flex items-center justify-center gap-2 w-full pt-4 pb-2 text-sm text-gray-400 hover:text-white transition-colors"
                   >
                     <Mail className="w-4 h-4" /> info@takumitech.co.za
                   </a>
@@ -115,9 +131,9 @@ export default function EngineerPage() {
       </AnimatePresence>
 
       {/* --------------------------------------------------------- */}
-      {/* STATIC AMBIENT BACKGROUND */}
+      {/* BACKGROUND */}
       {/* --------------------------------------------------------- */}
-      <div className="absolute inset-0 z-0 pointer-events-none transform-gpu">
+      <div className="absolute inset-0 z-0 pointer-events-none transform-gpu overflow-hidden">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-[#00E5FF]/5 to-transparent blur-3xl opacity-40" />
         <div className="absolute top-[40%] left-0 w-[600px] h-[600px] bg-gradient-to-tr from-[#2563EB]/5 to-transparent blur-3xl opacity-40" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:linear-gradient(to_bottom,black_0%,transparent_80%)]" />
@@ -130,7 +146,7 @@ export default function EngineerPage() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative w-full max-w-5xl mx-auto text-center px-4 sm:px-6 mb-24 z-10 will-change-transform"
+        className="relative w-full max-w-5xl mx-auto text-center px-4 sm:px-6 mb-20 z-10 will-change-transform"
       >
         <motion.div variants={itemVariants} className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-[#0A0D14] border border-white/5 mb-8 shadow-sm">
           <span className="text-[10px] sm:text-xs font-mono text-[#00E5FF] tracking-[0.2em] uppercase font-semibold">
@@ -154,16 +170,16 @@ export default function EngineerPage() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="w-full max-w-3xl mx-auto px-4 sm:px-6 z-10 mb-24 text-center will-change-transform relative"
+        className="w-full max-w-4xl mx-auto px-4 sm:px-6 z-10 mb-24 text-center will-change-transform relative"
       >
-        <motion.div variants={itemVariants} className="relative p-8 md:p-12 rounded-3xl bg-[#0A0D14] border border-white/5 overflow-hidden">
+        <motion.div variants={itemVariants} className="relative p-8 md:p-12 rounded-3xl bg-[#0A0D14] border border-white/5 overflow-hidden shadow-lg hover:border-[#00E5FF]/20 transition-colors duration-500">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-[#00E5FF]/50 to-transparent" />
           
-          <Code className="w-6 h-6 text-[#00E5FF] mx-auto mb-6 opacity-50" />
+          <Code className="w-8 h-8 text-[#00E5FF] mx-auto mb-6 opacity-80" />
           
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 tracking-tight">The Takumi Philosophy</h2>
           <p className="text-gray-400 text-base md:text-lg leading-relaxed font-medium">
-            In Japanese culture, <strong className="text-white font-bold">"Takumi" (匠)</strong> translates to a master artisan—an individual who dedicates their entire life to perfecting a single craft. Takumi Tech was built on this exact principle. We do not believe in quick fixes or mass-produced templates. Absolute trust requires absolute competence.
+            In Japanese culture, <strong className="text-white font-bold tracking-wide">"Takumi" (匠)</strong> translates to a master artisan—an individual who dedicates their entire life to perfecting a single craft. Takumi Tech was built on this exact principle. We do not believe in quick fixes, shortcuts, or mass-produced templates. Absolute trust requires absolute competence.
           </p>
         </motion.div>
       </motion.section>
@@ -199,7 +215,7 @@ export default function EngineerPage() {
                 Founder & Lead Engineer
               </span>
               
-              <div className="space-y-4 text-gray-400 text-sm leading-relaxed flex-grow">
+              <div className="space-y-4 text-gray-400 text-sm md:text-base leading-relaxed flex-grow">
                 <p>
                   Currently advancing my formal education in Computer Engineering, I approach every project with a deep, structural understanding of how technology actually works. I don't just troubleshoot problems; I understand the fundamental architecture of your systems.
                 </p>
@@ -229,7 +245,7 @@ export default function EngineerPage() {
                 Client Relations Manager
               </span>
               
-              <div className="space-y-4 text-gray-400 text-sm leading-relaxed flex-grow">
+              <div className="space-y-4 text-gray-400 text-sm md:text-base leading-relaxed flex-grow">
                 <p>
                   Technology is only as effective as the people supporting it. Alex brings a deep understanding of human behavior, communication, and expectation management to the Takumi Tech ecosystem.
                 </p>
@@ -259,7 +275,7 @@ export default function EngineerPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
           {/* Virtue 1 */}
-          <motion.div variants={itemVariants} className="flex flex-col bg-[#0A0D14] border border-white/5 rounded-3xl p-8 text-center items-center">
+          <motion.div variants={itemVariants} className="flex flex-col bg-[#0A0D14] border border-white/5 rounded-3xl p-8 text-center items-center hover:bg-[#030508] transition-colors">
             <div className="w-12 h-12 rounded-xl bg-[#00E5FF]/10 flex items-center justify-center border border-[#00E5FF]/20 mb-6">
               <Cpu className="w-6 h-6 text-[#00E5FF]" />
             </div>
@@ -270,7 +286,7 @@ export default function EngineerPage() {
           </motion.div>
 
           {/* Virtue 2 */}
-          <motion.div variants={itemVariants} className="flex flex-col bg-[#0A0D14] border border-white/5 rounded-3xl p-8 text-center items-center">
+          <motion.div variants={itemVariants} className="flex flex-col bg-[#0A0D14] border border-white/5 rounded-3xl p-8 text-center items-center hover:bg-[#030508] transition-colors">
             <div className="w-12 h-12 rounded-xl bg-[#2563EB]/10 flex items-center justify-center border border-[#2563EB]/20 mb-6">
               <Activity className="w-6 h-6 text-[#2563EB]" />
             </div>
@@ -281,7 +297,7 @@ export default function EngineerPage() {
           </motion.div>
 
           {/* Virtue 3 */}
-          <motion.div variants={itemVariants} className="flex flex-col bg-[#0A0D14] border border-white/5 rounded-3xl p-8 text-center items-center">
+          <motion.div variants={itemVariants} className="flex flex-col bg-[#0A0D14] border border-white/5 rounded-3xl p-8 text-center items-center hover:bg-[#030508] transition-colors">
             <div className="w-12 h-12 rounded-xl bg-[#10B981]/10 flex items-center justify-center border border-[#10B981]/20 mb-6">
               <ShieldCheck className="w-6 h-6 text-[#10B981]" />
             </div>
@@ -295,7 +311,7 @@ export default function EngineerPage() {
       </motion.section>
 
       {/* --------------------------------------------------------- */}
-      {/* CLEAN CONTACT CTA */}
+      {/* BOTTOM CONTACT CTA */}
       {/* --------------------------------------------------------- */}
       <motion.section
         initial={{ opacity: 0, y: 20 }}
@@ -303,10 +319,10 @@ export default function EngineerPage() {
         viewport={{ once: true }}
         className="w-full max-w-3xl mx-auto px-4 sm:px-6 mb-16 z-10 text-center will-change-transform"
       >
-        <div className="bg-[#0A0D14] border border-white/5 rounded-3xl p-8 md:p-12">
+        <div className="bg-[#0A0D14] border border-white/5 rounded-3xl p-8 md:p-12 shadow-xl">
           <h2 className="text-2xl font-bold tracking-tight text-white mb-3">Need to chat before booking?</h2>
           <p className="text-gray-400 text-sm mb-8 max-w-lg mx-auto">
-            Get in touch with us directly via WhatsApp or email for any specific inquiries.
+            Get in touch with us directly via WhatsApp or email for any specific inquiries, or launch a formal support ticket.
           </p>
           <button 
             onClick={() => setIsContactOpen(true)}

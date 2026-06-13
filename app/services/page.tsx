@@ -5,7 +5,7 @@ import { motion, Variants, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { 
   ArrowRight, ShieldCheck, Server, Network, Wrench, Globe, Cpu, 
-  Mail, Search, Briefcase, Activity, Clock, MessageCircle, Layers, 
+  Mail, Search, Briefcase, Activity, MessageCircle, Layers, 
   Cloud, Zap, BatteryCharging, Users, Terminal, X, ArrowUpRight, Ticket 
 } from "lucide-react";
 
@@ -123,7 +123,7 @@ export default function ServicesPage() {
     <main className="relative w-full min-h-screen flex flex-col items-center justify-start pb-32 pt-12 md:pt-24 z-10 overflow-x-hidden selection:bg-[#00E5FF]/30 selection:text-white bg-[#030508]">
       
       {/* --------------------------------------------------------- */}
-      {/* CONTACT MODAL (POPUP) */}
+      {/* UNIVERSAL CONTACT MODAL */}
       {/* --------------------------------------------------------- */}
       <AnimatePresence>
         {isContactOpen && (
@@ -224,7 +224,7 @@ export default function ServicesPage() {
       {/* --------------------------------------------------------- */}
       {/* STATIC AMBIENT BACKGROUND */}
       {/* --------------------------------------------------------- */}
-      <div className="absolute inset-0 z-0 pointer-events-none transform-gpu">
+      <div className="absolute inset-0 z-0 pointer-events-none transform-gpu overflow-hidden">
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-gradient-to-br from-[#00E5FF]/5 to-transparent blur-3xl opacity-40" />
         <div className="absolute top-[20%] right-0 w-[500px] h-[500px] bg-gradient-to-bl from-[#8B5CF6]/5 to-transparent blur-3xl opacity-40" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:linear-gradient(to_bottom,black_0%,transparent_60%)]" />
@@ -253,7 +253,7 @@ export default function ServicesPage() {
         </motion.h1>
         
         <motion.p variants={itemVariants} className="text-gray-400 text-base md:text-lg leading-relaxed font-medium max-w-2xl mx-auto px-4">
-          Professional tech help made simple. We offer high-quality computer support, fast internet setups, and unbeatable pricing so you never overpay.
+          Professional tech help made simple. We offer high-quality computer support, fast internet setups, and honest pricing so you never overpay.
         </motion.p>
       </motion.section>
 
@@ -336,7 +336,7 @@ export default function ServicesPage() {
       >
         <motion.div 
           variants={itemVariants}
-          className="relative group flex flex-col md:flex-row items-center gap-8 bg-[#0A0D14] border border-[#F59E0B]/20 hover:border-[#F59E0B]/40 rounded-3xl p-8 md:p-10 transition-all duration-500 overflow-hidden"
+          className="relative group flex flex-col md:flex-row items-center gap-8 bg-[#0A0D14] border border-[#F59E0B]/20 hover:border-[#F59E0B]/40 rounded-3xl p-8 md:p-10 transition-all duration-500 overflow-hidden shadow-lg"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-[#F59E0B]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
           
@@ -404,7 +404,7 @@ export default function ServicesPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           
           {/* ADD-ON 1 */}
-          <motion.div variants={itemVariants} className="group flex flex-col bg-[#0A0D14] border border-white/5 hover:border-[#00E5FF]/30 rounded-3xl p-6 transition-all duration-300">
+          <motion.div variants={itemVariants} className="group flex flex-col bg-[#0A0D14] border border-white/5 hover:border-[#00E5FF]/30 rounded-3xl p-6 transition-all duration-300 shadow-lg">
             <div className="flex items-center justify-between mb-4">
               <div className="w-10 h-10 rounded-lg bg-[#00E5FF]/10 flex items-center justify-center border border-[#00E5FF]/20">
                 <Mail className="w-5 h-5 text-[#00E5FF]" />
@@ -421,7 +421,7 @@ export default function ServicesPage() {
           </motion.div>
 
           {/* ADD-ON 2 */}
-          <motion.div variants={itemVariants} className="group flex flex-col bg-[#0A0D14] border border-white/5 hover:border-[#A855F7]/30 rounded-3xl p-6 transition-all duration-300">
+          <motion.div variants={itemVariants} className="group flex flex-col bg-[#0A0D14] border border-white/5 hover:border-[#A855F7]/30 rounded-3xl p-6 transition-all duration-300 shadow-lg">
             <div className="flex items-center justify-between mb-4">
               <div className="w-10 h-10 rounded-lg bg-[#A855F7]/10 flex items-center justify-center border border-[#A855F7]/20">
                 <Cloud className="w-5 h-5 text-[#A855F7]" />
@@ -438,7 +438,7 @@ export default function ServicesPage() {
           </motion.div>
 
           {/* ADD-ON 3 */}
-          <motion.div variants={itemVariants} className="group flex flex-col bg-[#0A0D14] border border-white/5 hover:border-[#10B981]/30 rounded-3xl p-6 transition-all duration-300">
+          <motion.div variants={itemVariants} className="group flex flex-col bg-[#0A0D14] border border-white/5 hover:border-[#10B981]/30 rounded-3xl p-6 transition-all duration-300 shadow-lg">
             <div className="flex items-center justify-between mb-4">
               <div className="w-10 h-10 rounded-lg bg-[#10B981]/10 flex items-center justify-center border border-[#10B981]/20">
                 <Search className="w-5 h-5 text-[#10B981]" />
@@ -458,7 +458,7 @@ export default function ServicesPage() {
       </motion.section>
 
       {/* --------------------------------------------------------- */}
-      {/* CLEAN CONTACT CTA */}
+      {/* BOTTOM CONTACT CTA */}
       {/* --------------------------------------------------------- */}
       <motion.section
         initial={{ opacity: 0, y: 20 }}
@@ -466,10 +466,10 @@ export default function ServicesPage() {
         viewport={{ once: true }}
         className="w-full max-w-3xl mx-auto px-4 sm:px-6 mb-16 z-10 text-center will-change-transform"
       >
-        <div className="bg-[#0A0D14] border border-white/5 rounded-3xl p-8 md:p-12">
+        <div className="bg-[#0A0D14] border border-white/5 rounded-3xl p-8 md:p-12 shadow-xl">
           <h2 className="text-2xl font-bold tracking-tight text-white mb-3">Ready to get started?</h2>
           <p className="text-gray-400 text-sm mb-8 max-w-lg mx-auto">
-            Log a support ticket directly or reach out to our team via WhatsApp or email if you have any questions.
+            Log a support ticket or reach out to our team directly if you have any questions before booking.
           </p>
           <button 
             onClick={() => setIsContactOpen(true)}
