@@ -2,7 +2,7 @@
 
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Terminal, Cpu, ShieldCheck, Mail, MessageCircle, Activity } from "lucide-react";
+import { ArrowRight, Terminal, Cpu, ShieldCheck, Mail, MessageCircle, Activity, Users } from "lucide-react";
 
 // ---------------------------------------------------------
 // HARDWARE-ACCELERATED ANIMATION VARIANTS
@@ -49,15 +49,15 @@ export default function EngineerPage() {
         <motion.div variants={itemVariants} className="inline-flex items-center justify-center mb-8">
           <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#00E5FF] mr-4 opacity-70" />
           <span className="text-[10px] sm:text-xs font-mono text-[#00E5FF] tracking-[0.3em] uppercase font-bold">
-            The Philosophy
+            The Core Team
           </span>
           <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#00E5FF] ml-4 opacity-70" />
         </motion.div>
         
         <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-[6.5rem] font-black tracking-tighter uppercase mb-8 leading-[0.9] text-white">
-          The Master <br />
+          The Architects <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5FF] to-[#2563EB]">
-            Artisan.
+            Of Performance.
           </span>
         </motion.h1>
       </motion.section>
@@ -74,34 +74,62 @@ export default function EngineerPage() {
       >
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 relative">
           
-          {/* LEFT COLUMN: THE TAKUMI MEANING & BIO */}
+          {/* LEFT COLUMN: THE BIOS */}
           <motion.div 
             variants={itemVariants} 
             className="md:col-span-7 flex flex-col gap-8"
           >
-            <div className="bg-[#05080F] border border-white/5 rounded-[2.5rem] p-8 md:p-12 shadow-lg relative overflow-hidden h-full">
+            {/* FOUNDER BIO */}
+            <div className="bg-[#05080F] border border-white/5 rounded-[2.5rem] p-8 md:p-12 shadow-lg relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00E5FF] to-[#2563EB]" />
               
               <div className="w-14 h-14 rounded-2xl bg-[#080C16] border border-white/5 flex items-center justify-center mb-8">
                 <Terminal className="w-7 h-7 text-[#00E5FF]" />
               </div>
               
-              <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white mb-6">
-                Engineered for Precision
+              <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white mb-2">
+                Rudi Mouton
               </h2>
+              <span className="text-[#00E5FF] font-mono text-xs font-bold uppercase tracking-widest block mb-6">Founder & Lead Engineer</span>
               
               <div className="space-y-6 text-gray-400 text-sm md:text-base leading-relaxed font-medium">
                 <p>
                   In Japanese culture, <strong className="text-white">"Takumi" (匠)</strong> translates to a master artisan—an individual who dedicates their entire life to perfecting a single craft. Takumi Tech was built on this exact philosophy. We do not believe in quick fixes or mass-produced templates. 
                 </p>
                 <p>
-                  My name is Rudi, founder and lead engineer. Currently advancing my formal education in Computer Engineering, I approach every project with a deep, structural understanding of how technology actually works. I don't just troubleshoot problems; I understand the fundamental architecture of your systems.
+                  Currently advancing my formal education in Computer Engineering, I approach every project with a deep, structural understanding of how technology actually works. I don't just troubleshoot problems; I understand the fundamental architecture of your systems.
                 </p>
                 <p>
                   When you hand over your business infrastructure, your website, or your custom PC build to me, I treat it with absolute respect. I tear it down, optimize it, and rebuild it with the same meticulous care as if it were my own personal machine.
                 </p>
                 <p className="text-[#00E5FF] font-bold">
                   Absolute trust requires absolute competence. That is the Takumi standard.
+                </p>
+              </div>
+            </div>
+
+            {/* CLIENT RELATIONS BIO */}
+            <div className="bg-[#05080F] border border-white/5 rounded-[2.5rem] p-8 md:p-12 shadow-lg relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#2563EB] to-[#8B5CF6]" />
+              
+              <div className="w-14 h-14 rounded-2xl bg-[#080C16] border border-white/5 flex items-center justify-center mb-8">
+                <Users className="w-7 h-7 text-[#2563EB]" />
+              </div>
+              
+              <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white mb-2">
+                Alexander de Wet
+              </h2>
+              <span className="text-[#2563EB] font-mono text-xs font-bold uppercase tracking-widest block mb-6">Client Relations Manager</span>
+              
+              <div className="space-y-6 text-gray-400 text-sm md:text-base leading-relaxed font-medium">
+                <p>
+                  Technology is only as effective as the people supporting it. Alexander brings a deep understanding of human behavior, communication, and expectation management to the Takumi Tech ecosystem.
+                </p>
+                <p>
+                  Currently pursuing a degree in Psychology at Eduvos and backed by extensive experience in high-standard, fast-paced customer service environments, Alex ensures that every client interaction is seamless, transparent, and highly professional.
+                </p>
+                <p>
+                  While the engineering bay handles the complex hardware and code, Alex ensures your project stays on track, your questions are answered immediately, and your overall experience is completely supported from start to finish.
                 </p>
               </div>
             </div>
@@ -147,7 +175,7 @@ export default function EngineerPage() {
                 <h3 className="text-lg font-black uppercase tracking-wider text-white">Absolute Integrity</h3>
               </div>
               <p className="text-gray-400 text-sm leading-relaxed font-medium">
-                Transparent pricing and honest diagnostics. I protect your business data and respect your hardware as if it were my own.
+                Transparent pricing and honest diagnostics. We protect your business data and respect your hardware as if it were our own.
               </p>
             </div>
           </motion.div>
@@ -156,53 +184,55 @@ export default function EngineerPage() {
       </motion.section>
 
       {/* --------------------------------------------------------- */}
-      {/* 3-WAY CONTACT MATRIX (CALL TO ACTION) */}
+      {/* DIRECT TEAM CONTACT */}
       {/* --------------------------------------------------------- */}
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="w-full max-w-4xl mx-auto px-4 sm:px-6 z-10 text-center will-change-transform"
+        className="w-full max-w-5xl mx-auto px-4 sm:px-6 mb-16 z-10 will-change-transform"
       >
-        <div className="p-8 md:p-12 rounded-[2.5rem] bg-[#05080F] border border-white/5 shadow-xl relative overflow-hidden flex flex-col items-center">
-          <div className="absolute inset-0 bg-gradient-to-t from-[#00E5FF]/5 to-transparent pointer-events-none" />
+        <div className="flex flex-col items-center text-center mb-8">
+          <p className="text-gray-500 text-sm font-medium mb-2">Need to chat with us before booking?</p>
+          <h2 className="text-2xl font-black uppercase tracking-tight text-white">Select Your Contact</h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
           
-          <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white mb-4 relative z-10">
-            Ready to upgrade your infrastructure?
-          </h2>
-          <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-10 font-medium relative z-10 max-w-xl mx-auto">
-            Choose your preferred communication vector below to get started. 
-          </p>
-          
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 w-full relative z-10">
-            
-            {/* TICKET BUTTON */}
-            <Link 
-              href="/ticket"
-              className="flex items-center justify-center gap-3 px-8 py-4 bg-[#00E5FF] text-[#030508] font-black uppercase tracking-widest text-xs rounded-xl hover:bg-[#00B8CC] transition-colors duration-300 w-full md:w-auto"
-            >
-              <Terminal className="w-4 h-4" /> Log a Ticket
-            </Link>
-
-            {/* WHATSAPP BUTTON */}
-            <a 
-              href="https://wa.me/27818281861" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] font-black uppercase tracking-widest text-xs rounded-xl hover:bg-[#25D366] hover:text-white transition-colors duration-300 w-full md:w-auto"
-            >
-              <MessageCircle className="w-4 h-4" /> WhatsApp
+          {/* ALEX - Client Relations */}
+          <div className="bg-[#05080F] border border-white/5 rounded-[2rem] p-6 sm:p-8 flex flex-col items-center text-center hover:border-[#2563EB]/40 transition-colors group relative overflow-hidden shadow-lg">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#2563EB] to-[#8B5CF6] opacity-50 group-hover:opacity-100 transition-opacity" />
+            <div className="w-12 h-12 rounded-xl bg-[#2563EB]/10 flex items-center justify-center border border-[#2563EB]/20 mb-4">
+               <Users className="w-6 h-6 text-[#2563EB]" />
+            </div>
+            <h3 className="text-lg font-black text-white uppercase tracking-wider mb-1">Alexander de Wet</h3>
+            <span className="text-[10px] font-mono text-[#2563EB] uppercase tracking-widest mb-3 block">Client Relations Manager</span>
+            <p className="text-gray-400 text-xs sm:text-sm mb-8 flex-grow">General inquiries, project updates, pricing, and booking assistance.</p>
+            <a href="https://wa.me/27614955695" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] hover:bg-[#25D366] hover:text-white rounded-xl text-xs font-black uppercase tracking-widest transition-colors duration-300 mt-auto">
+              <MessageCircle className="w-4 h-4" /> Message Alex
             </a>
-
-            {/* EMAIL BUTTON */}
-            <a 
-              href="mailto:rudi@takumitech.co.za" 
-              className="flex items-center justify-center gap-3 px-8 py-4 bg-[#080C16] border border-white/10 text-white font-black uppercase tracking-widest text-xs rounded-xl hover:bg-white/10 transition-colors duration-300 w-full md:w-auto"
-            >
-              <Mail className="w-4 h-4" /> Email Us
-            </a>
-
           </div>
+
+          {/* RUDI - Engineering */}
+          <div className="bg-[#05080F] border border-white/5 rounded-[2rem] p-6 sm:p-8 flex flex-col items-center text-center hover:border-[#00E5FF]/40 transition-colors group relative overflow-hidden shadow-lg">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00E5FF] to-[#2563EB] opacity-50 group-hover:opacity-100 transition-opacity" />
+            <div className="w-12 h-12 rounded-xl bg-[#00E5FF]/10 flex items-center justify-center border border-[#00E5FF]/20 mb-4">
+               <Terminal className="w-6 h-6 text-[#00E5FF]" />
+            </div>
+            <h3 className="text-lg font-black text-white uppercase tracking-wider mb-1">Rudi Mouton</h3>
+            <span className="text-[10px] font-mono text-[#00E5FF] uppercase tracking-widest mb-3 block">Founder & Lead Engineer</span>
+            <p className="text-gray-400 text-xs sm:text-sm mb-8 flex-grow">Complex technical support, hardware diagnostics, and deep coding.</p>
+            <a href="https://wa.me/27818281861" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] hover:bg-[#25D366] hover:text-white rounded-xl text-xs font-black uppercase tracking-widest transition-colors duration-300 mt-auto">
+              <MessageCircle className="w-4 h-4" /> Message Rudi
+            </a>
+          </div>
+
+        </div>
+
+        <div className="mt-8 flex justify-center">
+          <a href="mailto:info@takumitech.co.za" className="flex items-center justify-center gap-3 px-8 py-4 bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-xs rounded-xl hover:bg-white/10 transition-colors duration-300">
+            <Mail className="w-4 h-4" /> Or Email info@takumitech.co.za
+          </a>
         </div>
       </motion.section>
 

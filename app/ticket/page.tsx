@@ -2,7 +2,7 @@
 
 import { useState, FormEvent, useEffect, Suspense } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { Send, Terminal, ShieldCheck, CheckCircle, XCircle, ArrowLeft, Activity, Server, Globe, Layers, Network, Wrench, User, Mail, AlignLeft, ArrowRight, Briefcase, Search, Cloud, MapPin, MessageCircle } from "lucide-react";
+import { Send, Terminal, ShieldCheck, CheckCircle, XCircle, ArrowLeft, Activity, Server, Globe, Layers, Network, Wrench, User, Mail, AlignLeft, ArrowRight, Briefcase, Search, Cloud, MapPin, MessageCircle, Users } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
@@ -267,20 +267,22 @@ function SmartTicketForm() {
                     />
                   </div>
 
-                  <div className="pt-6 mt-auto flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-white/5">
-                    <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-                      <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Or contact directly:</span>
-                      <div className="flex gap-2">
-                        <a href="https://wa.me/27818281861" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 rounded-lg transition-colors group/wa">
-                          <MessageCircle className="w-4 h-4 text-[#25D366] group-hover/wa:scale-110 transition-transform" />
+                  <div className="pt-6 mt-auto flex flex-col md:flex-row items-center justify-between gap-6 border-t border-white/5">
+                    <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
+                      <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest text-center sm:text-left">Or Message Us Directly:</span>
+                      <div className="flex flex-wrap gap-2 justify-center">
+                        <a href="https://wa.me/27614955695" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] rounded-xl transition-colors hover:bg-[#25D366] hover:text-white group">
+                          <MessageCircle className="w-3.5 h-3.5" /> 
+                          <span className="text-[10px] font-black uppercase tracking-wider">Alex <span className="opacity-70 font-mono font-medium">(Support)</span></span>
                         </a>
-                        <a href="mailto:rudi@takumitech.co.za" className="p-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-colors group/em">
-                          <Mail className="w-4 h-4 text-white group-hover/em:scale-110 transition-transform" />
+                        <a href="https://wa.me/27818281861" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] rounded-xl transition-colors hover:bg-[#00E5FF] hover:text-[#030508] group">
+                          <MessageCircle className="w-3.5 h-3.5" /> 
+                          <span className="text-[10px] font-black uppercase tracking-wider">Rudi <span className="opacity-70 font-mono font-medium">(Tech)</span></span>
                         </a>
                       </div>
                     </div>
 
-                    <button type="button" onClick={handleNext} disabled={!isStep1Valid} className="group flex items-center gap-3 px-8 py-4 bg-white text-[#030508] font-black uppercase tracking-widest text-xs rounded-xl hover:bg-gray-200 transition-colors disabled:opacity-20 disabled:cursor-not-allowed w-full sm:w-auto justify-center">
+                    <button type="button" onClick={handleNext} disabled={!isStep1Valid} className="group flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#030508] font-black uppercase tracking-widest text-xs rounded-xl hover:bg-gray-200 transition-colors disabled:opacity-20 disabled:cursor-not-allowed w-full md:w-auto shrink-0">
                       Next Step <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>

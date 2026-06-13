@@ -79,7 +79,7 @@ export default function Footer() {
             </p>
             
             <a 
-              href="mailto:rudi@takumitech.co.za"
+              href="mailto:info@takumitech.co.za"
               className="group relative flex items-center gap-4 p-1 rounded-2xl bg-[#05080F] border border-white/5 hover:border-[#00E5FF]/40 transition-all duration-300 shadow-md hover:shadow-lg overflow-hidden w-full transform-gpu hover:-translate-y-1"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
@@ -88,7 +88,7 @@ export default function Footer() {
               </div>
               <div className="flex flex-col z-10 overflow-hidden pr-4">
                 <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest transition-colors duration-300 group-hover:text-[#00E5FF]">General Inquiries</span>
-                <span className="text-sm font-bold text-white truncate">rudi@takumitech.co.za</span>
+                <span className="text-sm font-bold text-white truncate">info@takumitech.co.za</span>
               </div>
             </a>
           </div>

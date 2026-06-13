@@ -2,7 +2,7 @@
 
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Server, Network, Wrench, Globe, Cpu, Mail, Search, Briefcase, Activity, Clock, MessageCircle, Layers, Cloud, Zap, BatteryCharging } from "lucide-react";
+import { ArrowRight, ShieldCheck, Server, Network, Wrench, Globe, Cpu, Mail, Search, Briefcase, Activity, Clock, MessageCircle, Layers, Cloud, Zap, BatteryCharging, Users, Terminal } from "lucide-react";
 
 // ---------------------------------------------------------
 // DATA: CORE SERVICES (MERGED & PRICED)
@@ -375,29 +375,54 @@ export default function ServicesPage() {
       </motion.section>
 
       {/* --------------------------------------------------------- */}
-      {/* QUICK CONTACT ALTERNATIVES */}
+      {/* DIRECT TEAM CONTACT */}
       {/* --------------------------------------------------------- */}
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="w-full max-w-4xl mx-auto px-4 sm:px-6 mb-12 z-10 text-center will-change-transform"
+        className="w-full max-w-5xl mx-auto px-4 sm:px-6 mb-16 z-10 will-change-transform"
       >
-        <p className="text-gray-500 text-sm font-medium mb-6">Need to chat with us before booking?</p>
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          <a 
-            href="https://wa.me/27818281861" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-3 bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] hover:bg-[#25D366] hover:text-white rounded-xl text-xs font-black uppercase tracking-widest transition-colors duration-300"
-          >
-            <MessageCircle className="w-4 h-4" /> WhatsApp Us
-          </a>
-          <a 
-            href="mailto:rudi@takumitech.co.za" 
-            className="flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/5 text-gray-300 hover:bg-white hover:text-black rounded-xl text-xs font-black uppercase tracking-widest transition-colors duration-300"
-          >
-            <Mail className="w-4 h-4" /> Email Us
+        <div className="flex flex-col items-center text-center mb-8">
+          <p className="text-gray-500 text-sm font-medium mb-2">Need to chat with us before booking?</p>
+          <h2 className="text-2xl font-black uppercase tracking-tight text-white">Select Your Contact</h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+          
+          {/* ALEX - Client Relations */}
+          <div className="bg-[#05080F] border border-white/5 rounded-[2rem] p-6 sm:p-8 flex flex-col items-center text-center hover:border-[#2563EB]/40 transition-colors group relative overflow-hidden shadow-lg">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#2563EB] to-[#8B5CF6] opacity-50 group-hover:opacity-100 transition-opacity" />
+            <div className="w-12 h-12 rounded-xl bg-[#2563EB]/10 flex items-center justify-center border border-[#2563EB]/20 mb-4">
+               <Users className="w-6 h-6 text-[#2563EB]" />
+            </div>
+            <h3 className="text-lg font-black text-white uppercase tracking-wider mb-1">Alexander de Wet</h3>
+            <span className="text-[10px] font-mono text-[#2563EB] uppercase tracking-widest mb-3 block">Client Relations Manager</span>
+            <p className="text-gray-400 text-xs sm:text-sm mb-8 flex-grow">General inquiries, project updates, pricing, and booking assistance.</p>
+            <a href="https://wa.me/27614955695" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] hover:bg-[#25D366] hover:text-white rounded-xl text-xs font-black uppercase tracking-widest transition-colors duration-300 mt-auto">
+              <MessageCircle className="w-4 h-4" /> Message Alex
+            </a>
+          </div>
+
+          {/* RUDI - Engineering */}
+          <div className="bg-[#05080F] border border-white/5 rounded-[2rem] p-6 sm:p-8 flex flex-col items-center text-center hover:border-[#00E5FF]/40 transition-colors group relative overflow-hidden shadow-lg">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00E5FF] to-[#2563EB] opacity-50 group-hover:opacity-100 transition-opacity" />
+            <div className="w-12 h-12 rounded-xl bg-[#00E5FF]/10 flex items-center justify-center border border-[#00E5FF]/20 mb-4">
+               <Terminal className="w-6 h-6 text-[#00E5FF]" />
+            </div>
+            <h3 className="text-lg font-black text-white uppercase tracking-wider mb-1">Rudi Mouton</h3>
+            <span className="text-[10px] font-mono text-[#00E5FF] uppercase tracking-widest mb-3 block">Founder & Lead Engineer</span>
+            <p className="text-gray-400 text-xs sm:text-sm mb-8 flex-grow">Complex technical support, hardware diagnostics, and deep coding.</p>
+            <a href="https://wa.me/27818281861" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] hover:bg-[#25D366] hover:text-white rounded-xl text-xs font-black uppercase tracking-widest transition-colors duration-300 mt-auto">
+              <MessageCircle className="w-4 h-4" /> Message Rudi
+            </a>
+          </div>
+
+        </div>
+
+        <div className="mt-8 flex justify-center">
+          <a href="mailto:info@takumitech.co.za" className="flex items-center justify-center gap-3 px-8 py-4 bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-xs rounded-xl hover:bg-white/10 transition-colors duration-300">
+            <Mail className="w-4 h-4" /> Or Email info@takumitech.co.za
           </a>
         </div>
       </motion.section>
