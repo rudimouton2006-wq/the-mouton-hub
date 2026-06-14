@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Terminal, Mail, ArrowRight, ShieldCheck, MessageCircle } from "lucide-react";
+import { Terminal, Mail, ArrowRight, ShieldCheck, MessageCircle, Instagram } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -103,6 +103,17 @@ export default function Footer() {
               >
                 <Mail className="w-5 h-5 text-gray-500 group-hover:text-[#00E5FF] transition-colors" />
                 <span className="font-medium">info@takumitech.co.za</span>
+              </a>
+
+              {/* INSTAGRAM LINK ADDED HERE */}
+              <a 
+                href="https://www.instagram.com/takumitech.co.za/"
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 text-sm md:text-base text-gray-400 hover:text-white transition-colors w-max"
+              >
+                <Instagram className="w-5 h-5 text-gray-500 group-hover:text-[#00E5FF] transition-colors" />
+                <span className="font-medium">Instagram</span>
               </a>
             </div>
           </div>

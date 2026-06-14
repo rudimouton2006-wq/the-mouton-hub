@@ -2,13 +2,12 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 // IMPORT YOUR COMPONENTS HERE
-// Note: Adjust the paths (e.g., "./components/Navbar") if your components folder is located somewhere else!
 import Navbar from "./components/Navbar"; 
 import Footer from "./components/Footer";
 import FloatingActions from "./components/FloatingActions";
 
 // ---------------------------------------------------------
-// GLOBAL SEO & SOCIAL MEDIA METADATA
+// GLOBAL SEO METADATA
 // ---------------------------------------------------------
 export const metadata: Metadata = {
   title: {
@@ -26,28 +25,6 @@ export const metadata: Metadata = {
     "Managed Web Hosting"
   ],
   authors: [{ name: "Takumi Tech Engineering" }],
-  openGraph: {
-    title: "Takumi Tech | Premium IT & Web Solutions",
-    description: "Premium computer repair, expert hardware upgrades, and fast website design built for your business.",
-    url: "https://takumitech.co.za", 
-    siteName: "Takumi Tech",
-    images: [
-      {
-        url: "/og-image.jpg", 
-        width: 1200,
-        height: 630,
-        alt: "Takumi Tech Systems",
-      },
-    ],
-    locale: "en_ZA",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Takumi Tech | Premium IT & Web Solutions",
-    description: "Premium computer repair, expert hardware upgrades, and fast website design built for your business.",
-    images: ["/og-image.jpg"],
-  },
   icons: {
     icon: "/icon.png", 
   },

@@ -2,7 +2,7 @@
 
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, ServerCrash } from "lucide-react";
+import { Terminal, ShieldAlert } from "lucide-react";
 
 // ---------------------------------------------------------
 // ANIMATION VARIANTS
@@ -28,7 +28,7 @@ const itemVariants: Variants = {
 
 export default function NotFound() {
   return (
-    <main className="relative w-full min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden selection:bg-red-500/30 selection:text-white bg-transparent">
+    <main className="relative w-full min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden selection:bg-[#00E5FF]/30 selection:text-white bg-[#030508]">
       
       {/* --------------------------------------------------------- */}
       {/* INSANELY BEAUTIFUL AMBIENT BACKGROUND (WITH EDGE MASKING) */}
@@ -66,51 +66,58 @@ export default function NotFound() {
       </div>
 
       {/* --------------------------------------------------------- */}
-      {/* 404 ERROR CARD */}
+      {/* HACKER TERMINAL 404 CARD */}
       {/* --------------------------------------------------------- */}
       <motion.section 
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="w-full max-w-2xl mx-auto bg-[#080B12]/80 backdrop-blur-3xl rounded-[2.5rem] p-10 md:p-16 flex flex-col items-center text-center border border-red-500/20 relative z-10 shadow-[0_20px_60px_rgba(0,0,0,0.8)] hover:border-red-500/40 transition-colors duration-700"
+        className="w-full max-w-2xl mx-auto bg-[#0A0D14]/80 backdrop-blur-3xl rounded-[2rem] p-8 md:p-12 flex flex-col border border-red-500/20 relative z-10 shadow-[0_20px_60px_rgba(0,0,0,0.8)] hover:border-[#00E5FF]/30 transition-colors duration-700"
       >
-        {/* Subtle internal red glow */}
-        <div className="absolute inset-0 bg-gradient-to-b from-red-500/5 to-transparent pointer-events-none rounded-[2.5rem]" />
+        {/* Subtle internal glow */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#00E5FF]/5 to-transparent pointer-events-none rounded-[2rem]" />
 
         {/* Dynamic Status Indicator */}
-        <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-lg bg-red-500/10 border border-red-500/20 mb-10 shadow-[0_0_15px_rgba(239,68,68,0.1)] relative z-10">
-          <div className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500 shadow-[0_0_8px_#EF4444]"></span>
-          </div>
-          <span className="text-[10px] sm:text-xs font-mono text-red-400 tracking-[0.2em] uppercase font-bold">Status: 404 Error</span>
-        </motion.div>
-
-        {/* Core Error Iconography */}
-        <motion.div variants={itemVariants} className="relative mb-10 z-10">
-          <div className="w-24 h-24 bg-[#030508] border border-red-500/30 rounded-[2rem] flex items-center justify-center shadow-[inset_0_0_30px_rgba(239,68,68,0.15)] relative z-10">
-            <ServerCrash className="w-10 h-10 text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.8)]" />
-          </div>
-          {/* Hardware Failure Ring */}
-          <div className="absolute inset-0 border border-red-500/40 rounded-[2rem] animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite]" />
+        <motion.div variants={itemVariants} className="inline-flex items-center gap-3 px-4 py-2 rounded-xl bg-red-500/10 border border-red-500/20 mb-8 shadow-[0_0_15px_rgba(239,68,68,0.1)] relative z-10 w-max">
+          <ShieldAlert className="w-4 h-4 text-red-500" />
+          <span className="text-[10px] sm:text-xs font-mono text-red-400 tracking-[0.2em] uppercase font-bold">Fatal Vector: 404</span>
         </motion.div>
         
-        <motion.h1 variants={itemVariants} className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter uppercase mb-6 text-white z-10">
-          Page Not <span className="text-transparent bg-clip-text bg-gradient-to-br from-red-400 to-red-600 drop-shadow-[0_0_20px_rgba(239,68,68,0.4)]">Found</span>
-        </motion.h1>
-        
-        <motion.p variants={itemVariants} className="text-[#A1A1AA] text-sm md:text-base leading-relaxed font-medium max-w-md mx-auto mb-12 z-10">
-          We couldn't find the page you were looking for. It might have been moved, deleted, or you may have mistyped the web address.
-        </motion.p>
+        {/* The Terminal Window */}
+        <motion.div variants={itemVariants} className="w-full bg-[#030508] rounded-xl border border-white/10 p-6 font-mono text-left relative overflow-hidden mb-10 shadow-inner z-10">
+           {/* Terminal Window Controls */}
+           <div className="flex gap-2 mb-6 border-b border-white/5 pb-4">
+             <div className="w-3 h-3 rounded-full bg-red-500/50" />
+             <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+             <div className="w-3 h-3 rounded-full bg-green-500/50" />
+           </div>
+           
+           {/* Terminal Output */}
+           <div className="flex flex-col gap-3">
+             <p className="text-gray-400 text-xs sm:text-sm break-words">
+               <span className="text-[#00E5FF] font-bold">root@takumitech</span>:<span className="text-blue-400">~</span>$ ./locate_target_path
+             </p>
+             <p className="text-red-500 text-xs sm:text-sm font-bold drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]">
+               &gt;_ ERROR 404: DIRECTORY NOT FOUND.
+             </p>
+             <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
+               &gt;_ The requested URL path does not exist in the current server cluster. It may have been moved, deleted, or manually mistyped.
+             </p>
+             <p className="text-[#00E5FF] text-xs sm:text-sm mt-4 flex items-center">
+               &gt;_ Awaiting manual reroute command
+               <span className="inline-block w-2.5 h-4 bg-[#00E5FF] ml-2 animate-pulse shadow-[0_0_8px_#00E5FF]" />
+             </p>
+           </div>
+        </motion.div>
 
         {/* Action Vector */}
-        <motion.div variants={itemVariants} className="z-10 w-full sm:w-auto">
+        <motion.div variants={itemVariants} className="z-10 w-full flex justify-center sm:justify-start">
           <Link 
             href="/" 
-            className="group relative flex items-center justify-center gap-3 px-10 py-4 bg-white text-[#030508] font-black uppercase tracking-widest text-xs rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:bg-gray-200 transition-all duration-300 w-full hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]"
+            className="group relative flex items-center justify-center gap-3 px-10 py-5 bg-[#00E5FF] text-[#030508] font-bold uppercase tracking-wider text-sm rounded-2xl shadow-[0_0_20px_rgba(0,229,255,0.2)] hover:bg-[#00cce6] transition-all duration-300 w-full sm:w-auto hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,229,255,0.4)]"
           >
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> 
-            Back to Home
+            <Terminal className="w-5 h-5 group-hover:-translate-x-1 transition-transform" /> 
+            Reroute to Main Terminal
           </Link>
         </motion.div>
 
