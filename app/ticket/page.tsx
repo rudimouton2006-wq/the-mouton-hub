@@ -5,7 +5,7 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import { 
   Send, Terminal, ShieldCheck, CheckCircle, XCircle, ArrowLeft, 
   Activity, Server, Globe, Layers, Network, Wrench, User, Mail, 
-  AlignLeft, ArrowRight, Briefcase, Search, Cloud, MapPin, Users, MessageCircle 
+  AlignLeft, ArrowRight, Briefcase, Search, Cloud, MapPin, MessageCircle 
 } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -63,7 +63,6 @@ function SupportHubInterface() {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
-  const [activeInput, setActiveInput] = useState<string | null>(null);
   
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isPreselected, setIsPreselected] = useState(false);
@@ -186,74 +185,103 @@ function SupportHubInterface() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col gap-8 transform-gpu">
+    <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col gap-10 transform-gpu">
       
       {/* Back Navigation */}
       <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3 }}>
-        <Link href="/" className="inline-flex items-center gap-2 text-sm font-bold text-gray-400 hover:text-white transition-colors uppercase tracking-wider group">
+        <Link href="/" className="inline-flex items-center gap-2 text-sm font-bold text-gray-400 hover:text-white transition-colors uppercase tracking-wider group w-max">
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform text-[#00E5FF]" /> Back to Home
         </Link>
       </motion.div>
 
       {/* --------------------------------------------------------- */}
-      {/* DIRECT COMMS GRID (Clear, Simple English) */}
+      {/* DIRECT COMMS GRID (SLA Badges, Avatars, Color Psychology) */}
       {/* --------------------------------------------------------- */}
       <motion.div 
         initial={{ opacity: 0, y: 15 }} 
         animate={{ opacity: 1, y: 0 }} 
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full"
+        className="grid grid-cols-1 sm:grid-cols-3 gap-5 w-full mb-4"
       >
+        {/* Rudi - Tech */}
         <a 
           href="https://wa.me/27818281861" 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="group flex flex-col items-center p-6 rounded-3xl bg-[#0A0D14] border border-white/5 hover:border-[#25D366]/40 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+          className="group flex flex-col items-center p-6 rounded-3xl bg-[#0A0D14] border border-[#00E5FF]/20 hover:border-[#00E5FF]/50 transition-all duration-300 shadow-lg hover:shadow-[0_10px_30px_rgba(0,229,255,0.1)] hover:-translate-y-1 relative overflow-hidden"
         >
-          <div className="w-14 h-14 rounded-2xl bg-[#030508] border border-white/5 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-            <MessageCircle className="w-6 h-6 text-[#25D366]" />
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00E5FF]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          <div className="relative mb-5">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#00E5FF]/20 to-[#030508] border border-[#00E5FF]/30 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <span className="text-xl font-black text-[#00E5FF] tracking-tighter">R</span>
+            </div>
+            <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-[#25D366] rounded-full border-4 border-[#0A0D14] flex items-center justify-center">
+              <MessageCircle className="w-3 h-3 text-white" />
+            </div>
           </div>
+          
           <h4 className="text-white font-bold text-lg mb-1">WhatsApp Rudi</h4>
-          <p className="text-gray-400 text-sm font-medium text-center">Tech & Hardware Help</p>
+          <p className="text-gray-400 text-sm font-medium text-center mb-5">Tech & Hardware</p>
+          
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-[#25D366]/10 border border-[#25D366]/20 rounded-full mt-auto">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
+            <span className="text-[10px] font-bold text-[#25D366] uppercase tracking-wider">Avg Response: 5 Mins</span>
+          </div>
         </a>
 
+        {/* Alex - Support */}
         <a 
           href="https://wa.me/27614955695" 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="group flex flex-col items-center p-6 rounded-3xl bg-[#0A0D14] border border-white/5 hover:border-[#25D366]/40 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+          className="group flex flex-col items-center p-6 rounded-3xl bg-[#0A0D14] border border-[#2563EB]/20 hover:border-[#2563EB]/50 transition-all duration-300 shadow-lg hover:shadow-[0_10px_30px_rgba(37,99,235,0.1)] hover:-translate-y-1 relative overflow-hidden"
         >
-          <div className="w-14 h-14 rounded-2xl bg-[#030508] border border-white/5 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-            <MessageCircle className="w-6 h-6 text-[#25D366]" />
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#2563EB]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          <div className="relative mb-5">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#2563EB]/20 to-[#030508] border border-[#2563EB]/30 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <span className="text-xl font-black text-[#2563EB] tracking-tighter">A</span>
+            </div>
+            <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-[#25D366] rounded-full border-4 border-[#0A0D14] flex items-center justify-center">
+              <MessageCircle className="w-3 h-3 text-white" />
+            </div>
           </div>
+          
           <h4 className="text-white font-bold text-lg mb-1">WhatsApp Alex</h4>
-          <p className="text-gray-400 text-sm font-medium text-center">General Support</p>
+          <p className="text-gray-400 text-sm font-medium text-center mb-5">General Support</p>
+          
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-[#25D366]/10 border border-[#25D366]/20 rounded-full mt-auto">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
+            <span className="text-[10px] font-bold text-[#25D366] uppercase tracking-wider">Avg Response: 5 Mins</span>
+          </div>
         </a>
 
+        {/* Email - Neutral */}
         <a 
           href="mailto:info@takumitech.co.za"
-          className="group flex flex-col items-center p-6 rounded-3xl bg-[#0A0D14] border border-white/5 hover:border-[#00E5FF]/40 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+          className="group flex flex-col items-center p-6 rounded-3xl bg-[#0A0D14] border border-white/10 hover:border-white/30 transition-all duration-300 shadow-lg hover:-translate-y-1 relative overflow-hidden"
         >
-          <div className="w-14 h-14 rounded-2xl bg-[#030508] border border-white/5 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-            <Mail className="w-6 h-6 text-[#00E5FF]" />
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          <div className="relative mb-5">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-white/10 to-[#030508] border border-white/10 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <Mail className="w-7 h-7 text-gray-300 group-hover:text-white transition-colors" />
+            </div>
           </div>
+          
           <h4 className="text-white font-bold text-lg mb-1">Email Us</h4>
-          <p className="text-gray-400 text-sm font-medium text-center">info@takumitech.co.za</p>
+          <p className="text-gray-400 text-sm font-medium text-center mb-5">info@takumitech.co.za</p>
+          
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full mt-auto">
+            <div className="w-1.5 h-1.5 rounded-full bg-gray-500" />
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Avg Response: 2 Hours</span>
+          </div>
         </a>
-      </motion.div>
-
-      {/* DIVIDER */}
-      <motion.div 
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.3 }}
-        className="flex items-center gap-4 py-4"
-      >
-        <div className="flex-grow h-px bg-white/10" />
-        <span className="text-xs sm:text-sm font-bold text-gray-400 uppercase tracking-widest">Or Log A Formal Ticket Below</span>
-        <div className="flex-grow h-px bg-white/10" />
       </motion.div>
 
       {/* --------------------------------------------------------- */}
-      {/* TICKET INTERFACE MATRIX (Easy to Read) */}
+      {/* TICKET INTERFACE MATRIX (With Visual Breadcrumbs) */}
       {/* --------------------------------------------------------- */}
       <motion.div 
         initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
@@ -272,22 +300,25 @@ function SupportHubInterface() {
 
         <div className="p-6 sm:p-10 flex flex-col flex-grow">
           
-          {/* Header */}
+          {/* Header & Breadcrumbs */}
           {step < 4 && (
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-6 border-b border-white/10 pb-6">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-5">
                 <div className="w-14 h-14 bg-[#030508] border border-white/10 rounded-xl flex items-center justify-center shrink-0">
                   <Terminal className="w-6 h-6 text-[#00E5FF]" />
                 </div>
                 <div>
-                  <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
-                    Step {step} <span className="text-gray-500 font-normal">of 3</span>
+                  <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white mb-2">
+                    Formal Ticket
                   </h1>
-                  <p className="text-xs sm:text-sm font-bold text-[#00E5FF] uppercase tracking-wider mt-1">
-                    {step === 1 && "Your Details"}
-                    {step === 2 && (selectedCategory ? "Select an Option" : "What do you need help with?")}
-                    {step === 3 && (isPreselected ? `Details for: ${formData.module}` : "Please describe your request")}
-                  </p>
+                  {/* Step Breadcrumbs */}
+                  <div className="flex items-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider flex-wrap">
+                    <span className={step >= 1 ? "text-[#00E5FF]" : "text-gray-600"}>1. Details</span>
+                    <span className="text-gray-600">—</span>
+                    <span className={step >= 2 ? "text-[#00E5FF]" : "text-gray-600"}>2. Category</span>
+                    <span className="text-gray-600">—</span>
+                    <span className={step >= 3 ? "text-[#00E5FF]" : "text-gray-600"}>3. Request</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -315,9 +346,17 @@ function SupportHubInterface() {
                       <User className="w-4 h-4" /> Your Full Name
                     </label>
                     <input 
-                      type="text" name="designation" value={formData.designation} onChange={handleChange} onFocus={() => setActiveInput('designation')} onBlur={() => setActiveInput(null)}
-                      className={`w-full bg-[#030508] border rounded-2xl px-6 py-5 text-lg font-medium text-white focus:outline-none transition-all duration-300 ${activeInput === 'designation' ? 'border-[#00E5FF]/50 ring-1 ring-[#00E5FF]/20' : 'border-white/10 hover:border-white/20'}`}
-                      placeholder="E.g. John Doe" autoFocus
+                      type="text" 
+                      name="designation" 
+                      value={formData.designation} 
+                      onChange={handleChange} 
+                      autoFocus
+                      className="w-full bg-[#030508] border border-white/10 hover:border-white/20 rounded-2xl px-6 py-5 text-lg font-medium text-white focus:outline-none focus:border-[#00E5FF]/50 focus:ring-1 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_15px_rgba(0,229,255,0.15)] transition-all duration-300"
+                      style={{ 
+                        WebkitBoxShadow: '0 0 0 30px #030508 inset', 
+                        WebkitTextFillColor: 'white',
+                        transition: 'background-color 5000s ease-in-out 0s'
+                      }}
                     />
                   </div>
 
@@ -326,9 +365,16 @@ function SupportHubInterface() {
                       <Mail className="w-4 h-4" /> Your Email Address
                     </label>
                     <input 
-                      type="email" name="returnVector" value={formData.returnVector} onChange={handleChange} onFocus={() => setActiveInput('email')} onBlur={() => setActiveInput(null)}
-                      className={`w-full bg-[#030508] border rounded-2xl px-6 py-5 text-lg font-medium text-white focus:outline-none transition-all duration-300 ${activeInput === 'email' ? 'border-[#00E5FF]/50 ring-1 ring-[#00E5FF]/20' : 'border-white/10 hover:border-white/20'}`}
-                      placeholder="john@example.com"
+                      type="email" 
+                      name="returnVector" 
+                      value={formData.returnVector} 
+                      onChange={handleChange} 
+                      className="w-full bg-[#030508] border border-white/10 hover:border-white/20 rounded-2xl px-6 py-5 text-lg font-medium text-white focus:outline-none focus:border-[#00E5FF]/50 focus:ring-1 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_15px_rgba(0,229,255,0.15)] transition-all duration-300"
+                      style={{ 
+                        WebkitBoxShadow: '0 0 0 30px #030508 inset', 
+                        WebkitTextFillColor: 'white',
+                        transition: 'background-color 5000s ease-in-out 0s'
+                      }}
                     />
                   </div>
 
@@ -447,9 +493,11 @@ function SupportHubInterface() {
                       <AlignLeft className="w-4 h-4" /> Please type your message below
                     </label>
                     <textarea 
-                      name="payload" value={formData.payload} onChange={handleChange} onFocus={() => setActiveInput('payload')} onBlur={() => setActiveInput(null)}
-                      className={`w-full flex-grow bg-[#030508] border rounded-2xl px-6 py-5 text-base font-medium text-white focus:outline-none transition-all duration-300 resize-none min-h-[250px] ${activeInput === 'payload' ? 'border-[#00E5FF]/50 ring-1 ring-[#00E5FF]/20' : 'border-white/10 hover:border-white/20'}`}
-                      placeholder="Tell us exactly what you need help with..." autoFocus
+                      name="payload" 
+                      value={formData.payload} 
+                      onChange={handleChange} 
+                      autoFocus
+                      className="w-full flex-grow bg-[#030508] border border-white/10 hover:border-white/20 rounded-2xl px-6 py-5 text-base font-medium text-white focus:outline-none focus:border-[#00E5FF]/50 focus:ring-1 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_15px_rgba(0,229,255,0.15)] transition-all duration-300 resize-none min-h-[250px]"
                     />
                   </div>
 

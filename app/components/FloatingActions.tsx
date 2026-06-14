@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { MessageCircle, Terminal, X } from "lucide-react";
+import { MessageCircle, Ticket, X, LifeBuoy } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function FloatingActions() {
@@ -17,25 +17,7 @@ export default function FloatingActions() {
     >
       
       {/* --------------------------------------------------------- */}
-      {/* TICKET QUICK LINK */}
-      {/* --------------------------------------------------------- */}
-      <div className="pointer-events-auto relative group flex items-center justify-center">
-        <Link 
-          href="/ticket"
-          aria-label="Log a Ticket"
-          className="relative flex items-center justify-center w-12 h-12 bg-[#0A0D14] hover:bg-[#00E5FF]/10 border border-white/10 hover:border-[#00E5FF]/50 rounded-full shadow-[0_10px_20px_rgba(0,0,0,0.5)] transition-all duration-300 hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,229,255,0.2)]"
-        >
-          <Terminal className="w-5 h-5 text-gray-400 group-hover:text-[#00E5FF] transition-colors duration-300 relative z-10" />
-        </Link>
-        
-        {/* Tooltip */}
-        <div className="absolute right-[120%] px-4 py-2.5 bg-[#0A0D14] text-white text-xs font-bold tracking-wider uppercase rounded-xl border border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-xl transform translate-x-2 group-hover:translate-x-0">
-          Log a Ticket
-        </div>
-      </div>
-
-      {/* --------------------------------------------------------- */}
-      {/* EXPANDABLE WHATSAPP MENU */}
+      {/* EXPANDABLE SUPPORT MENU (ZENDESK/INTERCOM STYLE) */}
       {/* --------------------------------------------------------- */}
       <AnimatePresence>
         {isOpen && (
@@ -44,34 +26,49 @@ export default function FloatingActions() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="flex flex-col gap-3 pointer-events-auto w-max"
+            className="flex flex-col gap-3 pointer-events-auto w-max mb-2"
           >
-            {/* Option 1: Rudi */}
+            {/* Option 1: Log a Ticket (Replaced Terminal with Ticket icon) */}
+            <Link 
+              href="/ticket"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center gap-4 px-5 py-3.5 bg-[#0A0D14] border border-[#00E5FF]/20 hover:border-[#00E5FF]/60 rounded-2xl shadow-xl transition-all duration-300 group hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(0,229,255,0.15)]"
+            >
+              <div className="flex flex-col text-right">
+                <span className="text-sm font-bold text-white">Log a Formal Ticket</span>
+                <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">Trackable Support</span>
+              </div>
+              <div className="w-10 h-10 rounded-full bg-[#00E5FF]/10 flex items-center justify-center shrink-0">
+                <Ticket className="w-5 h-5 text-[#00E5FF]" />
+              </div>
+            </Link>
+
+            {/* Option 2: Rudi */}
             <Link 
               href="https://wa.me/27818281861"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 px-5 py-3 bg-[#0A0D14] border border-white/10 hover:border-[#25D366]/50 rounded-2xl shadow-xl transition-all duration-300 group hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(37,211,102,0.15)]"
+              className="flex items-center gap-4 px-5 py-3.5 bg-[#0A0D14] border border-white/10 hover:border-[#25D366]/50 rounded-2xl shadow-xl transition-all duration-300 group hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(37,211,102,0.15)]"
             >
               <div className="flex flex-col text-right">
                 <span className="text-sm font-bold text-white">WhatsApp Rudi</span>
-                <span className="text-xs text-gray-500 font-medium mt-0.5">Tech & Hardware</span>
+                <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">Tech & Hardware</span>
               </div>
               <div className="w-10 h-10 rounded-full bg-[#25D366]/10 flex items-center justify-center shrink-0">
                 <MessageCircle className="w-5 h-5 text-[#25D366]" />
               </div>
             </Link>
 
-            {/* Option 2: Alex */}
+            {/* Option 3: Alex */}
             <Link 
               href="https://wa.me/27614955695"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 px-5 py-3 bg-[#0A0D14] border border-white/10 hover:border-[#25D366]/50 rounded-2xl shadow-xl transition-all duration-300 group hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(37,211,102,0.15)]"
+              className="flex items-center gap-4 px-5 py-3.5 bg-[#0A0D14] border border-white/10 hover:border-[#25D366]/50 rounded-2xl shadow-xl transition-all duration-300 group hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(37,211,102,0.15)]"
             >
               <div className="flex flex-col text-right">
                 <span className="text-sm font-bold text-white">WhatsApp Alex</span>
-                <span className="text-xs text-gray-500 font-medium mt-0.5">General Support</span>
+                <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">General Support</span>
               </div>
               <div className="w-10 h-10 rounded-full bg-[#25D366]/10 flex items-center justify-center shrink-0">
                 <MessageCircle className="w-5 h-5 text-[#25D366]" />
@@ -82,7 +79,7 @@ export default function FloatingActions() {
       </AnimatePresence>
 
       {/* --------------------------------------------------------- */}
-      {/* WHATSAPP TOGGLE BUTTON */}
+      {/* MAIN TOGGLE BUTTON (UNIFIED 'HELP' FAB) */}
       {/* --------------------------------------------------------- */}
       <div className="pointer-events-auto relative group flex items-center justify-center">
         
@@ -91,17 +88,17 @@ export default function FloatingActions() {
           <motion.div 
             animate={{ scale: [1, 1.4, 1], opacity: [0.4, 0, 0.4] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-0 bg-[#25D366] rounded-full z-0"
+            className="absolute inset-0 bg-[#00E5FF] rounded-full z-0"
           />
         )}
 
         <button 
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle WhatsApp Options"
+          aria-label="Toggle Support Options"
           className={`relative flex items-center justify-center w-14 h-14 rounded-full transition-all duration-300 hover:scale-110 z-10 shadow-lg ${
             isOpen 
               ? "bg-[#0A0D14] border border-white/10 hover:bg-white/10 text-white" 
-              : "bg-[#25D366] hover:bg-[#1EBE5A] text-white shadow-[0_10px_30px_rgba(37,211,102,0.4)]"
+              : "bg-[#00E5FF] hover:bg-[#00cce6] text-[#030508] shadow-[0_10px_30px_rgba(0,229,255,0.3)]"
           }`}
         >
           <motion.div
@@ -110,9 +107,9 @@ export default function FloatingActions() {
             transition={{ duration: 0.2 }}
           >
             {isOpen ? (
-              <X className="w-6 h-6 relative z-10" />
+              <X className="w-6 h-6 relative z-10 text-white" />
             ) : (
-              <MessageCircle className="w-7 h-7 relative z-10 drop-shadow-md" />
+              <LifeBuoy className="w-7 h-7 relative z-10 drop-shadow-md" />
             )}
           </motion.div>
         </button>
@@ -120,7 +117,7 @@ export default function FloatingActions() {
         {/* Tooltip (Hides when menu is open) */}
         {!isOpen && (
           <div className="absolute right-[120%] px-4 py-2.5 bg-[#0A0D14] text-white text-xs font-bold tracking-wider uppercase rounded-xl border border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-xl transform translate-x-2 group-hover:translate-x-0 flex items-center gap-3">
-            <div className="w-2 h-2 rounded-full bg-[#25D366] shadow-[0_0_8px_#25D366]" /> Chat With Us
+            <div className="w-2 h-2 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00E5FF]" /> Need Help?
           </div>
         )}
       </div>
