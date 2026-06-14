@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, ShieldCheck, Server, Globe, Briefcase, Lock, AlertTriangle, ChevronRight } from "lucide-react";
+import { ArrowLeft, ShieldCheck, Server, Globe, Briefcase, Lock, AlertTriangle, ChevronRight, MessageCircle } from "lucide-react";
 import { useEffect } from "react";
 
 export default function TermsPage() {
