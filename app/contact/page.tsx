@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { ArrowRight, Mail, MapPin, Phone, ShieldCheck, Terminal, Send, Lock, CheckCircle, XCircle } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Phone, ShieldCheck, Terminal, Send, Lock, CheckCircle, XCircle, Share2, Instagram, Linkedin, Facebook } from "lucide-react";
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -117,6 +117,28 @@ export default function ContactPage() {
                 Western Cape, ZA<br />
                 <span className="text-[10px] text-gray-500 mt-2 block tracking-widest">ACCESS: BY APPOINTMENT ONLY</span>
               </span>
+            </div>
+
+            {/* NEW SOCIAL NETWORK CARD */}
+            <div className="bg-[#050505]/40 backdrop-blur-2xl border border-white/10 p-8 rounded-[2rem] flex flex-col group hover:border-white/20 transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]">
+              <div className="w-12 h-12 bg-pink-500/10 border border-pink-500/20 rounded-xl flex items-center justify-center mb-6 shadow-[inset_0_0_15px_rgba(236,72,153,0.2)]">
+                <Share2 className="w-5 h-5 text-pink-400" />
+              </div>
+              <h3 className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Social Network</h3>
+              <div className="flex flex-col gap-4">
+                <a href="https://www.instagram.com/takumitech.co.za/" target="_blank" rel="noopener noreferrer" className="group/social flex items-center gap-4 text-sm font-bold text-gray-400 hover:text-white transition-colors">
+                  <Instagram className="w-5 h-5 text-gray-500 group-hover/social:text-[#00E5FF] transition-colors" />
+                  INSTAGRAM
+                </a>
+                <a href="https://www.linkedin.com/company/takumi-tech/?viewAsMember=true" target="_blank" rel="noopener noreferrer" className="group/social flex items-center gap-4 text-sm font-bold text-gray-400 hover:text-white transition-colors">
+                  <Linkedin className="w-5 h-5 text-gray-500 group-hover/social:text-[#0A66C2] transition-colors" />
+                  LINKEDIN
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61590717218763" target="_blank" rel="noopener noreferrer" className="group/social flex items-center gap-4 text-sm font-bold text-gray-400 hover:text-white transition-colors">
+                  <Facebook className="w-5 h-5 text-gray-500 group-hover/social:text-[#1877F2] transition-colors" />
+                  FACEBOOK
+                </a>
+              </div>
             </div>
 
           </div>
