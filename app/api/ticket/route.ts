@@ -2,8 +2,8 @@ export const runtime = 'edge';
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-// Initialize the Resend Matrix securely
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize the Resend Matrix securely (with build-bypass fallback)
+const resend = new Resend(process.env.RESEND_API_KEY || "re_dummy_key_to_bypass_build");
 
 export async function POST(request: Request) {
   try {
