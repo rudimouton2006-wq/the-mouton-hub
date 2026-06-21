@@ -13,10 +13,10 @@ export default function Footer() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-[#00E5FF]/5 to-transparent blur-3xl pointer-events-none transform-gpu opacity-40" />
 
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
           
           {/* 1. BRAND COLUMN */}
-          <div className="md:col-span-4 flex flex-col gap-6">
+          <div className="md:col-span-2 lg:col-span-4 flex flex-col gap-6">
             <Link href="/" className="group flex items-center gap-3 w-max">
               <div className="w-12 h-12 rounded-xl bg-[#0A0D14] border border-white/10 flex items-center justify-center transition-transform duration-300 group-hover:scale-105 shadow-sm">
                 <Terminal className="w-6 h-6 text-gray-300 group-hover:text-[#00E5FF] transition-colors duration-300" />
@@ -31,7 +31,7 @@ export default function Footer() {
           </div>
 
           {/* 2. NAVIGATION COLUMN */}
-          <div className="md:col-span-3 flex flex-col gap-5">
+          <div className="md:col-span-1 lg:col-span-2 flex flex-col gap-5">
             <h3 className="text-white font-bold uppercase tracking-wider text-sm flex items-center gap-2">
               Navigation
             </h3>
@@ -56,7 +56,7 @@ export default function Footer() {
           </div>
 
           {/* 3. LEGAL COLUMN */}
-          <div className="md:col-span-2 flex flex-col gap-5">
+          <div className="md:col-span-1 lg:col-span-2 flex flex-col gap-5">
             <h3 className="text-white font-bold uppercase tracking-wider text-sm flex items-center gap-2">
               Legal
             </h3>
@@ -71,8 +71,8 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* 4. DIRECT CONTACT COLUMN */}
-          <div className="md:col-span-3 flex flex-col gap-5">
+          {/* 4. CONTACT US COLUMN */}
+          <div className="md:col-span-1 lg:col-span-2 flex flex-col gap-5">
             <h3 className="text-white font-bold uppercase tracking-wider text-sm flex items-center gap-2">
               Contact Us
             </h3>
@@ -104,7 +104,15 @@ export default function Footer() {
                 <Mail className="w-5 h-5 text-gray-500 group-hover:text-[#00E5FF] transition-colors" />
                 <span className="font-medium">info@takumitech.co.za</span>
               </a>
+            </div>
+          </div>
 
+          {/* 5. SOCIAL MEDIA COLUMN */}
+          <div className="md:col-span-1 lg:col-span-2 flex flex-col gap-5">
+            <h3 className="text-white font-bold uppercase tracking-wider text-sm flex items-center gap-2">
+              Social Media
+            </h3>
+            <div className="flex flex-col gap-5">
               {/* INSTAGRAM LINK */}
               <a 
                 href="https://www.instagram.com/takumitech.co.za/"
